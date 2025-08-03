@@ -1,0 +1,14 @@
+{
+  "deployment_start": "2025-08-03T04:16:38.574974",
+  "baseline_version": "v2.0",
+  "stages": [
+    {
+      "stage": "Stage 1",
+      "traffic_percent": 10,
+      "duration_minutes": 30,
+      "runs_completed": 3,
+      "avg_sharpe_ratio": 1.6784774889713816,
+      "avg_accuracy": 0.9343137220710158,
+      "avg_confidence": 0.9046486846821642,
+      "success_rate": 0.0,
+      "stage_successful": 

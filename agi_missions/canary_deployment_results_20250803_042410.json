@@ -1,0 +1,81 @@
+{
+  "deployment_start": "2025-08-03T04:24:07.631406",
+  "baseline_version": "v2.0",
+  "stages": [
+    {
+      "stage": "Stage 1",
+      "traffic_percent": 10,
+      "duration_minutes": 30,
+      "runs_completed": 3,
+      "avg_sharpe_ratio": 1.5531468194277538,
+      "avg_accuracy": 0.9145151895889109,
+      "avg_confidence": 0.8741362963587874,
+      "success_rate": 0.0,
+      "stage_successful": false,
+      "metrics": [
+        {
+          "timestamp": "2025-08-03T04:24:07.639843",
+          "stage": "canary_stage_1",
+          "traffic_percent": 10,
+          "runs_completed": 16,
+          "sharpe_ratio": 1.5164359374765584,
+          "accuracy": 0.8852010058974582,
+          "confidence": 0.8508022283625184,
+          "latency_ms": 22.961379891227676,
+          "drawdown": 0.0956333174487286,
+          "transfer_effectiveness": 0.7602706894299158,
+          "success_criteria_met": false,
+          "alerts_triggered": [
+            "Accuracy Drop: 0.885"
+          ]
+        },
+        {
+          "timestamp": "2025-08-03T04:24:08.645094",
+          "stage": "canary_stage_1",
+          "traffic_percent": 10,
+          "runs_completed": 20,
+          "sharpe_ratio": 1.5835135826131366,
+          "accuracy": 0.9309545703568672,
+          "confidence": 0.8766547668661525,
+          "latency_ms": 20.50100340885845,
+          "drawdown": 0.09271989849759901,
+          "transfer_effectiveness": 0.8233887529981698,
+          "success_criteria_met": false,
+          "alerts_triggered": []
+        },
+        {
+          "timestamp": "2025-08-03T04:24:09.650433",
+          "stage": "canary_stage_1",
+          "traffic_percent": 10,
+          "runs_completed": 15,
+          "sharpe_ratio": 1.5594909381935662,
+          "accuracy": 0.927389992512407,
+          "confidence": 0.8949518938476914,
+          "latency_ms": 17.400860982174567,
+          "drawdown": 0.08586219154974238,
+          "transfer_effectiveness": 0.806289524209446,
+          "success_criteria_met": false,
+          "alerts_triggered": []
+        }
+      ]
+    }
+  ],
+  "overall_success": false,
+  "rollback_executed": true,
+  "rollback_details": {
+    "rollback_executed": true,
+    "rollback_timestamp": "2025-08-03T04:24:10.656274",
+    "previous_baseline": "v1.0-transfer-baseline",
+    "rollback_reason": "Performance thresholds violated",
+    "fallback_parameters": {
+      "quantum_feature_dimensions": 10,
+      "hybrid_balance": 0.7,
+      "risk_adjustment": 0.15,
+      "confidence_mode": "static",
+      "regime_adaptation": false
+    },
+    "rollback_successful": true,
+    "recovery_time_seconds": 64.04206947913485
+  },
+  "deployment_end": "2025-08-03T04:24:10.656303"
+}
