@@ -1,0 +1,43 @@
+{
+  "training_intervals": {
+    "comprehensive": {
+      "hours": 24,
+      "enabled": true
+    },
+    "meta_learning": {
+      "hours": 8,
+      "enabled": true
+    },
+    "reasoning": {
+      "hours": 12,
+      "enabled": true
+    },
+    "creative": {
+      "hours": 16,
+      "enabled": true
+    },
+    "quantum": {
+      "hours": 6,
+      "enabled": true
+    },
+    "transfer": {
+      "hours": 18,
+      "enabled": true
+    }
+  },
+  "performance_thresholds": {
+    "min_improvement": 0.05,
+    "max_training_duration": 3600,
+    "cooldown_period": 1800
+  },
+  "adaptive_training": {
+    "enabled": true,
+    "performance_based_scheduling": true,
+    "difficulty_adjustment": true
+  },
+  "monitoring": {
+    "log_level": "INFO",
+    "save_detailed_logs": true,
+    "alert_on_failures": true
+  }
+}
