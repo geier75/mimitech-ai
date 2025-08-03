@@ -1,0 +1,13 @@
+2025-08-03 04:53:38,488 - INFO - 🔍 Production Live Monitor initialisiert
+2025-08-03 04:53:38,488 - INFO - 🔄 Starte Monitoring-Zyklus
+2025-08-03 04:53:38,488 - INFO - 🏥 Führe Production Health-Check durch
+2025-08-03 04:53:38,497 - INFO - 📊 Health-Score: 1.000
+2025-08-03 04:53:38,497 - INFO - 📈 Sharpe: 1.604, Accuracy: 0.929
+2025-08-03 04:53:38,574 - INFO - 🏁 Monitoring-Zyklus abgeschlossen
+2025-08-03 04:56:30,146 - INFO - 🔍 Production Live Monitor initialisiert
+2025-08-03 04:56:30,146 - INFO - 🔄 Starte Monitoring-Zyklus
+2025-08-03 04:56:30,146 - INFO - 🏥 Führe Production Health-Check durch
+2025-08-03 04:56:30,154 - INFO - 📊 Health-Score: 0.881
+2025-08-03 04:56:30,154 - INFO - 📈 Sharpe: 1.550, Accuracy: 0.898
+2025-08-03 04:56:30,154 - WARNING - ⚠️ Alerts: Drawdown Increase: 7.6% (Aktuell: 0.091)
+2025-08-03 04:56:30,157 - INFO - 🏁 Monitoring-Zyklus abgeschlossen
