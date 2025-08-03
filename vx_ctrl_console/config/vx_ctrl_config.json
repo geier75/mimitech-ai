@@ -1,0 +1,240 @@
+{
+  "console_config": {
+    "name": "VX-CTRL Console",
+    "version": "2.1.0",
+    "port": 9000,
+    "auto_open_browser": false,
+    "update_interval": 5,
+    "log_level": "INFO"
+  },
+  
+  "system_components": {
+    "agi_missions": {
+      "enabled": true,
+      "path": "agi_missions/",
+      "executor": "agi_missions/agi_mission_executor.py",
+      "results_pattern": "*results*.json"
+    },
+    
+    "live_dashboards": {
+      "enabled": true,
+      "dashboards": [
+        {
+          "name": "Live AGI Dashboard",
+          "port": 8083,
+          "script": "agi_missions/live_dashboard.py",
+          "url": "http://localhost:8083"
+        },
+        {
+          "name": "Training Dashboard", 
+          "port": 8080,
+          "script": "agi_missions/simple_web_dashboard.py",
+          "url": "http://localhost:8080"
+        },
+        {
+          "name": "Integrated Dashboard",
+          "port": 8081,
+          "script": "agi_missions/integrated_miso_dashboard.py", 
+          "url": "http://localhost:8081"
+        }
+      ]
+    },
+    
+    "multi_agent_system": {
+      "enabled": true,
+      "agents": {
+        "VX-PSI": {
+          "name": "Self-Awareness Agent",
+          "function": "Confidence calibration and meta-reflexion",
+          "status": "active",
+          "performance_target": 90.0
+        },
+        "VX-MEMEX": {
+          "name": "Memory Management Agent",
+          "function": "Knowledge storage and transfer learning",
+          "status": "active", 
+          "performance_target": 90.0
+        },
+        "VX-QUANTUM": {
+          "name": "Quantum Optimization Agent",
+          "function": "Quantum-enhanced processing",
+          "status": "active",
+          "performance_target": 90.0
+        },
+        "VX-REASON": {
+          "name": "Causal Reasoning Agent",
+          "function": "Logical inference and hypothesis generation",
+          "status": "active",
+          "performance_target": 90.0
+        },
+        "VX-NEXUS": {
+          "name": "Coordination Agent", 
+          "function": "Multi-agent orchestration",
+          "status": "active",
+          "performance_target": 90.0
+        }
+      }
+    },
+    
+    "quantum_engine": {
+      "enabled": true,
+      "backend": "qiskit_aer_simulator",
+      "max_qubits": 32,
+      "default_qubits": 10,
+      "entanglement_depth": 4,
+      "fidelity_threshold": 95.0,
+      "calibration_interval": 3600
+    },
+    
+    "security_layer": {
+      "enabled": true,
+      "void_protocol": {
+        "enabled": true,
+        "audit_coverage": 1.0,
+        "log_retention_days": 365
+      },
+      "zero_trust": {
+        "enabled": true,
+        "continuous_verification": true,
+        "threat_detection": true
+      },
+      "compliance": {
+        "gdpr": true,
+        "soc2": true,
+        "hipaa": true
+      }
+    },
+    
+    "documentation": {
+      "enabled": true,
+      "paths": {
+        "root": ".",
+        "investor_docs": "investor_docs/",
+        "stakeholder_docs": "stakeholder_docs/",
+        "technical_docs": "."
+      },
+      "auto_update": true,
+      "quality_checks": true
+    },
+    
+    "version_control": {
+      "enabled": true,
+      "git_enabled": true,
+      "auto_tagging": false,
+      "tag_prefix": "v",
+      "semantic_versioning": true
+    }
+  },
+  
+  "monitoring": {
+    "system_health": {
+      "enabled": true,
+      "check_interval": 30,
+      "metrics": [
+        "cpu_usage",
+        "memory_usage", 
+        "disk_usage",
+        "network_status",
+        "process_status"
+      ]
+    },
+    
+    "performance_tracking": {
+      "enabled": true,
+      "track_agi_missions": true,
+      "track_agent_performance": true,
+      "track_quantum_metrics": true,
+      "retention_days": 90
+    },
+    
+    "alerting": {
+      "enabled": true,
+      "thresholds": {
+        "cpu_usage": 80,
+        "memory_usage": 85,
+        "disk_usage": 90,
+        "mission_failure_rate": 0.1,
+        "agent_performance": 85.0
+      }
+    }
+  },
+  
+  "ui_settings": {
+    "theme": "matrix",
+    "colors": {
+      "primary": "#00ff00",
+      "secondary": "#00ffff", 
+      "warning": "#ffff00",
+      "error": "#ff0000",
+      "background": "#000000"
+    },
+    "animations": {
+      "enabled": true,
+      "glow_effect": true,
+      "pulse_indicators": true
+    },
+    "refresh_rates": {
+      "system_status": 5,
+      "dashboard_status": 10,
+      "performance_metrics": 15
+    }
+  },
+  
+  "api_endpoints": {
+    "base_url": "http://localhost:9000",
+    "endpoints": {
+      "status": "/api/status",
+      "missions": "/api/missions",
+      "agents": "/api/agents",
+      "quantum": "/api/quantum",
+      "security": "/api/security",
+      "docs": "/api/docs",
+      "version": "/api/version"
+    }
+  },
+  
+  "shortcuts": {
+    "keyboard": {
+      "ctrl+1": "agi_mission_control",
+      "ctrl+2": "dashboard_control",
+      "ctrl+3": "agent_control",
+      "ctrl+4": "quantum_control",
+      "ctrl+5": "security_control",
+      "ctrl+6": "documentation_control",
+      "ctrl+7": "version_control",
+      "ctrl+8": "open_web_console",
+      "ctrl+9": "system_analytics",
+      "ctrl+0": "exit_console"
+    },
+    
+    "quick_actions": {
+      "emergency_stop": "ctrl+alt+s",
+      "system_restart": "ctrl+alt+r",
+      "backup_system": "ctrl+alt+b",
+      "export_logs": "ctrl+alt+l"
+    }
+  },
+  
+  "logging": {
+    "enabled": true,
+    "log_file": "vx_ctrl_console/logs/vx_ctrl.log",
+    "log_level": "INFO",
+    "max_file_size": "10MB",
+    "backup_count": 5,
+    "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  },
+  
+  "backup": {
+    "enabled": true,
+    "auto_backup": true,
+    "backup_interval": 3600,
+    "backup_path": "vx_ctrl_console/backups/",
+    "retention_days": 30,
+    "include_patterns": [
+      "*.py",
+      "*.json", 
+      "*.md",
+      "*.sh"
+    ]
+  }
+}
