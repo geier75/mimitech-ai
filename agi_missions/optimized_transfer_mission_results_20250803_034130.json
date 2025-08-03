@@ -1,0 +1,223 @@
+{
+  "mission_name": "Quantum-Enhanced Portfolio Optimization for High-Frequency Trading with Risk-Constrained Feature Selection (Optimized)",
+  "source_mission": "Transfer Mission v1.0",
+  "optimization_version": "v2.0_VX-PSI_Enhanced",
+  "start_time": "2025-08-03T03:41:30.552553",
+  "phases": {
+    "parameter_optimization": {
+      "optimized_parameters": {
+        "quantum_feature_dim_optimal": 12,
+        "entanglement_depth_optimal": 4,
+        "expected_speedup": 2.3,
+        "feature_selection_efficiency": 0.9,
+        "uncertainty_threshold": 0.025,
+        "hybrid_balance": 0.75,
+        "risk_adjustment_factor": 0.2,
+        "confidence_threshold_base": 0.9,
+        "volatility_scaling_factor": 0.15
+      },
+      "optimization_rationale": {
+        "quantum_feature_dim": "12 Dimensionen f\u00fcr bessere Markt-Expressivit\u00e4t",
+        "hybrid_balance": "0.75 f\u00fcr stabilere Quantum-Classical Balance",
+        "risk_adjustment": "0.20 f\u00fcr aggressiveres Risikomanagement",
+        "dynamic_confidence": "Volatilit\u00e4ts-adaptive Confidence-Schwellen"
+      },
+      "expected_improvements": {
+        "sharpe_ratio": "+0.05 bis +0.10",
+        "accuracy": "+0.02 bis +0.03",
+        "transfer_effectiveness": "+0.05 bis +0.08"
+      }
+    },
+    "market_regime_detection": {
+      "current_regime": "volatile",
+      "volatility_level": 0.35,
+      "regime_adjustments": {
+        "hybrid_balance_modifier": -0.05,
+        "confidence_threshold_modifier": 0.1,
+        "risk_factor_modifier": 0.05
+      },
+      "confidence_in_detection": 0.87
+    },
+    "optimized_classical_baseline": {
+      "prediction_horizon": 100,
+      "feature_window_size": 1200,
+      "risk_tolerance": 0.04,
+      "classical_indicators": 60,
+      "portfolio_size": 30,
+      "rebalancing_frequency": 45,
+      "estimated_accuracy": 0.84,
+      "estimated_latency": 42,
+      "estimated_sharpe_ratio": 1.35,
+      "convergence_iterations": 100
+    },
+    "optimized_quantum_enhancement": {
+      "prediction_horizon": 100,
+      "feature_window_size": 1200,
+      "risk_tolerance": 0.04,
+      "classical_indicators": 60,
+      "portfolio_size": 30,
+      "rebalancing_frequency": 45,
+      "estimated_accuracy": 0.9199999999999999,
+      "estimated_latency": 17,
+      "estimated_sharpe_ratio": 1.62,
+      "convergence_iterations": 100,
+      "quantum_feature_dim": 12,
+      "quantum_entanglement_depth": 4,
+      "variational_parameters": 42,
+      "quantum_accuracy_boost": 0.08,
+      "quantum_speedup_factor": 2.4,
+      "feature_selection_efficiency": 0.9,
+      "quantum_uncertainty": 0.025,
+      "risk_adjustment_factor": 0.2,
+      "market_correlation_capture": 0.93,
+      "hybrid_balance": 0.75,
+      "dynamic_confidence_threshold": 0.9525
+    },
+    "optimized_evaluation": {
+      "metrics": {
+        "prediction_accuracy": 0.9199999999999999,
+        "sharpe_ratio": 1.62,
+        "max_drawdown": 0.1,
+        "average_latency": 17,
+        "quantum_classical_speedup_ratio": 2.4,
+        "feature_selection_effectiveness": 0.9,
+        "risk_adjusted_return": 1.377,
+        "quantum_entanglement_utilization": 0.88,
+        "computational_efficiency": 0.91,
+        "confidence_calibration_score": 0.94,
+        "adaptation_loss_vs_original": 0.03,
+        "transfer_learning_effectiveness": 0.82,
+        "market_regime_adaptation": 0.87
+      },
+      "baseline_comparison": {
+        "prediction_accuracy_improvement": 0.040000000000000036,
+        "prediction_accuracy_improvement_percent": 4.545454545454549,
+        "sharpe_ratio_improvement": 0.12500000000000022,
+        "sharpe_ratio_improvement_percent": 8.361204013377941,
+        "max_drawdown_improvement": -0.01999999999999999,
+        "max_drawdown_improvement_percent": -16.66666666666666,
+        "average_latency_improvement": -4,
+        "average_latency_improvement_percent": -19.047619047619047,
+        "quantum_classical_speedup_ratio_improvement": 0.2999999999999998,
+        "quantum_classical_speedup_ratio_improvement_percent": 14.285714285714276,
+        "feature_selection_effectiveness_improvement": 0.020000000000000018,
+        "feature_selection_effectiveness_improvement_percent": 2.2727272727272747,
+        "risk_adjusted_return_improvement": 0.18100000000000005,
+        "risk_adjusted_return_improvement_percent": 15.13377926421405,
+        "quantum_entanglement_utilization_improvement": 0.06000000000000005,
+        "quantum_entanglement_utilization_improvement_percent": 7.317073170731714,
+        "computational_efficiency_improvement": 0.040000000000000036,
+        "computational_efficiency_improvement_percent": 4.5977011494252915,
+        "confidence_calibration_score_improvement": 0.029999999999999916,
+        "confidence_calibration_score_improvement_percent": 3.296703296703287,
+        "adaptation_loss_vs_original_improvement": -0.020000000000000004,
+        "adaptation_loss_vs_original_improvement_percent": -40.00000000000001,
+        "transfer_learning_effectiveness_improvement": 0.07624999999999993,
+        "transfer_learning_effectiveness_improvement_percent": 10.252100840336125
+      },
+      "success_criteria_met": {
+        "primary": true,
+        "secondary": true,
+        "tertiary": true,
+        "transfer_effectiveness": true,
+        "optimization_success": true
+      },
+      "confidence": 0.9083333333333332
+    }
+  },
+  "end_time": "2025-08-03T03:41:30.571505",
+  "snapshot": {
+    "timestamp": "2025-08-03T03:41:30.571496",
+    "mission_name": "Quantum-Enhanced Portfolio Optimization for High-Frequency Trading with Risk-Constrained Feature Selection (Optimized)",
+    "source_mission": "Transfer Mission v1.0",
+    "optimization_version": "v2.0_VX-PSI_Enhanced",
+    "phase": "completed",
+    "parameter_changes": {
+      "quantum_feature_dim": "10 \u2192 12",
+      "hybrid_balance": "0.7 \u2192 0.75",
+      "risk_adjustment_factor": "0.15 \u2192 0.20",
+      "confidence_threshold": "static \u2192 dynamic"
+    },
+    "transferred_knowledge": [
+      "optimized_quantum_parameters",
+      "market_regime_adaptation",
+      "dynamic_confidence"
+    ],
+    "adapted_hypotheses": [
+      "Optimierte Parameter verbessern Transfer-Performance",
+      "Market-Regime-Adaptation erh\u00f6ht Robustheit"
+    ],
+    "current_solution": {
+      "prediction_horizon": 100,
+      "feature_window_size": 1200,
+      "risk_tolerance": 0.04,
+      "classical_indicators": 60,
+      "portfolio_size": 30,
+      "rebalancing_frequency": 45,
+      "estimated_accuracy": 0.9199999999999999,
+      "estimated_latency": 17,
+      "estimated_sharpe_ratio": 1.62,
+      "convergence_iterations": 100,
+      "quantum_feature_dim": 12,
+      "quantum_entanglement_depth": 4,
+      "variational_parameters": 42,
+      "quantum_accuracy_boost": 0.08,
+      "quantum_speedup_factor": 2.4,
+      "feature_selection_efficiency": 0.9,
+      "quantum_uncertainty": 0.025,
+      "risk_adjustment_factor": 0.2,
+      "market_correlation_capture": 0.93,
+      "hybrid_balance": 0.75,
+      "dynamic_confidence_threshold": 0.9525
+    },
+    "metrics": {
+      "prediction_accuracy": 0.9199999999999999,
+      "sharpe_ratio": 1.62,
+      "max_drawdown": 0.1,
+      "average_latency": 17,
+      "quantum_classical_speedup_ratio": 2.4,
+      "feature_selection_effectiveness": 0.9,
+      "risk_adjusted_return": 1.377,
+      "quantum_entanglement_utilization": 0.88,
+      "computational_efficiency": 0.91,
+      "confidence_calibration_score": 0.94,
+      "adaptation_loss_vs_original": 0.03,
+      "transfer_learning_effectiveness": 0.82,
+      "market_regime_adaptation": 0.87
+    },
+    "adaptation_loss": 0.03,
+    "transfer_effectiveness": 0.82,
+    "confidence": 0.9083333333333332,
+    "improvement_vs_baseline": {
+      "prediction_accuracy_improvement": 0.040000000000000036,
+      "prediction_accuracy_improvement_percent": 4.545454545454549,
+      "sharpe_ratio_improvement": 0.12500000000000022,
+      "sharpe_ratio_improvement_percent": 8.361204013377941,
+      "max_drawdown_improvement": -0.01999999999999999,
+      "max_drawdown_improvement_percent": -16.66666666666666,
+      "average_latency_improvement": -4,
+      "average_latency_improvement_percent": -19.047619047619047,
+      "quantum_classical_speedup_ratio_improvement": 0.2999999999999998,
+      "quantum_classical_speedup_ratio_improvement_percent": 14.285714285714276,
+      "feature_selection_effectiveness_improvement": 0.020000000000000018,
+      "feature_selection_effectiveness_improvement_percent": 2.2727272727272747,
+      "risk_adjusted_return_improvement": 0.18100000000000005,
+      "risk_adjusted_return_improvement_percent": 15.13377926421405,
+      "quantum_entanglement_utilization_improvement": 0.06000000000000005,
+      "quantum_entanglement_utilization_improvement_percent": 7.317073170731714,
+      "computational_efficiency_improvement": 0.040000000000000036,
+      "computational_efficiency_improvement_percent": 4.5977011494252915,
+      "confidence_calibration_score_improvement": 0.029999999999999916,
+      "confidence_calibration_score_improvement_percent": 3.296703296703287,
+      "adaptation_loss_vs_original_improvement": -0.020000000000000004,
+      "adaptation_loss_vs_original_improvement_percent": -40.00000000000001,
+      "transfer_learning_effectiveness_improvement": 0.07624999999999993,
+      "transfer_learning_effectiveness_improvement_percent": 10.252100840336125
+    },
+    "next_actions": [
+      "Validierung auf realen Daten",
+      "A/B-Test gegen Baseline",
+      "Produktions-Deployment"
+    ]
+  }
+}

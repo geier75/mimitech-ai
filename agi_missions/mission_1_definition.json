@@ -1,0 +1,77 @@
+{
+  "problem_name": "Adaptive Neural Network Architecture Optimization with Quantum-Enhanced Feature Selection",
+  "objective": "Optimiere eine hybride Neural Network Architektur für maximale Accuracy bei minimalem Ressourcenverbrauch, mit Quantum-verstärkter Feature Selection und klassischer Backpropagation",
+  "variables": {
+    "hidden_layers": "Anzahl versteckter Schichten (2-20)",
+    "neurons_per_layer": "Neuronen pro Schicht (16-512)",
+    "learning_rate": "Lernrate (0.0001-0.1)",
+    "quantum_feature_dim": "Dimensionalität des Quantum Feature Space (4-16)",
+    "classical_features": "Anzahl klassischer Features (50-1000)",
+    "batch_size": "Batch-Größe für Training (16-256)",
+    "dropout_rate": "Dropout-Rate für Regularisierung (0.0-0.5)",
+    "quantum_entanglement_depth": "Tiefe der Quantum Entanglement Layers (1-8)"
+  },
+  "constraints": [
+    "hidden_layers >= 2 AND hidden_layers <= 20",
+    "neurons_per_layer >= 16 AND neurons_per_layer <= 512",
+    "learning_rate >= 0.0001 AND learning_rate <= 0.1",
+    "quantum_feature_dim >= 4 AND quantum_feature_dim <= 16",
+    "classical_features >= 50 AND classical_features <= 1000",
+    "batch_size >= 16 AND batch_size <= 256",
+    "dropout_rate >= 0.0 AND dropout_rate <= 0.5",
+    "quantum_entanglement_depth >= 1 AND quantum_entanglement_depth <= 8",
+    "total_parameters < 10000000",
+    "training_time < 3600",
+    "memory_usage < 8192",
+    "target_accuracy >= 0.95"
+  ],
+  "initial_hypotheses": [
+    "Quantum-enhanced feature selection reduziert die Dimensionalität effektiver als klassische PCA",
+    "Moderate Netzwerktiefe (6-10 Layer) mit Quantum-Features übertrifft tiefe rein klassische Netze",
+    "Entangled Quantum Features erfassen nichtlineare Korrelationen besser als klassische Methoden",
+    "Adaptive Lernraten-Anpassung basierend auf Quantum-Uncertainty verbessert Konvergenz",
+    "Hybrid-Training mit Quantum-Classical Feedback-Loops erreicht höhere Accuracy bei weniger Epochen"
+  ],
+  "metrics": [
+    "final_accuracy",
+    "training_convergence_speed",
+    "total_parameters",
+    "memory_efficiency",
+    "quantum_classical_speedup_ratio",
+    "feature_selection_effectiveness",
+    "generalization_error",
+    "quantum_entanglement_utilization",
+    "energy_consumption_per_epoch",
+    "uncertainty_reduction_rate"
+  ],
+  "preset_preferences": {
+    "classical": "medium",
+    "quantum": "intensive",
+    "hybrid_balance": 0.7
+  },
+  "success_criteria": {
+    "primary": "final_accuracy >= 0.95 AND training_time <= 3600",
+    "secondary": "quantum_classical_speedup_ratio >= 1.5",
+    "tertiary": "memory_efficiency >= 0.8"
+  },
+  "dataset_simulation": {
+    "type": "synthetic_multiclass_classification",
+    "samples": 10000,
+    "features": 784,
+    "classes": 10,
+    "noise_level": 0.05,
+    "complexity": "high_dimensional_nonlinear"
+  },
+  "quantum_components": [
+    "variational_quantum_classifier",
+    "quantum_feature_maps",
+    "entangled_feature_selection",
+    "quantum_uncertainty_estimation"
+  ],
+  "classical_components": [
+    "deep_neural_network",
+    "backpropagation_optimizer",
+    "regularization_techniques",
+    "classical_preprocessing"
+  ]
+}

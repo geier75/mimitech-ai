@@ -1,0 +1,104 @@
+{
+  "problem_name": "Quantum-Enhanced Portfolio Optimization for High-Frequency Trading with Risk-Constrained Feature Selection",
+  "objective": "Maximiere Vorhersagegenauigkeit für Finanzmarktbewegungen bei minimalem Risiko und optimaler Latenz unter 50ms",
+  "variables": {
+    "prediction_horizon": "Vorhersagezeitraum in Millisekunden (10-1000)",
+    "feature_window_size": "Anzahl historischer Datenpunkte (100-5000)",
+    "risk_tolerance": "Maximales akzeptables Risiko (0.01-0.10)",
+    "quantum_feature_dim": "Dimensionalität des Quantum Feature Space (4-16)",
+    "classical_indicators": "Anzahl technischer Indikatoren (20-200)",
+    "portfolio_size": "Anzahl Assets im Portfolio (10-100)",
+    "rebalancing_frequency": "Rebalancing-Frequenz in Sekunden (1-300)",
+    "quantum_entanglement_depth": "Tiefe der Quantum Entanglement für Korrelationen (1-8)",
+    "latency_budget": "Maximale Latenz pro Entscheidung in ms (10-100)",
+    "confidence_threshold": "Mindest-Confidence für Trades (0.7-0.99)"
+  },
+  "constraints": [
+    "prediction_horizon >= 10 AND prediction_horizon <= 1000",
+    "feature_window_size >= 100 AND feature_window_size <= 5000",
+    "risk_tolerance >= 0.01 AND risk_tolerance <= 0.10",
+    "quantum_feature_dim >= 4 AND quantum_feature_dim <= 16",
+    "classical_indicators >= 20 AND classical_indicators <= 200",
+    "portfolio_size >= 10 AND portfolio_size <= 100",
+    "rebalancing_frequency >= 1 AND rebalancing_frequency <= 300",
+    "quantum_entanglement_depth >= 1 AND quantum_entanglement_depth <= 8",
+    "latency_budget >= 10 AND latency_budget <= 100",
+    "confidence_threshold >= 0.7 AND confidence_threshold <= 0.99",
+    "total_computational_cost < 1000000",
+    "prediction_accuracy >= 0.85",
+    "sharpe_ratio >= 1.5",
+    "max_drawdown <= 0.15"
+  ],
+  "initial_hypotheses": [
+    "Quantum-enhanced feature selection aus Neural Network Mission reduziert Dimensionalität auch bei Finanzdaten effektiver als klassische PCA",
+    "Moderate Quantum Feature Dimensionen (8-12) aus vorheriger Mission optimieren auch Finanzkorrelationen besser als extreme Werte",
+    "Entangled Quantum Features erfassen nichtlineare Marktkorrelationen zwischen Assets ähnlich wie bei Neural Network Features",
+    "Adaptive Confidence-Schwellenwerte basierend auf Quantum Uncertainty verbessern Risk-Adjusted Returns",
+    "Hybrid Quantum-Classical Optimierung konvergiert auch bei Finanzoptimierung 2-3x schneller als rein klassische Ansätze",
+    "Quantum Feature Maps mit 8-12 Qubits erreichen optimale Balance zwischen Markt-Expressivität und Rauschen-Resistenz",
+    "Adaptive Rebalancing-Frequenzen basierend auf Quantum Market Uncertainty reduzieren Transaktionskosten",
+    "Entangled Quantum Layers erfassen komplexe Asset-Korrelationen und Regime-Wechsel effektiver",
+    "Quantum-Enhanced Risk-Modellierung durch Uncertainty-Quantifizierung verbessert Sharpe Ratio",
+    "Variational Quantum Circuits optimieren Portfolio-Gewichtungen unter Latenz-Constraints"
+  ],
+  "metrics": [
+    "prediction_accuracy",
+    "sharpe_ratio",
+    "max_drawdown",
+    "average_latency",
+    "quantum_classical_speedup_ratio",
+    "feature_selection_effectiveness",
+    "risk_adjusted_return",
+    "quantum_entanglement_utilization",
+    "computational_efficiency",
+    "confidence_calibration_score",
+    "adaptation_loss_vs_original",
+    "transfer_learning_effectiveness"
+  ],
+  "preset_preferences": {
+    "classical": "standard",
+    "quantum": "quick",
+    "transfer_learning": "enabled"
+  },
+  "success_criteria": {
+    "primary": "prediction_accuracy >= 0.85 AND sharpe_ratio >= 1.5",
+    "secondary": "quantum_classical_speedup_ratio >= 1.5 AND average_latency <= 50",
+    "tertiary": "adaptation_loss_vs_original <= 0.05 AND max_drawdown <= 0.15"
+  },
+  "transfer_learning_config": {
+    "source_mission": "Adaptive Neural Network Architecture Optimization",
+    "transferable_components": [
+      "quantum_feature_selection_strategy",
+      "entanglement_depth_optimization",
+      "hybrid_optimization_approach",
+      "uncertainty_quantification_methods"
+    ],
+    "domain_adaptations": [
+      "financial_market_constraints",
+      "risk_management_integration",
+      "latency_optimization",
+      "portfolio_theory_integration"
+    ]
+  },
+  "dataset_simulation": {
+    "type": "synthetic_financial_timeseries",
+    "assets": 50,
+    "timepoints": 10000,
+    "features_per_asset": 20,
+    "market_regimes": 3,
+    "noise_level": 0.08,
+    "complexity": "high_frequency_nonlinear_correlations"
+  },
+  "quantum_components": [
+    "variational_quantum_portfolio_optimizer",
+    "quantum_correlation_feature_maps",
+    "entangled_risk_assessment",
+    "quantum_market_uncertainty_estimation"
+  ],
+  "classical_components": [
+    "technical_indicator_calculation",
+    "portfolio_optimization_algorithms",
+    "risk_management_systems",
+    "latency_optimization_techniques"
+  ]
+}

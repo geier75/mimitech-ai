@@ -1,0 +1,410 @@
+metadata:
+  comparison_date: '2025-08-03T03:54:22.775574'
+  old_baseline_file: old_baseline.json
+  new_baseline_file: new_baseline.json
+  alpha_level: 0.05
+  sample_sizes:
+    old_baseline: 35
+    new_baseline: 35
+statistical_tests:
+  accuracy:
+    metric: accuracy
+    old_mean: !!python/object/apply:numpy._core.multiarray.scalar
+    - &id001 !!python/object/apply:numpy.dtype
+      args:
+      - f8
+      - false
+      - true
+      state: !!python/tuple
+      - 3
+      - <
+      - null
+      - null
+      - null
+      - -1
+      - -1
+      - 0
+    - !!binary |
+      RBrKG+Kf6z8=
+    new_mean: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      EjzrNCCk7T8=
+    old_std: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      Pw5h0q1arz8=
+    new_std: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      DAyZa6/XpD8=
+    difference: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      cA4JyfAhsD8=
+    percent_improvement: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      SUtHBCEzHUA=
+    t_statistic: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      OiBSQ6pHFEA=
+    p_value: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      fBo5s4x5yz4=
+    is_significant: &id002 !!python/object/apply:numpy._core.multiarray.scalar
+    - !!python/object/apply:numpy.dtype
+      args:
+      - b1
+      - false
+      - true
+      state: !!python/tuple
+      - 3
+      - '|'
+      - null
+      - null
+      - null
+      - -1
+      - -1
+      - 0
+    - !!binary |
+      AQ==
+    cohens_d: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      Jim+ai5k8z8=
+    confidence_interval_95: !!python/tuple
+    - !!python/object/apply:numpy._core.multiarray.scalar
+      - *id001
+      - !!binary |
+        BRKR/OqQoz8=
+    - !!python/object/apply:numpy._core.multiarray.scalar
+      - *id001
+      - !!binary |
+        3pPJE2x7tj8=
+    interpretation: "Sehr gro\xDFer Effekt"
+  sharpe_ratio:
+    metric: sharpe_ratio
+    old_mean: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      qO4z/bqN9z8=
+    new_mean: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      vPJ4NBGP+j8=
+    old_std: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      1GFo5l0MxD8=
+    new_std: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      W20w/7Bnwj8=
+    difference: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      oCAourEKyD8=
+    percent_improvement: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      74caNKOEKUA=
+    t_statistic: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      0LcHLp7nFEA=
+    p_value: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      hjrbMIAzvj4=
+    is_significant: *id002
+    cohens_d: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      vOtDHSD98z8=
+    confidence_interval_95: !!python/tuple
+    - !!python/object/apply:numpy._core.multiarray.scalar
+      - *id001
+      - !!binary |
+        kfoQv2e5vT8=
+    - !!python/object/apply:numpy._core.multiarray.scalar
+      - *id001
+      - !!binary |
+        /OFjylec0D8=
+    interpretation: "Sehr gro\xDFer Effekt"
+  quantum_speedup:
+    metric: quantum_speedup
+    old_mean: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      ONaAb+feAEA=
+    new_mean: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      8DDzO0ncAkA=
+    old_std: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      S/fbvD/wwD8=
+    new_std: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      pLLFNJeewD8=
+    difference: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      gKslxxzWzz8=
+    percent_improvement: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      PvZI+6aWJ0A=
+    t_statistic: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      5JyWwoG/H0A=
+    p_value: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      xjailLVavz0=
+    is_significant: *id002
+    cohens_d: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      85DEC2Jb/j8=
+    confidence_interval_95: !!python/tuple
+    - !!python/object/apply:numpy._core.multiarray.scalar
+      - *id001
+      - !!binary |
+        dlSsoxHVxz8=
+    - !!python/object/apply:numpy._core.multiarray.scalar
+      - *id001
+      - !!binary |
+        RYFP9ZPr0z8=
+    interpretation: "Sehr gro\xDFer Effekt"
+  latency_ms:
+    metric: latency_ms
+    old_mean: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      1ouP7C+oNUA=
+    new_mean: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      BXtnosEQMUA=
+    old_std: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      chFCqCUFCkA=
+    new_std: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      TsFW0EadA0A=
+    difference: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      REOgKLldEsA=
+    percent_improvement: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      kMV+030zNcA=
+    t_statistic: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      XiQP6SOtGsA=
+    p_value: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      /5d6vCzqNz4=
+    is_significant: *id002
+    cohens_d: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      Cl6LNeiB+b8=
+    confidence_interval_95: !!python/tuple
+    - !!python/object/apply:numpy._core.multiarray.scalar
+      - *id001
+      - !!binary |
+        unlj8YjcF8A=
+    - !!python/object/apply:numpy._core.multiarray.scalar
+      - *id001
+      - !!binary |
+        nBm6v9K9CcA=
+    interpretation: "Sehr gro\xDFer Effekt"
+  drawdown:
+    metric: drawdown
+    old_mean: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      kMH/TfDEvz8=
+    new_mean: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      kFCND697uT8=
+    old_std: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      K8M2bCGGkj8=
+    new_std: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      zek+H6Noij8=
+    difference: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      AMTJ+QQlmb8=
+    percent_improvement: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      fzv7/3DJM8A=
+    t_statistic: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      wfaapy0oGsA=
+    p_value: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      J0GDOWNjRD4=
+    is_significant: *id002
+    cohens_d: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      EeNbacUC+b8=
+    confidence_interval_95: !!python/tuple
+    - !!python/object/apply:numpy._core.multiarray.scalar
+      - *id001
+      - !!binary |
+        H+JH8qVooL8=
+    - !!python/object/apply:numpy._core.multiarray.scalar
+      - *id001
+      - !!binary |
+        wsMDD754kb8=
+    interpretation: "Sehr gro\xDFer Effekt"
+  confidence:
+    metric: confidence
+    old_mean: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      Tb4CKb/T6z8=
+    new_mean: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      aHjLTFHm7D8=
+    old_std: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      Yxl+Q8o4pT8=
+    new_std: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      j513dzzhmD8=
+    difference: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      sKGLPCIpoT8=
+    percent_improvement: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      tvX8XJ3VDkA=
+    t_statistic: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      543/Ri+CEEA=
+    p_value: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      N9LV/BfbGj8=
+    is_significant: *id002
+    cohens_d: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      IXajzAKS7z8=
+    confidence_interval_95: !!python/tuple
+    - !!python/object/apply:numpy._core.multiarray.scalar
+      - *id001
+      - !!binary |
+        COCLfBu6kT8=
+    - !!python/object/apply:numpy._core.multiarray.scalar
+      - *id001
+      - !!binary |
+        XFPRujZ1qT8=
+    interpretation: "Sehr gro\xDFer Effekt"
+  transfer_effectiveness:
+    metric: transfer_effectiveness
+    old_mean: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      K/tkfg0C6D8=
+    new_mean: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      xoDLwUdE6j8=
+    old_std: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      d6p3a932nz8=
+    new_std: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      fxRa24YUlT8=
+    difference: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      2Cw0G9IRsj8=
+    percent_improvement: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      85W1M/TQIkA=
+    t_statistic: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      Gr3P5ddVJkA=
+    p_value: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      sUeB0StzjDw=
+    is_significant: *id002
+    cohens_d: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      GD2k0E1bBUA=
+    confidence_interval_95: !!python/tuple
+    - !!python/object/apply:numpy._core.multiarray.scalar
+      - *id001
+      - !!binary |
+        rLSWU4iurT8=
+    - !!python/object/apply:numpy._core.multiarray.scalar
+      - *id001
+      - !!binary |
+        Wv+cDGBMtT8=
+    interpretation: "Sehr gro\xDFer Effekt"
+overall_assessment:
+  critical_metrics_analysis:
+  - metric: accuracy
+    improvement: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      SUtHBCEzHUA=
+    is_significant: *id002
+    effect_size: "Sehr gro\xDFer Effekt"
+  - metric: sharpe_ratio
+    improvement: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      74caNKOEKUA=
+    is_significant: *id002
+    effect_size: "Sehr gro\xDFer Effekt"
+  - metric: transfer_effectiveness
+    improvement: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      85W1M/TQIkA=
+    is_significant: *id002
+    effect_size: "Sehr gro\xDFer Effekt"
+  significant_improvements: 3
+  significant_degradations: 0
+  recommendation: DEPLOY_NEW_BASELINE
+  confidence: HIGH
+  summary: "Accuracy: +7.3% (signifikant); Sharpe Ratio: +12.8% (signifikant) \u2192\
+    \ Empfehlung: Neue Baseline deployen"
