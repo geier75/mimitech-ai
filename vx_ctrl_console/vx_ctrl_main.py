@@ -30,7 +30,7 @@ class VXControlConsole:
         }
         self.active_processes = {}
         self.mission_queue = []
-        self.console_port = 9000
+        self.console_port = self.find_available_port(9000)
         
     def initialize_console(self):
         """Initialisiert die VX-CTRL Console"""
@@ -98,15 +98,39 @@ class VXControlConsole:
             return result == 0
         except:
             return False
+
+    def find_available_port(self, start_port):
+        """Findet einen verfügbaren Port ab start_port"""
+        import socket
+        for port in range(start_port, start_port + 100):
+            try:
+                sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                sock.bind(('localhost', port))
+                sock.close()
+                return port
+            except OSError:
+                continue
+        return start_port  # Fallback
     
     def start_console_server(self):
         """Startet den Console Web Server"""
         def run_server():
-            server = HTTPServer(('localhost', self.console_port), VXConsoleHandler)
-            server.vx_console = self
-            print(f"🌐 VX-CTRL Console Server: http://localhost:{self.console_port}")
-            server.serve_forever()
-        
+            try:
+                server = HTTPServer(('localhost', self.console_port), VXConsoleHandler)
+                server.vx_console = self
+                print(f"🌐 VX-CTRL Console Server: http://localhost:{self.console_port}")
+                server.serve_forever()
+            except OSError as e:
+                if e.errno == 48:  # Address already in use
+                    print(f"⚠️  Port {self.console_port} already in use, trying next available port...")
+                    self.console_port = self.find_available_port(self.console_port + 1)
+                    server = HTTPServer(('localhost', self.console_port), VXConsoleHandler)
+                    server.vx_console = self
+                    print(f"🌐 VX-CTRL Console Server: http://localhost:{self.console_port}")
+                    server.serve_forever()
+                else:
+                    print(f"❌ Server error: {e}")
+
         server_thread = threading.Thread(target=run_server, daemon=True)
         server_thread.start()
         time.sleep(1)  # Give server time to start
