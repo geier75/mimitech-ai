@@ -1,0 +1,20 @@
+{
+  "monitoring_cycle": "2025-08-03T13:18:15.597076",
+  "health_check": {
+    "timestamp": "2025-08-03T13:18:15.596908",
+    "baseline_version": "v2.1",
+    "sharpe_ratio": 1.6108342663013622,
+    "accuracy": 0.9328565529530041,
+    "confidence": 0.9022710922004465,
+    "drawdown": 0.09450607946517901,
+    "latency_ms": 16.48801657468091,
+    "alerts_triggered": [
+      "Drawdown Increase: 11.2% (Aktuell: 0.095)"
+    ],
+    "drift_detected": false,
+    "fallback_required": false,
+    "health_score": 0.9
+  },
+  "fallback_executed": false,
+  "fallback_details": null
+}

@@ -1,0 +1,33 @@
+INFO:__main__:🚀 Automated Deploy/Canary System initialisiert
+INFO:__main__:🚀 Starte automatisches Deployment
+INFO:__main__:🎯 Führe Canary-Stage aus: Stage_10%
+INFO:__main__:✅ Stage_10%: Success Rate 93.3%, Sharpe 1.595, Alerts 1
+INFO:__main__:🎯 Führe Canary-Stage aus: Stage_25%
+INFO:__main__:✅ Stage_25%: Success Rate 75.0%, Sharpe 1.575, Alerts 3
+INFO:__main__:🎯 Führe Canary-Stage aus: Stage_50%
+INFO:__main__:✅ Stage_50%: Success Rate 84.0%, Sharpe 1.591, Alerts 2
+INFO:__main__:🎯 Führe Canary-Stage aus: Stage_100%
+INFO:__main__:✅ Stage_100%: Success Rate 96.7%, Sharpe 1.596, Alerts 7
+ERROR:__main__:❌ Kritischer Fehler in Stage_100% - Stoppe Deployment
+INFO:__main__:🤔 Treffe Deployment-Entscheidung...
+INFO:__main__:🎯 Führe Deployment-Aktion aus: REVERT
+INFO:__main__:🔄 Führe Rollback durch...
+INFO:__main__:  - Stoppe aktuelle Deployment
+INFO:__main__:  - Aktiviere vorherige Baseline
+INFO:__main__:  - Validiere Rollback
+INFO:__main__:  - Erstelle Incident-Report
+INFO:__main__:📋 Deployment-Report gespeichert: agi_missions/deployment_reports/deploy_report_20250803_131642.json
+INFO:__main__:
+============================================================
+INFO:__main__:🏆 AUTOMATED DEPLOYMENT ABGESCHLOSSEN
+INFO:__main__:============================================================
+INFO:__main__:🎯 Entscheidung: REVERT
+INFO:__main__:📊 Confidence: 85.0%
+INFO:__main__:⚠️ Risk Assessment: HIGH
+INFO:__main__:✅ Aktion erfolgreich: True
+INFO:__main__:============================================================
+
+🚀 DEPLOYMENT ABGESCHLOSSEN
+Entscheidung: REVERT
+Erfolgreich: True
+Report: DEPLOY_1754219802

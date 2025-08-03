@@ -8,6 +8,7 @@ import json
 import yaml
 import time
 import logging
+import os
 from typing import Dict, List, Any, Optional
 from datetime import datetime, timedelta
 from dataclasses import dataclass, asdict
@@ -40,7 +41,10 @@ class FallbackExecution:
 class VXControlFallbackPolicy:
     """VX-CONTROL Fallback Policy Manager"""
     
-    def __init__(self, config_file: str = "agi_missions/production_config_v2.1.yaml"):
+    def __init__(self, config_file: str = None):
+        if config_file is None:
+            script_dir = os.path.dirname(os.path.abspath(__file__))
+            config_file = os.path.join(script_dir, "production_config_v2.1.yaml")
         with open(config_file, 'r') as f:
             self.config = yaml.safe_load(f)
         
@@ -184,6 +188,52 @@ class VXControlFallbackPolicy:
         
         return True
     
+    def integrate_with_smoke_test_daemon(self, smoke_test_results: List[Dict]) -> List[FallbackTrigger]:
+        """Integration mit Smoke-Test-Daemon"""
+        logger.info("🔗 Integriere mit Smoke-Test-Daemon")
+
+        triggered = []
+
+        # Analysiere letzte Smoke-Test-Ergebnisse
+        recent_results = smoke_test_results[-5:] if len(smoke_test_results) >= 5 else smoke_test_results
+
+        if not recent_results:
+            return triggered
+
+        # Prüfe auf anhaltende Probleme
+        consecutive_failures = 0
+        for result in reversed(recent_results):
+            if result.get("status") in ["FAIL", "WARNING"]:
+                consecutive_failures += 1
+            else:
+                break
+
+        if consecutive_failures >= 3:
+            trigger = FallbackTrigger(
+                name="SMOKE_TEST_CONSECUTIVE_FAILURES",
+                condition=f"{consecutive_failures} consecutive smoke test failures",
+                threshold=3,
+                duration_minutes=0,
+                severity="HIGH",
+                auto_execute=True
+            )
+            triggered.append(trigger)
+
+        # Prüfe Drift-Patterns
+        drift_count = sum(1 for result in recent_results if result.get("drift_detected", False))
+        if drift_count >= 3:
+            trigger = FallbackTrigger(
+                name="PERSISTENT_DRIFT_DETECTED",
+                condition=f"Drift detected in {drift_count}/{len(recent_results)} recent tests",
+                threshold=3,
+                duration_minutes=0,
+                severity="MEDIUM",
+                auto_execute=True
+            )
+            triggered.append(trigger)
+
+        return triggered
+
     def execute_fallback(self, trigger: FallbackTrigger) -> FallbackExecution:
         """Führt Fallback aus"""
         logger.error(f"🔄 Führe Fallback aus für Trigger: {trigger.name}")

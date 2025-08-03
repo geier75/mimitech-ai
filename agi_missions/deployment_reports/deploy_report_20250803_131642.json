@@ -1,0 +1,108 @@
+{
+  "timestamp": "2025-08-03T13:16:42.960064",
+  "deployment_id": "DEPLOY_1754219802",
+  "baseline_version": "v2.1-transfer-baseline",
+  "canary_results": [
+    {
+      "stage": "Stage_10%",
+      "success_rate": 0.9333333333333333,
+      "avg_metrics": {
+        "sharpe_ratio": 1.5947149211259637,
+        "accuracy": 0.922921775613419,
+        "confidence": 0.8932422184787837,
+        "latency_ms": 18.928819389646954,
+        "drawdown": 0.09739534555680482
+      },
+      "alerts_count": 1,
+      "validation_passed": true,
+      "critical_issues": []
+    },
+    {
+      "stage": "Stage_25%",
+      "success_rate": 0.75,
+      "avg_metrics": {
+        "sharpe_ratio": 1.5754130138771818,
+        "accuracy": 0.9123436124668489,
+        "confidence": 0.882430707140067,
+        "latency_ms": 19.08787526023913,
+        "drawdown": 0.09053012858140914
+      },
+      "alerts_count": 3,
+      "validation_passed": false,
+      "critical_issues": []
+    },
+    {
+      "stage": "Stage_50%",
+      "success_rate": 0.84,
+      "avg_metrics": {
+        "sharpe_ratio": 1.5909648775381293,
+        "accuracy": 0.9213499132578407,
+        "confidence": 0.8911417193805344,
+        "latency_ms": 19.05100563076539,
+        "drawdown": 0.09438396190331078
+      },
+      "alerts_count": 2,
+      "validation_passed": false,
+      "critical_issues": []
+    },
+    {
+      "stage": "Stage_100%",
+      "success_rate": 0.9666666666666667,
+      "avg_metrics": {
+        "sharpe_ratio": 1.595785458865383,
+        "accuracy": 0.9241415790264719,
+        "confidence": 0.8938418551239645,
+        "latency_ms": 18.95251924972451,
+        "drawdown": 0.09514627900491443
+      },
+      "alerts_count": 7,
+      "validation_passed": false,
+      "critical_issues": [
+        "High alert count: 7"
+      ]
+    }
+  ],
+  "decision": {
+    "decision": "REVERT",
+    "confidence": 0.85,
+    "reasoning": [
+      "\u2705 Success Rate: 87.2% >= 85.0%",
+      "\u2705 Sharpe Ratio: 1.589 >= 1.5",
+      "\u2705 Accuracy: 0.920 >= 0.88",
+      "\u2705 Confidence: 0.890 >= 0.82",
+      "\u274c 3 Canary-Stages fehlgeschlagen"
+    ],
+    "metrics_summary": {
+      "avg_success_rate": 0.8725,
+      "avg_sharpe_ratio": 1.5892195678516645,
+      "avg_accuracy": 0.9201892200911451,
+      "avg_confidence": 0.8901641250308374,
+      "total_alerts": 13,
+      "failed_stages": 3
+    },
+    "risk_assessment": "HIGH",
+    "recommended_actions": [
+      "Sofortiger Rollback zur vorherigen Baseline",
+      "Analysiere kritische Issues",
+      "Plane Fixes vor erneutem Deployment"
+    ]
+  },
+  "action_result": {
+    "action": "REVERT",
+    "timestamp": "2025-08-03T13:16:40.946866",
+    "success": true,
+    "details": {
+      "rollback_completed": true,
+      "previous_baseline_active": true,
+      "incident_logged": true
+    }
+  },
+  "summary": {
+    "total_stages": 4,
+    "successful_stages": 1,
+    "avg_success_rate": 0.8725,
+    "total_alerts": 13,
+    "final_decision": "REVERT",
+    "deployment_successful": true
+  }
+}

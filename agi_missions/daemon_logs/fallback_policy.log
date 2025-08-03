@@ -1,0 +1,28 @@
+INFO:__main__:📋 5 Fallback-Trigger definiert
+INFO:__main__:🛡️ VX-CONTROL Fallback Policy initialisiert
+INFO:__main__:🔍 Evaluiere Fallback-Trigger
+WARNING:__main__:🚨 Trigger aktiviert: SHARPE_RATIO_CRITICAL_DROP
+WARNING:__main__:🚨 Trigger aktiviert: CONFIDENCE_SUSTAINED_LOW
+WARNING:__main__:🚨 Trigger aktiviert: DRAWDOWN_EXCESSIVE
+INFO:__main__:📊 3 Trigger aktiviert
+ERROR:__main__:🔄 Führe Fallback aus für Trigger: SHARPE_RATIO_CRITICAL_DROP
+INFO:__main__:🔄 Fallback-Operation: v2.1 → v1.0-transfer-baseline
+INFO:__main__:  - Stoppe aktuelle Baseline
+INFO:__main__:  - Lade Fallback-Konfiguration
+INFO:__main__:  - Aktiviere Fallback-Parameter
+INFO:__main__:  - Validiere Fallback-System
+INFO:__main__:  - Starte Fallback-Baseline
+INFO:__main__:📋 VOID-Audit-Log erstellt: VOID_FALLBACK_1754219900
+INFO:__main__:✅ Fallback erfolgreich: v2.1 → v1.0-transfer-baseline
+INFO:__main__:🔄 Fallback ausgeführt: VOID_FALLBACK_1754219900
+ERROR:__main__:🔄 Führe Fallback aus für Trigger: CONFIDENCE_SUSTAINED_LOW
+INFO:__main__:🔄 Fallback-Operation: v1.0-transfer-baseline → v1.0-transfer-baseline
+INFO:__main__:  - Stoppe aktuelle Baseline
+INFO:__main__:  - Lade Fallback-Konfiguration
+INFO:__main__:  - Aktiviere Fallback-Parameter
+INFO:__main__:  - Validiere Fallback-System
+INFO:__main__:  - Starte Fallback-Baseline
+INFO:__main__:📋 VOID-Audit-Log erstellt: VOID_FALLBACK_1754219902
+INFO:__main__:✅ Fallback erfolgreich: v1.0-transfer-baseline → v1.0-transfer-baseline
+INFO:__main__:🔄 Fallback ausgeführt: VOID_FALLBACK_1754219902
+INFO:__main__:📋 Fallback-Status: {'current_baseline': 'v1.0-transfer-baseline', 'last_fallback': '2025-08-03T13:18:22.723292', 'total_fallbacks': 2, 'active_triggers': 5, 'fallback_enabled': True}

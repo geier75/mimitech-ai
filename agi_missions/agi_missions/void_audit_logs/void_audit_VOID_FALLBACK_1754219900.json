@@ -1,0 +1,20 @@
+{
+  "audit_id": "VOID_FALLBACK_1754219900",
+  "timestamp": "2025-08-03T13:18:20.123620",
+  "event_type": "AUTOMATIC_FALLBACK",
+  "trigger": {
+    "name": "SHARPE_RATIO_CRITICAL_DROP",
+    "condition": "sharpe_ratio < 1.5 for 15+ minutes",
+    "threshold": 1.5,
+    "duration_minutes": 15,
+    "severity": "CRITICAL",
+    "auto_execute": true
+  },
+  "version_change": {
+    "from": "v2.1",
+    "to": "v1.0-transfer-baseline"
+  },
+  "void_protocol": true,
+  "security_level": "HIGH",
+  "automated": true
+}

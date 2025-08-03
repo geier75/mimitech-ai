@@ -16,11 +16,15 @@ from datetime import datetime, timedelta
 from dataclasses import dataclass, asdict
 
 # Setup logging
+import os
+log_dir = os.path.dirname(os.path.abspath(__file__))
+os.makedirs(log_dir, exist_ok=True)
+
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('agi_missions/production_monitor.log'),
+        logging.FileHandler(os.path.join(log_dir, 'production_monitor.log')),
         logging.StreamHandler()
     ]
 )
@@ -44,7 +48,10 @@ class HealthCheckResult:
 class ProductionLiveMonitor:
     """Live-Monitor für Produktions-Baseline"""
     
-    def __init__(self, config_file: str = "agi_missions/production_config_v2.1.yaml"):
+    def __init__(self, config_file: str = None):
+        if config_file is None:
+            script_dir = os.path.dirname(os.path.abspath(__file__))
+            config_file = os.path.join(script_dir, "production_config_v2.1.yaml")
         with open(config_file, 'r') as f:
             self.config = yaml.safe_load(f)
         

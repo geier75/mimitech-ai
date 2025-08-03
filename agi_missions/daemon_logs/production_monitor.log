@@ -1,0 +1,7 @@
+2025-08-03 13:18:15,580 - INFO - 🔍 Production Live Monitor initialisiert
+2025-08-03 13:18:15,588 - INFO - 🔄 Starte Monitoring-Zyklus
+2025-08-03 13:18:15,588 - INFO - 🏥 Führe Production Health-Check durch
+2025-08-03 13:18:15,596 - INFO - 📊 Health-Score: 0.900
+2025-08-03 13:18:15,597 - INFO - 📈 Sharpe: 1.611, Accuracy: 0.933
+2025-08-03 13:18:15,597 - WARNING - ⚠️ Alerts: Drawdown Increase: 11.2% (Aktuell: 0.095)
+2025-08-03 13:18:15,679 - INFO - 🏁 Monitoring-Zyklus abgeschlossen

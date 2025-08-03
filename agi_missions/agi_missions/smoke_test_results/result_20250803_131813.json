@@ -1,0 +1,31 @@
+{
+  "timestamp": "2025-08-03T13:18:13.517879",
+  "test_type": "FULL_SMOKE_TEST",
+  "status": "PASS",
+  "metrics": {
+    "matrix_throughput": 942.3225754511191,
+    "matrix_accuracy": 0.9234761239420967,
+    "matrix_latency_ms": 15.918115930544309,
+    "quantum_speedup": 2.382861551192837,
+    "quantum_fidelity": 0.943216030680498,
+    "quantum_coherence_time": 99.28589796636821,
+    "sharpe_ratio": 1.5755339089690952,
+    "accuracy": 0.9124136244979253,
+    "confidence": 0.8824984236947147,
+    "transfer_effectiveness": 0.8176821552877581,
+    "drawdown": 0.10114444576304993,
+    "latency_ms": 18.19117628456992
+  },
+  "baseline_comparison": {
+    "quantum_speedup": -0.7141020336317954,
+    "sharpe_ratio": -0.2826639892977782,
+    "accuracy": -0.2826639892977863,
+    "confidence": -0.2826639892977806,
+    "transfer_effectiveness": -0.28266398929778475,
+    "drawdown": 18.99346560358814,
+    "latency_ms": -1.6693173807031347
+  },
+  "drift_detected": false,
+  "alerts": [],
+  "execution_time_seconds": 0.008044958114624023
+}

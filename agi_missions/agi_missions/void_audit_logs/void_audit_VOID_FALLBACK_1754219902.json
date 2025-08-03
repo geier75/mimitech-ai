@@ -1,0 +1,20 @@
+{
+  "audit_id": "VOID_FALLBACK_1754219902",
+  "timestamp": "2025-08-03T13:18:22.716830",
+  "event_type": "AUTOMATIC_FALLBACK",
+  "trigger": {
+    "name": "CONFIDENCE_SUSTAINED_LOW",
+    "condition": "confidence < 0.85 for 20+ minutes",
+    "threshold": 0.85,
+    "duration_minutes": 20,
+    "severity": "HIGH",
+    "auto_execute": true
+  },
+  "version_change": {
+    "from": "v1.0-transfer-baseline",
+    "to": "v1.0-transfer-baseline"
+  },
+  "void_protocol": true,
+  "security_level": "HIGH",
+  "automated": true
+}
