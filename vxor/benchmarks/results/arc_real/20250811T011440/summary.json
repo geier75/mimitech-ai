@@ -1,0 +1,53 @@
+{
+  "harness": {
+    "timestamp_utc": "2025-08-11T01:14:41.712110Z",
+    "build_id": "2e05242c5505ca8c610555809e7e798609d457bf56d0bc532accbf791b9947dc",
+    "dataset": {
+      "train_hash": "dbcadd4f86ade07885048da36e097348d97bc2e8f03dddfa970ae56e8923debd",
+      "test_hash": "5c3e50a280f0c9f0b8675d39d72f4df096dae3ce26ae69f499c41d872df01851"
+    },
+    "results": {
+      "accuracy": 0.002386634844868735,
+      "categories": {
+        "uncategorized": {
+          "acc": 0.002386634844868735,
+          "n": 419
+        }
+      },
+      "n_total": 419,
+      "n_correct": 1
+    },
+    "policy": {
+      "threads": 1,
+      "simulation": "disabled_by_policy"
+    },
+    "sbom": "aiohappyeyeballs==2.6.1\naiohttp==3.12.15\naiosignal==1.4.0\naltgraph @ file:///AppleInternal/Library/BuildRoots/39d9dc1a-2111-11f0-be06-226177e5bb69/Library/Caches/com.apple.xbs/Sources/python3/altgraph-0.17.2-py2.py3-none-any.whl\nannotated-types==0.7.0\nanyio==4.9.0\nasync-timeout==5.0.1\nattrs==25.3.0\ncertifi==2025.7.14\ncharset-normalizer==3.4.2\nclick==8.1.8\ndatasets==2.20.0\ndill==0.3.8\nexceptiongroup==1.3.0\nfastapi==0.116.1\nfilelock==3.18.0\nfrozenlist==1.7.0\nfsspec==2024.5.0\nfuture @ file:///AppleInternal/Library/BuildRoots/39d9dc1a-2111-11f0-be06-226177e5bb69/Library/Caches/com.apple.xbs/Sources/python3/future-0.18.2-py3-none-any.whl\nh11==0.16.0\nhf-xet==1.1.7\nhttpcore==1.0.9\nhttptools==0.6.4\nhttpx==0.28.1\nhuggingface-hub==0.34.4\nidna==3.10\nmacholib @ file:///AppleInternal/Library/BuildRoots/39d9dc1a-2111-11f0-be06-226177e5bb69/Library/Caches/com.apple.xbs/Sources/python3/macholib-1.15.2-py2.py3-none-any.whl\nmarkdown-it-py==3.0.0\nmdurl==0.1.2\nmlx==0.27.1\nmlx-metal==0.27.1\nmultidict==6.6.3\nmultiprocess==0.70.16\nnumpy==2.0.2\npackaging==25.0\npandas==2.3.1\npip==25.0.1\npropcache==0.3.2\npsutil==7.0.0\npyarrow==19.0.1\npyarrow-hotfix==0.7\npydantic==2.11.7\npydantic_core==2.33.2\nPygments==2.19.2\npython-dateutil==2.9.0.post0\npython-dotenv==1.1.1\npython-multipart==0.0.20\npytz==2025.2\nPyYAML==6.0.2\nrequests==2.32.4\nrich==14.1.0\nscipy==1.13.1\nsetuptools==58.0.4\nsix @ file:///AppleInternal/Library/BuildRoots/39d9dc1a-2111-11f0-be06-226177e5bb69/Library/Caches/com.apple.xbs/Sources/python3/six-1.15.0-py2.py3-none-any.whl\nsniffio==1.3.1\nstarlette==0.47.2\ntqdm==4.67.1\ntyping-inspection==0.4.1\ntyping_extensions==4.14.1\ntzdata==2025.2\nurllib3==2.5.0\nuvicorn==0.35.0\nuvloop==0.21.0\nwatchfiles==1.1.0\nwebsockets==15.0.1\nwheel @ file:///AppleInternal/Library/BuildRoots/39d9dc1a-2111-11f0-be06-226177e5bb69/Library/Caches/com.apple.xbs/Sources/python3/wheel-0.37.0-py2.py3-none-any.whl\nxxhash==3.5.0\nyarl==1.20.1\n"
+  },
+  "meta": {
+    "timestamp_utc": "2025-08-11T01:14:41.730495Z",
+    "argv": [
+      "/Volumes/My Book/MISO_Ultimate 15.32.28/vxor/benchmarks/run_arc_harness.py",
+      "--train-root",
+      "datasets/arc-agi-1/train",
+      "--eval-root",
+      "datasets/arc-agi-1/evaluation",
+      "--attempts",
+      "2",
+      "--offline"
+    ],
+    "host": "Mac",
+    "git_commit": "2dcdbcfd1dff95fbbb859c9c01c5e75de166c5e5",
+    "dataset": {
+      "arc_train_dir": "datasets/arc-agi-1/train",
+      "arc_eval_dir": "datasets/arc-agi-1/evaluation",
+      "arc_train_dir_hash": "dbcadd4f86ade07885048da36e097348d97bc2e8f03dddfa970ae56e8923debd",
+      "arc_eval_dir_hash": "5c3e50a280f0c9f0b8675d39d72f4df096dae3ce26ae69f499c41d872df01851",
+      "allowlist_json": "vxor/benchmarks/allowlists/arc_glue_allowlist.json"
+    },
+    "latency": {
+      "p95_time_per_test_s": 0.00013658400000005066,
+      "n_tests": 419
+    },
+    "note": "attempts parameter is recorded but current harness supports one prediction per test"
+  }
+}
