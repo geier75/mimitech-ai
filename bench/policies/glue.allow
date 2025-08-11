@@ -1,0 +1,6 @@
+# GLUE Dataset Allowlist (SHA-256)
+# Ein Eintrag pro Zeile. Unterstützt Kommentare per '#'.
+# Verwenden Sie sha256_dir() auf dem GLUE-Root-Verzeichnis und tragen Sie den Hash hier ein.
+# Beispiel:
+# f00dbabe... (Hash des GLUE-Root-Verzeichnisses)
+c6156c57616a511ae66df43facf473c7ef0d061cb8208055bf1050d1b6d86827

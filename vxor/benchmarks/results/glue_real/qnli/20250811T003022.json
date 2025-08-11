@@ -1,0 +1,35 @@
+{
+  "timestamp_utc": "2025-08-11T00:30:24.892521Z",
+  "host": "Mac",
+  "git_commit": "bd3f9c1a9636d86cd15e93b012cd4147562c8c02",
+  "argv": [
+    "/Volumes/My Book/MISO_Ultimate 15.32.28/vxor/benchmarks/run_glue_harness.py",
+    "--root",
+    "/Volumes/My Book/MISO_Ultimate 15.32.28/datasets/glue",
+    "--tasks",
+    "sst2",
+    "rte",
+    "mnli",
+    "qnli",
+    "qqp",
+    "cola",
+    "mrpc",
+    "stsb",
+    "wnli",
+    "--split",
+    "dev",
+    "--offline"
+  ],
+  "dataset": {
+    "glue_root": "/Volumes/My Book/MISO_Ultimate 15.32.28/datasets/glue",
+    "glue_root_dir_hash": "c6156c57616a511ae66df43facf473c7ef0d061cb8208055bf1050d1b6d86827"
+  },
+  "task": "qnli",
+  "split": "dev",
+  "latency": {
+    "p95_time_per_task_s": 5.542002327274531e-06
+  },
+  "harness_metrics": {
+    "accuracy": 0.57111477210324
+  }
+}

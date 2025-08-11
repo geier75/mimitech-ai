@@ -1,0 +1,45 @@
+{
+  "timestamp_utc": "2025-08-11T00:30:24.759488Z",
+  "build_id": "88356087581ff3c8b11b269f0c43b4f000479d6f234df2478eb6ba2b12b3706d",
+  "dataset": {
+    "root_hash": "c6156c57616a511ae66df43facf473c7ef0d061cb8208055bf1050d1b6d86827",
+    "split": "dev"
+  },
+  "results": {
+    "sst2": {
+      "accuracy": 0.5711009174311926
+    },
+    "rte": {
+      "accuracy": 0.5631768953068592
+    },
+    "mnli": {
+      "accuracy": 0.4209803023362345
+    },
+    "qnli": {
+      "accuracy": 0.57111477210324
+    },
+    "qqp": {
+      "accuracy": 0.6361365322780114,
+      "f1": 0.11181549236249472
+    },
+    "cola": {
+      "matthews": 0.0
+    },
+    "mrpc": {
+      "accuracy": 0.6838235294117647,
+      "f1": 0.8122270742358079
+    },
+    "stsb": {
+      "pearson": 0.41910934854762905,
+      "spearman": 0.41736419703309624
+    },
+    "wnli": {
+      "accuracy": 0.5633802816901409
+    }
+  },
+  "policy": {
+    "threads": 1,
+    "simulation": "disabled_by_policy"
+  },
+  "sbom": "blinker==1.9.0\ncertifi==2025.4.26\nclick==8.1.8\ncontourpy==1.3.2\ncycler==0.12.1\nfilelock==3.18.0\nFlask==3.1.0\nfonttools==4.57.0\nfsspec==2025.3.2\nitsdangerous==2.2.0\nJinja2==3.1.6\njoblib==1.4.2\nkiwisolver==1.4.8\nMarkupSafe==3.0.2\nmatplotlib==3.10.1\nmlx==0.25.1\nmpmath==1.3.0\nnetworkx==3.4.2\nnumpy==2.2.5\npackaging==25.0\npandas==2.2.3\npatsy==1.0.1\npillow==11.2.1\npip==25.1.1\npsutil==7.0.0\npyparsing==3.2.3\npython-dateutil==2.9.0.post0\npytz==2025.2\nscikit-learn==1.6.1\nscipy==1.15.2\nsetuptools==79.0.1\nsix==1.17.0\nstatsmodels==0.14.4\nsympy==1.13.3\nthreadpoolctl==3.6.0\ntorch==2.7.0\ntqdm==4.67.1\ntyping_extensions==4.13.2\ntzdata==2025.2\nWerkzeug==3.1.3\nwheel @ file:///opt/homebrew/Cellar/python%403.13/3.13.2/libexec/wheel-0.45.1-py3-none-any.whl#sha256=b9235939e2096903717cb6bfc132267f8a7e46deb2ec3ef9c5e234ea301795d0\n"
+}
