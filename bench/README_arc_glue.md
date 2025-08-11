@@ -52,6 +52,17 @@ python -m bench.glue_eval \
 
 - Expects per-task subfolders containing `dev.jsonl` or `test.jsonl`.
 
+## Scientist-Principle PR-A: Cajal & Scheibel
+
+The PR-A patchset introduces deterministic micro-feature primitives for ARC and adapter/feature registries for ARC/GLUE.
+
+- ARC Cajal primitives: `vxor.benchmarks.arc.primitives` (palette, symmetry, periodicity, connected components)
+- ARC Scheibel registry: `vxor.benchmarks.arc.registry` with `@register_heuristic()`
+- GLUE Cajal markers: `vxor.benchmarks.glue.features` (negation, modal, entailment cues)
+- GLUE Scheibel adapter registry: `vxor.benchmarks.glue.adapter_registry` with `@register_adapter()`
+
+See `bench/README_cajal_scheibel.md` for APIs and tests.
+
 ## Outputs
 
 Each run creates `runs/<arc|glue>/<UTC>*/` with:
