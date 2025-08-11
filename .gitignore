@@ -2,3 +2,15 @@
 ._*
 .ipynb_checkpoints/
 Thumbs.db
+ 
+ # Python / venv
+ .venv/
+ **/__pycache__/
+ *.py[cod]
+ 
+# Eval results & logs
+vxor/benchmarks/results/
+*.log
+ 
+# Caches
+.cache/

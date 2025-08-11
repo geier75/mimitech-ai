@@ -1,0 +1,8 @@
+numpy
+scipy
+sympy
+pytest
+scikit-learn
+pandas
+datasets
+evaluate
