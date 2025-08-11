@@ -1,0 +1,120 @@
+name: SymPy Linear Solver Nightly
+
+on:
+  schedule:
+    - cron: '15 2 * * *'   # nightly at 02:15 UTC
+    - cron: '45 3 * * 0'   # weekly (Sunday) at 03:45 UTC
+  workflow_dispatch:
+
+jobs:
+  nightly:
+    runs-on: ubuntu-latest
+    env:
+      # Optional: provide the real NPZ via repository secret
+      UK165_NPZ_URL: ${{ secrets.UK165_NPZ_URL }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install sympy numpy scipy pytest
+
+      - name: Run PR-A unit tests (Cajal/Scheibel)
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PYTHONPATH=.
+          # Discover PR-A test files, if present
+          TESTS=$(find vxor/benchmarks/tests -maxdepth 1 -type f \( -name 'test_arc_primitives.py' -o -name 'test_arc_registry.py' -o -name 'test_glue_features.py' -o -name 'test_glue_adapter_registry.py' \) 2>/dev/null || true)
+          if [ -n "$TESTS" ]; then
+            echo "[INFO] Running PR-A unit tests..."
+            python -m pytest -q $TESTS
+          else
+            echo "[INFO] PR-A unit tests not found; skipping."
+          fi
+
+      - name: Run benchmark (real 165×165 via URL/file if provided)
+        id: run_bench
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUT_DIR="${{ runner.temp }}/sympy_lin_results"
+          mkdir -p "$OUT_DIR"
+          USED_DEMO=0
+          # If no URL secret is provided and no local NPZ exists, create a demo NPZ
+          if [ -z "${UK165_NPZ_URL:-}" ] && [ ! -f vxor/benchmarks/systems/uk165_real.npz ]; then
+            echo "[INFO] No UK165_NPZ_URL and no local NPZ found. Generating demo NPZ ..."
+            python vxor/benchmarks/systems/make_uk165_demo_npz.py --out vxor/benchmarks/systems/uk165_real.npz --m 165 --n 165 --seed 42
+            USED_DEMO=1
+          fi
+          python vxor/benchmarks/sympy_lin_sys_bench.py \
+            --mode module \
+            --module-path vxor/benchmarks/systems/uk165_from_npz.py \
+            --callable get_system \
+            --module-auto-size \
+            --repeats 3 --warmup 1 --loops 3 \
+            --tag uk165_real_ci \
+            --output-dir "$OUT_DIR"
+          echo "OUT_DIR=$OUT_DIR" >> "$GITHUB_ENV"
+          # Find newest JSON in nested subdirectories (matrix-id prefix folders)
+          JSON_PATH=$(find "$OUT_DIR" -type f -name '*.json' -print0 | xargs -0 ls -1t | head -n1)
+          echo "JSON_PATH=$JSON_PATH" >> "$GITHUB_ENV"
+          echo "json_path=$JSON_PATH" >> "$GITHUB_OUTPUT"
+          echo "out_dir=$OUT_DIR" >> "$GITHUB_OUTPUT"
+          echo "used_demo=$USED_DEMO" >> "$GITHUB_OUTPUT"
+
+      - name: Apply gates (using reference SHA)
+        if: steps.run_bench.outputs.used_demo == '0'
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "Using JSON: $JSON_PATH"
+          python vxor/benchmarks/tests/gate_sympy_lin_ci.py \
+            --json "$JSON_PATH" \
+            --expect-size 165x165 \
+            --expect-method LUsolve \
+            --expect-fallback 0 \
+            --expect-domain QQ \
+            --expect-dtype int \
+            --expect-matrix-sha-prefix 91654d64f711 \
+            --residual-l2-max 1e-10 \
+            --rel-error-max 1e-12 \
+            --p95-max 120.0 \
+            --mean-s-max 120.0 \
+            --variance-threshold 1.5 \
+            --ring-check
+
+      - name: Apply gates (no reference SHA available)
+        if: steps.run_bench.outputs.used_demo == '1'
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "Using JSON: $JSON_PATH"
+          python vxor/benchmarks/tests/gate_sympy_lin_ci.py \
+            --json "$JSON_PATH" \
+            --expect-size 165x165 \
+            --expect-method LUsolve \
+            --expect-fallback 0 \
+            --expect-domain QQ \
+            --expect-dtype int \
+            --residual-l2-max 1e-10 \
+            --rel-error-max 1e-12 \
+            --p95-max 120.0 \
+            --mean-s-max 120.0 \
+            --variance-threshold 1.5 \
+            --ring-check
+
+      - name: Upload results artifact (JSON + manifests)
+        uses: actions/upload-artifact@v4
+        with:
+          name: sympy_lin_results
+          path: ${{ steps.run_bench.outputs.out_dir }}
+          if-no-files-found: error
