@@ -13,7 +13,7 @@ except Exception as e:
 
 
 def now_stamp() -> str:
-    return dt.datetime.utcnow().strftime("%Y%m%dT%H%M%S")
+    return dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%S")
 
 
 def ensure_dir(p: str) -> None:
