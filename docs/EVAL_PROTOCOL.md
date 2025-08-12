@@ -5,7 +5,7 @@ Dieser Leitfaden definiert reproduzierbare Evaluationsläufe für ARC, GLUE und 
 ## Umgebung
 - Docker Image: `eval/Dockerfile` (Python 3.11-slim)
 - Installation: `eval/requirements.txt`
-- Einstieg: `Makefile` Targets `test`, `arc-eval`, `glue-eval`, `imo-eval`, `compare-external`
+- Einstieg: `Makefile` Targets `test`, `arc-eval`, `glue-eval`, `imo-eval`, `compare-external`, `pack`
 
 ## Hardware & Software zu protokollieren
 - CPU/GPU, RAM, OS, Kernel, Python-Version, Paketversionen
@@ -18,6 +18,16 @@ Dieser Leitfaden definiert reproduzierbare Evaluationsläufe für ARC, GLUE und 
 ## Artefakte
 - Ergebnisse als JSON unter `vxor/benchmarks/results/<bench>/<timestamp>.json`
 - Optional CSV/MD-Aggregate (können nachgerüstet werden)
+
+## Evaluator-Pack (Archiv)
+- Erstellung eines übertragbaren Archivs der eval-relevanten Dateien (git-tracked only):
+  ```bash
+  make pack
+  ```
+- Verifikation der Prüfsumme:
+  ```bash
+  shasum -a 256 -c vxor_evaluator_pack_<YYYYMMDD>_<GIT_SHA>.tar.gz.sha256
+  ```
 
 ## Ausführung
 ```bash

@@ -14,3 +14,7 @@ vxor/benchmarks/results/
  
 # Caches
 .cache/
+
+# Release artifacts
+vxor_evaluator_pack_*.tar.gz
+vxor_evaluator_pack_*.tar.gz.sha256
