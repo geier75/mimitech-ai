@@ -1,11 +1,11 @@
 PY ?= python3
 RESULTS_DIR = vxor/benchmarks/results
 
-.PHONY: help test arc-eval glue-eval imo-eval compare-external pack docker-build docker-test docker-arc-eval docker-glue-eval docker-imo-eval
+.PHONY: help test arc-eval glue-eval imo-eval compare-external aggregate-results pack docker-build docker-test docker-arc-eval docker-glue-eval docker-imo-eval
 
 help:
 	@echo "Targets:" \
-		"test, arc-eval, glue-eval, imo-eval, compare-external, pack," \
+		"test, arc-eval, glue-eval, imo-eval, compare-external, aggregate-results, pack," \
 		"docker-build, docker-test, docker-arc-eval, docker-glue-eval, docker-imo-eval"
 
 # Run unit tests
@@ -27,6 +27,10 @@ imo-eval:
 # Optional comparison with external LLM APIs (only if API keys are present)
 compare-external:
 	$(PY) eval/scripts/compare_models.py
+
+# Aggregate results JSONs into a summary
+aggregate-results:
+	$(PY) eval/scripts/aggregate_results.py --results-dir $(RESULTS_DIR) --out-dir $(RESULTS_DIR)/summary
 
 # Containerized workflows
 docker-build:

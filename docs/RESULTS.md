@@ -13,3 +13,10 @@ Hier werden Ergebnisse gesammelt. Jede Tabelle verlinkt auf Rohdaten (JSON) unte
 
 ## Reproduzierbarkeit
 - Dockerfile, Makefile, Seeds, Protokoll in `docs/EVAL_PROTOCOL.md`
+
+## Aggregation
+- Ergebnisse zusammenfassen (offline):
+  ```bash
+  make aggregate-results
+  ```
+- Ausgabe: `vxor/benchmarks/results/summary/summary_<timestamp>.json` und `latest.json`
