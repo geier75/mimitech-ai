@@ -1,11 +1,11 @@
 PY ?= python3
 RESULTS_DIR = vxor/benchmarks/results
 
-.PHONY: help test arc-eval glue-eval imo-eval compare-external aggregate-results pack docker-build docker-test docker-arc-eval docker-glue-eval docker-imo-eval
+.PHONY: help test arc-eval glue-eval imo-eval compare-external aggregate-results smoke-all pack docker-build docker-test docker-arc-eval docker-glue-eval docker-imo-eval
 
 help:
 	@echo "Targets:" \
-		"test, arc-eval, glue-eval, imo-eval, compare-external, aggregate-results, pack," \
+		"test, arc-eval, glue-eval, imo-eval, compare-external, aggregate-results, smoke-all, pack," \
 		"docker-build, docker-test, docker-arc-eval, docker-glue-eval, docker-imo-eval"
 
 # Run unit tests
@@ -31,6 +31,13 @@ compare-external:
 # Aggregate results JSONs into a summary
 aggregate-results:
 	$(PY) eval/scripts/aggregate_results.py --results-dir $(RESULTS_DIR) --out-dir $(RESULTS_DIR)/summary
+
+# Run all smoke steps and aggregate
+smoke-all:
+	$(MAKE) arc-eval
+	$(MAKE) imo-eval
+	$(MAKE) compare-external
+	$(MAKE) aggregate-results
 
 # Containerized workflows
 docker-build:

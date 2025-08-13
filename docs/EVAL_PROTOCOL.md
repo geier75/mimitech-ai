@@ -5,7 +5,7 @@ Dieser Leitfaden definiert reproduzierbare Evaluationsläufe für ARC, GLUE und 
 ## Umgebung
 - Docker Image: `eval/Dockerfile` (Python 3.11-slim)
 - Installation: `eval/requirements.txt`
-- Einstieg: `Makefile` Targets `test`, `arc-eval`, `glue-eval`, `imo-eval`, `compare-external`, `pack`
+- Einstieg: `Makefile` Targets `test`, `arc-eval`, `glue-eval`, `imo-eval`, `compare-external`, `aggregate-results`, `smoke-all`, `pack`
 
 ## Hardware & Software zu protokollieren
 - CPU/GPU, RAM, OS, Kernel, Python-Version, Paketversionen
@@ -35,6 +35,9 @@ make test         # Unit-Tests
 make arc-eval     # ARC Smoke/Eval
 make glue-eval    # GLUE Baseline/Eval
 make imo-eval     # SymPy Linear Systeme
+make compare-external   # Optional: API-Vergleich (nur mit Keys)
+make aggregate-results  # Ergebnisse zusammenfassen (offline)
+make smoke-all          # ARC + IMO + Compare + Aggregation
 ```
 
 ## Datenschutz/Compliance
