@@ -18,3 +18,7 @@ vxor/benchmarks/results/
 # Release artifacts
 vxor_evaluator_pack_*.tar.gz
 vxor_evaluator_pack_*.tar.gz.sha256
+
+# Embedded repositories / externals (do not stage)
+external/ARC-AGI/
+vxor-benchmark-suite/

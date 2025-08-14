@@ -1,0 +1,36 @@
+name: release-gate
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review, labeled, unlabeled]
+    branches: [main]
+
+concurrency:
+  group: release-gate-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  guard:
+    if: github.event.pull_request.base.ref == 'main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run release guard
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REQUIRE_LABELS: legal-approved,cto-approved
+          SENSITIVE_PREFIXES: vxor/,core/,agi_missions/
+          BLACKLIST_PATTERNS: NDA ONLY|DO NOT PUBLISH|CONFIDENTIAL|PROPRIETARY|INTERNAL ONLY|PATENT-PENDING DETAILS
+        run: |
+          python tools/release_guard.py
