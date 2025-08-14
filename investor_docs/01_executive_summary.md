@@ -179,10 +179,10 @@
 4. **Term Sheet**: Framework prepared for negotiation
 
 ### **📧 INVESTOR CONTACT**
-- **CEO**: ceo@vxor-agi.com
-- **CFO**: cfo@vxor-agi.com  
-- **Investors**: investors@vxor-agi.com
-- **Board**: board@vxor-agi.com
+- **CEO**: info@mimitechai.com
+- **CFO**: info@mimitechai.com  
+- **Investors**: info@mimitechai.com
+- **Board**: info@mimitechai.com
 
 ---
 

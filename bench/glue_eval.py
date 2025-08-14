@@ -117,12 +117,23 @@ def eval_glue_task(
     ctx: AuditContext,
     split: str,
     batch_size: int,
+    dump_errors: bool = False,
+    save_preds: bool = False,
+    topn: int = 1,
+    thresholds: Optional[Dict[str, float]] = None,
 ) -> Dict[str, Any]:
     spec = TASKS[task]
     data = load_task_split(dir_path, split)
     y_true: List[Any] = []
     y_pred: List[Any] = []
+    # For optional dumps
+    pred_records: List[Dict[str, Any]] = []
+    err_records: List[Dict[str, Any]] = []
+    # Ensure output dirs exist lazily
+    preds_dir = ctx.run_dir / "preds"
+    errors_dir = ctx.run_dir / "errors"
 
+    ex_idx = 0
     for i in range(0, len(data), batch_size):
         batch = data[i : i + batch_size]
         t0 = time.perf_counter()
@@ -135,12 +146,76 @@ def eval_glue_task(
         for ex, p in zip(batch, preds):
             # expected ground truth fields
             y = ex.get(spec["label_field"])  # may be missing in test; harness expects available
+            # Apply thresholds only for binary tasks if prediction is a float-like score
+            pred_val: Any = p
+            score_val: Optional[float] = None
+            if spec["type"] == "binary" and not isinstance(p, (int, np.integer)):
+                try:
+                    score_val = float(p)
+                    thr = (thresholds or {}).get(task, 0.5)
+                    pred_val = int(score_val >= float(thr))
+                except Exception:
+                    # fallback to int cast if possible
+                    try:
+                        pred_val = int(p)
+                    except Exception:
+                        pred_val = p
+                        score_val = None
+            else:
+                # Normalize multiclass predictions to int when possible
+                if spec["type"] in ("binary", "multiclass"):
+                    try:
+                        pred_val = int(p)
+                    except Exception:
+                        pass
+
             y_true.append(y)
-            y_pred.append(p)
+            y_pred.append(pred_val)
+
+            if save_preds or dump_errors:
+                # Derive a guid if missing
+                guid = ex.get("guid") or ex.get("id") or ex.get("idx") or f"{task}:{split}:{ex_idx}"
+                text_payload = {k: ex.get(k) for k in spec.get("text_fields", []) if k in ex}
+                rec: Dict[str, Any] = {
+                    "guid": guid,
+                    "idx": ex_idx,
+                    "task": task,
+                    "split": split,
+                    "y_true": y,
+                    "y_pred": pred_val,
+                }
+                if score_val is not None:
+                    rec["y_score"] = score_val
+                if text_payload:
+                    rec["text"] = text_payload
+                pred_records.append(rec)
+                # Misclassifications only for classification tasks
+                if dump_errors and spec["type"] in ("binary", "multiclass") and (y is not None) and (pred_val != y):
+                    err_records.append(rec)
+            ex_idx += 1
         append_jsonl(ctx, "GLUE_BATCH", task=task, i=i, n=len(batch), seconds=dt_s)
 
     metrics = compute_metrics(task, y_true, y_pred)
     append_jsonl(ctx, "GLUE_TASK_DONE", task=task, n=len(data), **metrics)
+
+    # Write optional artifacts
+    if save_preds and pred_records:
+        preds_dir.mkdir(parents=True, exist_ok=True)
+        out_p = preds_dir / f"{task}.jsonl"
+        with out_p.open("w", encoding="utf-8") as f:
+            for rec in pred_records:
+                f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+        append_jsonl(ctx, "GLUE_PRED_DUMP", task=task, path=str(out_p), n=len(pred_records))
+        if topn and topn > 1:
+            # We do not have top-N candidates from the solver; log unavailability once per task.
+            append_jsonl(ctx, "GLUE_TOPN_UNAVAILABLE", task=task, requested=topn)
+    if dump_errors and err_records:
+        errors_dir.mkdir(parents=True, exist_ok=True)
+        out_e = errors_dir / f"{task}.jsonl"
+        with out_e.open("w", encoding="utf-8") as f:
+            for rec in err_records:
+                f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+        append_jsonl(ctx, "GLUE_ERROR_DUMP", task=task, path=str(out_e), n=len(err_records))
     return metrics
 
 
@@ -156,6 +231,11 @@ def main(argv: Optional[List[str]] = None) -> int:
     p.add_argument("--batch-size", type=int, default=32)
     p.add_argument("--threads", type=int, default=1)
     p.add_argument("--output-dir", type=str, default="runs/glue")
+    # New analysis/calibration options
+    p.add_argument("--dump-errors", action="store_true", help="Schreibe fehllabelte Beispiele pro Task in run_dir/errors/{task}.jsonl")
+    p.add_argument("--save-preds", action="store_true", help="Schreibe Vorhersagen pro Task in run_dir/preds/{task}.jsonl")
+    p.add_argument("--topn", type=int, default=1, help="Anzahl Top-N Kandidaten (nur wenn Solver solche liefert; sonst Info-Log)")
+    p.add_argument("--thresholds-json", type=str, default="", help="JSON-Datei: {task: schwelle} für binäre Tasks")
 
     args = p.parse_args(argv)
 
@@ -202,13 +282,36 @@ def main(argv: Optional[List[str]] = None) -> int:
     mod = __import__(mod_name, fromlist=[func_name])
     solver_fn = getattr(mod, func_name)
 
+    # Load thresholds mapping if provided
+    thresholds: Optional[Dict[str, float]] = None
+    if args.thresholds_json:
+        tpath = Path(args.thresholds_json)
+        if tpath.exists():
+            try:
+                thresholds = json.loads(tpath.read_text(encoding="utf-8"))
+            except Exception as ex:
+                append_jsonl(ctx, "WARN", reason="thresholds_parse_error", path=str(tpath), error=str(ex))
+        else:
+            append_jsonl(ctx, "WARN", reason="thresholds_missing", path=str(tpath))
+
     results: Dict[str, Any] = {}
     for task in [t.strip() for t in args.tasks.split(",") if t.strip()]:
         if task not in TASKS:
             append_jsonl(ctx, "ERROR", reason="unknown_task", task=task)
             return 2
         try:
-            metrics = eval_glue_task(task, glue_root / task, solver_fn, ctx, args.split, args.batch_size)
+            metrics = eval_glue_task(
+                task,
+                glue_root / task,
+                solver_fn,
+                ctx,
+                args.split,
+                args.batch_size,
+                dump_errors=args.dump_errors,
+                save_preds=args.save_preds,
+                topn=int(args.topn),
+                thresholds=thresholds,
+            )
             results[task] = metrics
         except Exception as ex:
             append_jsonl(ctx, "ERROR", reason="uncaught_exception", task=task, error=str(ex))

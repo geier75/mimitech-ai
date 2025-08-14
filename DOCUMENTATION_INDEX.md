@@ -266,7 +266,7 @@
 - **Technical Questions**: Contact VXOR Technical Documentation Team
 - **Business Inquiries**: Contact VXOR Business Development Team
 - **Security Concerns**: Contact VXOR Security Team
-- **General Feedback**: documentation-feedback@vxor-agi.com
+- **General Feedback**: info@mimitechai.com
 
 ### **🔄 CONTINUOUS IMPROVEMENT:**
 - **User Feedback**: Regular surveys and feedback collection

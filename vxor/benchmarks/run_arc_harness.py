@@ -46,7 +46,8 @@ def run(argv: List[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description="ARC-AGI-1 wrapper: offline audited run with allowlists and artifacts")
     ap.add_argument("--train-root", required=True, type=str)
     ap.add_argument("--eval-root", required=True, type=str)
-    ap.add_argument("--attempts", type=int, default=1, help="kept for compatibility; current harness supports single guess")
+    ap.add_argument("--attempts", type=int, default=1, help="number of candidate attempts to request from solver")
+    ap.add_argument("--agg", type=str, default="first", choices=["first", "best_of_n", "any_correct"], help="aggregation policy for multiple candidates")
     ap.add_argument("--timeout-s", type=float, default=120.0)
     ap.add_argument("--offline", action="store_true")
     ap.add_argument("--no-leakage", action="store_true")
@@ -100,6 +101,8 @@ def run(argv: List[str] | None = None) -> int:
     env["OPENBLAS_NUM_THREADS"] = "1"
     if args.offline:
         env["VXOR_FORCE_OFFLINE"] = "1"
+    # Hint to solver(s) about desired candidate count (best effort)
+    env["VXOR_ARC_TOPN"] = str(int(args.attempts))
 
     # Delegate to harness; set output-dir to results_root so the run dir is created under arc_real/
     cmd = [
@@ -110,6 +113,9 @@ def run(argv: List[str] | None = None) -> int:
         "--allowlist", str(allowlist_path),
         "--output-dir", str(results_root),
         "--threads", "1",
+        "--attempts", str(int(args.attempts)),
+        "--agg", str(args.agg),
+        "--max-seconds", str(float(args.timeout_s)),
     ]
     print("[RUN] ", " ".join(cmd))
     proc = subprocess.run(cmd, env=env, text=True)

@@ -302,9 +302,9 @@ tail -f vx_ctrl_console/logs/vx_ctrl.log
 - **Updates**: Regular feature updates
 
 ### **📧 CONTACT:**
-- **Technical**: tech-support@vxor-agi.com
-- **General**: info@vxor-agi.com
-- **Emergency**: emergency@vxor-agi.com
+- **Technical**: info@mimitechai.com
+- **General**: info@mimitechai.com
+- **Emergency**: info@mimitechai.com
 
 ---
 

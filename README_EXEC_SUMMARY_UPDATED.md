@@ -163,10 +163,10 @@
 4. **Government Contracts**: Defense & National Security Applications
 
 ### **📧 CONTACT INFORMATION:**
-- **Business Development**: partnerships@vxor-agi.com
-- **Investment Inquiries**: investors@vxor-agi.com  
-- **Technical Partnerships**: tech@vxor-agi.com
-- **Media & Press**: press@vxor-agi.com
+- **Business Development**: info@mimitechai.com
+- **Investment Inquiries**: info@mimitechai.com  
+- **Technical Partnerships**: info@mimitechai.com
+- **Media & Press**: info@mimitechai.com
 
 ### **🔗 RESOURCES:**
 - **Live Demo**: https://demo.vxor-agi.com

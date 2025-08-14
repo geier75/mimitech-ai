@@ -421,10 +421,10 @@ git clone https://github.com/vxor-research/experimental-data
 ## 📞 **RESEARCH COLLABORATION CONTACT**
 
 ### **🎯 RESEARCH PARTNERSHIPS:**
-- **Principal Investigator**: research@vxor-agi.com
-- **Quantum Computing**: quantum@vxor-agi.com
-- **AGI Research**: agi-research@vxor-agi.com
-- **Data Sharing**: data@vxor-agi.com
+- **Principal Investigator**: info@mimitechai.com
+- **Quantum Computing**: info@mimitechai.com
+- **AGI Research**: info@mimitechai.com
+- **Data Sharing**: info@mimitechai.com
 
 ### **📚 RESEARCH RESOURCES:**
 - **Research Portal**: https://research.vxor-agi.com

@@ -423,8 +423,8 @@ services:
 ## 🆘 **SUPPORT & COMMUNITY**
 
 ### **📞 TECHNICAL SUPPORT:**
-- **Enterprise Support**: enterprise@vxor-agi.com
-- **Developer Support**: developers@vxor-agi.com
+- **Enterprise Support**: info@mimitechai.com
+- **Developer Support**: info@mimitechai.com
 - **Community Forum**: https://community.vxor-agi.com
 - **Documentation**: https://docs.vxor-agi.com
 

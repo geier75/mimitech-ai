@@ -1,5 +1,5 @@
 {
-  "arc_eval_dir_hash": "c15e7f46ed9d8e68ad5239647d61fef9492a14105093f48771092aa0a8c22b39",
+  "arc_eval_dir_hash": "5c3e50a280f0c9f0b8675d39d72f4df096dae3ce26ae69f499c41d872df01851",
   "arc_eval_files": {
     "00576224.json": "7ba34ffeebc522cccfe74ab4d7e06088ef6e057581b242cd8b5a7a01a77ac8eb",
     "009d5c81.json": "81c21ffd0935622c7bdc7682e2f87b7d696db0d07838ae2f8ba765bd44518948",
@@ -403,7 +403,7 @@
     "ff72ca3e.json": "e232299b4afe98c86282e4c062cc645ae3efe595664bea6b4712428f37e195d9"
   },
   "arc_eval_root": "datasets/arc-agi-1/evaluation",
-  "arc_train_dir_hash": "ebbd0f262b737c4e42dd97fa80914784ac826d919bd27bbedd70f64e76ed0e24",
+  "arc_train_dir_hash": "dbcadd4f86ade07885048da36e097348d97bc2e8f03dddfa970ae56e8923debd",
   "arc_train_files": {
     "007bbfb7.json": "11ca5ce82ff2bf9ee978dd9b52c07b060b44ddb98ceee0deaf462bb09599e3a5",
     "00d62c1b.json": "af6a4a252abfeab5982f19cc4f5f649da37516c633fca5a9b0ffc4ab9c9aab7e",
@@ -819,6 +819,6 @@
     "stsb/dev.jsonl": "a2b6fa6b476e18587476275e465fe1dda3333625460b94655ad7820457834600",
     "wnli/dev.jsonl": "b14eb0b8a0a6295ee6ea8e5bf16490c7fec494243affaed14f705664d2757d94"
   },
-  "glue_root": "/Volumes/My Book/MISO_Ultimate 15.32.28/datasets/glue",
+  "glue_root": "datasets/glue",
   "glue_root_dir_hash": "c6156c57616a511ae66df43facf473c7ef0d061cb8208055bf1050d1b6d86827"
 }

@@ -67,6 +67,11 @@ def run(argv: List[str] | None = None) -> int:
     ap.add_argument("--offline", action="store_true")
     ap.add_argument("--results-root", type=str, default="vxor/benchmarks/results/glue_real")
     ap.add_argument("--allowlist-json", type=str, default="vxor/benchmarks/allowlists/arc_glue_allowlist.json")
+    # Pass-through analysis flags
+    ap.add_argument("--dump-errors", action="store_true")
+    ap.add_argument("--save-preds", action="store_true")
+    ap.add_argument("--topn", type=int, default=1)
+    ap.add_argument("--thresholds-json", type=str, default="")
     args = ap.parse_args(argv)
 
     root = Path(args.root)
@@ -121,6 +126,14 @@ def run(argv: List[str] | None = None) -> int:
         "--threads", "1",
         "--output-dir", str(results_root),
     ]
+    if args.dump_errors:
+        cmd.append("--dump-errors")
+    if args.save_preds:
+        cmd.append("--save-preds")
+    if int(args.topn) and int(args.topn) > 1:
+        cmd += ["--topn", str(int(args.topn))]
+    if args.thresholds_json:
+        cmd += ["--thresholds-json", str(args.thresholds_json)]
     print("[RUN] ", " ".join(cmd))
     proc = subprocess.run(cmd, env=env, text=True)
     if proc.returncode != 0:

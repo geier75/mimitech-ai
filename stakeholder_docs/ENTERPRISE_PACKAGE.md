@@ -339,10 +339,10 @@ class VOIDProtocol:
 4. **Business Case Development**: ROI analysis and planning
 
 ### **📧 ENTERPRISE CONTACTS:**
-- **Enterprise Sales**: enterprise@vxor-agi.com
-- **Technical Consulting**: consulting@vxor-agi.com
-- **Support Services**: support@vxor-agi.com
-- **Partnership Development**: partnerships@vxor-agi.com
+- **Enterprise Sales**: info@mimitechai.com
+- **Technical Consulting**: info@mimitechai.com
+- **Support Services**: info@mimitechai.com
+- **Partnership Development**: info@mimitechai.com
 
 ### **🔗 ENTERPRISE RESOURCES:**
 - **Enterprise Demo**: https://enterprise.vxor-agi.com
