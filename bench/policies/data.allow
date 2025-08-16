@@ -1,0 +1,12 @@
+# SHA-256 allowlist for attested datasets
+# Put hashes of A and b (one per line). Example:
+# 91654d64f711e6e2c852a90fe99e5c791ad635e59c45ea534b86153883fbd8fa
+# 1c956258ae1bdf99564a5cf94df2c01f07da2b4cff4dd41b5003db8ad3a50414
+
+# UK165 real dataset (from verified SymPy benchmark)
+91654d64f711e6e2c852a90fe99e5c791ad635e59c45ea534b86153883fbd8fa
+1c956258ae1bdf99564a5cf94df2c01f07da2b4cff4dd41b5003db8ad3a50414
+
+# UK165 real dataset (canonical float64 hashes from npz in repo)
+55dfdd361b9867411f469a649d3616518425edb2d9992748c961beead7471314
+62c172d57aa7c4e9e66afc85075420d3c0d33824279625236c1f511723fc021d

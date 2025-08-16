@@ -1,0 +1,6 @@
+# Kernpakete für die Bildverarbeitung
+numpy>=1.24.0
+opencv-python-headless>=4.7.0
+mlx>=0.0.5
+torch>=2.0.0
+torchvision>=0.15.0

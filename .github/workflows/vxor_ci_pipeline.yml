@@ -1,0 +1,188 @@
+# VXOR.AI CI Pipeline - MIT Standards
+# Automated Testing, Coverage, Performance Benchmarks
+
+name: VXOR.AI MIT Testing Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # Daily builds at 06:00 UTC
+    - cron: '0 6 * * *'
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest]
+        python-version: [3.11, 3.12, 3.13]
+      fail-fast: false
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest pytest-cov pytest-benchmark pytest-xdist
+        pip install numpy scipy sympy torch mlx psutil
+        pip install fastapi uvicorn slowapi redis-py python-dotenv
+        pip install dash plotly streamlit bandit safety
+        
+    - name: Install VXOR Dependencies
+      run: |
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        if [ -f eval/requirements.txt ]; then pip install -r eval/requirements.txt; fi
+
+    - name: Lint with flake8
+      run: |
+        pip install flake8
+        # Stop build if syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # Exit-zero treats all errors as warnings
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
+    - name: TDD Unit Tests
+      run: |
+        cd tests
+        python -m pytest test_vx_context_core_tdd.py -v --tb=short
+
+    - name: ATDD Integration Tests  
+      run: |
+        cd tests
+        python test_vxor_modules_atdd.py
+
+    - name: MIT Performance Benchmarks
+      run: |
+        cd tests
+        python test_performance_benchmarks_mit.py
+        
+    - name: VXOR Master Benchmark Suite
+      run: |
+        cd tests
+        python vxor_master_benchmark_suite.py
+        
+    - name: Download and Verify Datasets
+      run: |
+        python scripts/download_datasets.py --dataset gsm8k --verify
+        python scripts/download_datasets.py --dataset mmlu --verify
+
+    - name: Test Coverage Analysis
+      run: |
+        cd tests
+        python -m pytest --cov=../vxor --cov-report=xml --cov-report=html --cov-report=term
+
+    - name: Upload Coverage Reports
+      uses: codecov/codecov-action@v3
+      with:
+        file: tests/coverage.xml
+        flags: unittests
+        name: codecov-umbrella
+
+  benchmark:
+    runs-on: macos-latest
+    needs: test
+    
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Set up Python 3.13
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.13
+
+    - name: Install Benchmark Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest-benchmark numpy psutil
+
+    - name: Run Quantum Linear Evaluation Benchmarks
+      run: |
+        cd bench
+        python quantum_linear_eval.py --dataset matrix_10x10 --threads 4 --repeats 3
+
+    - name: Performance Regression Detection
+      run: |
+        cd tests
+        python test_performance_benchmarks_mit.py --benchmark-only --benchmark-json=benchmark_results.json
+
+  security:
+    runs-on: macos-latest
+    
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Run Security Scan
+      run: |
+        pip install bandit safety
+        bandit -r . -f json -o bandit-report.json
+        safety check --json --output safety-report.json
+
+    - name: Test Code Execution Sandbox
+      run: |
+        python -c "
+        from miso.security.sandbox import HumanEvalSandbox
+        sandbox = HumanEvalSandbox()
+        result = sandbox.execute_problem('print(\"Hello Sandbox\")', 'assert True')
+        print(f'Sandbox test: {result[\"passed\"]} - Backend: {result[\"sandbox_backend\"]}')
+        "
+
+    - name: ZTM Security Validation
+      run: |
+        cd security
+        python ztm_monitor.py --validate --report-file=ztm_validation.json
+
+  deploy:
+    runs-on: macos-latest
+    needs: [test, benchmark, security]
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: Checkout Code  
+      uses: actions/checkout@v4
+
+    - name: Generate System Report
+      run: |
+        mkdir -p reports
+        cat > reports/pipeline_report.json << 'EOF'
+        {
+          "timestamp": $(date +%s),
+          "git_commit": "${{ github.sha }}",
+          "python_version": "3.13",
+          "status": "pipeline_success",
+          "components": {
+            "tests": "passed",
+            "benchmarks": "completed",
+            "security": "validated"
+          }
+        }
+        EOF
+
+    - name: Archive Reports
+      uses: actions/upload-artifact@v3
+      with:
+        name: vxor-pipeline-reports
+        path: |
+          reports/
+          tests/htmlcov/
+          bandit-report.json
+          safety-report.json

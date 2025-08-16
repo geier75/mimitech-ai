@@ -1,0 +1,46 @@
+# MISO_Ultimate 15.32.28 - Grundlegende Abhängigkeiten
+# Python 3.12.3 kompatibel
+
+# ML-Frameworks
+tensorflow>=2.15.0
+torch>=2.2.0
+transformers>=4.38.0
+accelerate>=0.27.0
+mlx>=0.7.0  # Apple M-Series Support
+datasets>=2.16.0
+
+# Data Processing
+numpy>=1.26.0
+pandas>=2.2.0
+scikit-learn>=1.4.0
+matplotlib>=3.8.0
+pillow>=10.2.0
+
+# Security
+cryptography>=42.0.0
+pycryptodome>=3.19.0
+jsonschema>=4.20.0
+certifi>=2024.2.2
+
+# Networking & APIs
+grpcio>=1.59.0
+fastapi>=0.109.0
+uvicorn>=0.27.0
+pydantic>=2.6.0
+requests>=2.31.0
+
+# Observability
+opentelemetry-api>=1.21.0
+opentelemetry-sdk>=1.21.0
+opentelemetry-exporter-otlp>=1.21.0
+
+# Testing
+pytest>=7.4.0
+pytest-benchmark>=4.0.0
+pytest-cov>=4.1.0
+
+# Dev Tools
+pip-tools>=7.3.0
+black>=23.12.0
+ruff>=0.1.14
+cyclonedx-bom>=3.11.0

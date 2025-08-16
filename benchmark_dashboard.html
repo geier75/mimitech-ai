@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MISO Ultimate - AGI Benchmark Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #00ff88;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            color: #00ff88;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+        }
+
+        .connection-status {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .connection-status.connected {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+            border: 1px solid #00ff88;
+        }
+
+        .connection-status.disconnected {
+            background: rgba(255, 68, 68, 0.2);
+            color: #ff4444;
+            border: 1px solid #ff4444;
+        }
+
+        .main-container {
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(0, 255, 136, 0.1);
+            border-color: rgba(0, 255, 136, 0.3);
+        }
+
+        .card h3 {
+            color: #00ff88;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .system-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .metric {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #00ff88;
+            display: block;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            color: #a0a0a0;
+            margin-top: 0.5rem;
+        }
+
+        .control-panel {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #00ff88, #00cc6a);
+            color: #000;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, #4a90e2, #357abd);
+            color: #fff;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .logs-container {
+            background: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            height: 300px;
+            overflow-y: auto;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .log-entry {
+            margin-bottom: 0.5rem;
+            padding: 0.25rem 0;
+        }
+
+        .log-entry.info { color: #00ff88; }
+        .log-entry.warning { color: #ffaa00; }
+        .log-entry.error { color: #ff4444; }
+        .log-entry.success { color: #00ff88; }
+
+        .status-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-badge.running {
+            background: rgba(255, 170, 0, 0.2);
+            color: #ffaa00;
+            border: 1px solid #ffaa00;
+        }
+
+        .status-badge.completed {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+            border: 1px solid #00ff88;
+        }
+
+        .status-badge.idle {
+            background: rgba(160, 160, 160, 0.2);
+            color: #a0a0a0;
+            border: 1px solid #a0a0a0;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(0, 255, 136, 0.3);
+            border-radius: 50%;
+            border-top-color: #00ff88;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .control-panel {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>🚀 MISO Ultimate - AGI Benchmark Dashboard</h1>
+        <div id="connection-status" class="connection-status disconnected">
+            Backend: Verbindung wird hergestellt...
+        </div>
+    </header>
+
+    <main class="main-container">
+        <!-- System Overview -->
+        <div class="dashboard-grid">
+            <div class="card">
+                <h3>🖥️ System Status</h3>
+                <div class="system-metrics">
+                    <div class="metric">
+                        <span id="cpu-usage" class="metric-value">-</span>
+                        <span class="metric-label">CPU %</span>
+                    </div>
+                    <div class="metric">
+                        <span id="memory-usage" class="metric-value">-</span>
+                        <span class="metric-label">RAM GB</span>
+                    </div>
+                    <div class="metric">
+                        <span id="uptime" class="metric-value">-</span>
+                        <span class="metric-label">Uptime</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>⚡ Hardware Info</h3>
+                <div id="hardware-info">
+                    <p>Hardware-Informationen werden geladen...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Control Panel -->
+        <div class="control-panel">
+            <button id="run-matrix-btn" class="btn btn-primary">
+                🔢 Matrix Benchmarks starten
+            </button>
+            <button id="run-quantum-btn" class="btn btn-secondary">
+                ⚛️ Quantum Benchmarks starten
+            </button>
+            <button id="run-all-btn" class="btn btn-primary">
+                🎯 Alle Benchmarks starten
+            </button>
+            <button id="training-step-btn" class="btn btn-secondary">
+                🧠 Training Step ausführen
+            </button>
+        </div>
+
+        <!-- Results Section -->
+        <div class="results-grid">
+            <!-- Benchmark Results -->
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <h3>📊 Benchmark Status</h3>
+                    <span id="benchmark-status" class="status-badge idle">Bereit</span>
+                </div>
+                <div class="chart-container">
+                    <canvas id="benchmark-chart"></canvas>
+                </div>
+            </div>
+
+            <!-- Training Results -->
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <h3>🧠 Training Status</h3>
+                    <span id="training-status" class="status-badge idle">Bereit</span>
+                </div>
+                <div class="chart-container">
+                    <canvas id="training-chart"></canvas>
+                </div>
+            </div>
+
+            <!-- System Logs -->
+            <div class="card">
+                <h3>📝 System Logs</h3>
+                <div id="logs-container" class="logs-container">
+                    <div class="log-entry info">[SYSTEM] MISO Ultimate Dashboard initialisiert</div>
+                    <div class="log-entry info">[INFO] Warte auf Backend-Verbindung...</div>
+                </div>
+            </div>
+
+            <!-- Live Metrics -->
+            <div class="card">
+                <h3>📈 Live Metriken</h3>
+                <div class="chart-container">
+                    <canvas id="metrics-chart"></canvas>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // MISO Ultimate Dashboard - Echte Backend-Integration
+        console.log('🚀 MISO Ultimate Dashboard wird initialisiert...');
+
+        // Backend-Konfiguration
+        const BACKEND_URL = 'http://127.0.0.1:8000';
+        const WS_URL = 'ws://127.0.0.1:8000/ws';
+
+        // Globale Variablen
+        let websocket = null;
+        let isBackendConnected = false;
+        let charts = {};
+
+        // DOM-Elemente
+        const connectionStatus = document.getElementById('connection-status');
+        const cpuUsage = document.getElementById('cpu-usage');
+        const memoryUsage = document.getElementById('memory-usage');
+        const uptime = document.getElementById('uptime');
+        const hardwareInfo = document.getElementById('hardware-info');
+        const logsContainer = document.getElementById('logs-container');
+        const benchmarkStatus = document.getElementById('benchmark-status');
+        const trainingStatus = document.getElementById('training-status');
+
+        // Buttons
+        const runMatrixBtn = document.getElementById('run-matrix-btn');
+        const runQuantumBtn = document.getElementById('run-quantum-btn');
+        const runAllBtn = document.getElementById('run-all-btn');
+        const trainingStepBtn = document.getElementById('training-step-btn');
+
+        // Utility Functions
+        function addLog(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = document.createElement('div');
+            logEntry.className = `log-entry ${type}`;
+            logEntry.textContent = `[${timestamp}] ${message}`;
+            logsContainer.appendChild(logEntry);
+            logsContainer.scrollTop = logsContainer.scrollHeight;
+        }
+
+        function updateConnectionStatus(connected) {
+            isBackendConnected = connected;
+            if (connected) {
+                connectionStatus.textContent = 'Backend: Verbunden ✅';
+                connectionStatus.className = 'connection-status connected';
+            } else {
+                connectionStatus.textContent = 'Backend: Offline ❌';
+                connectionStatus.className = 'connection-status disconnected';
+            }
+        }
+
+        function updateStatus(element, status) {
+            element.textContent = status;
+            element.className = `status-badge ${status.toLowerCase()}`;
+        }
+
+        // Backend Communication
+        async function checkBackendConnection() {
+            try {
+                const response = await fetch(`${BACKEND_URL}/`);
+                const data = await response.json();
+                
+                if (data.status === 'running') {
+                    addLog(`Backend verbunden: ${data.version}`, 'success');
+                    updateConnectionStatus(true);
+                    return true;
+                }
+            } catch (error) {
+                addLog(`Backend-Verbindung fehlgeschlagen: ${error.message}`, 'error');
+                updateConnectionStatus(false);
+                return false;
+            }
+        }
+
+        async function loadSystemMetrics() {
+            if (!isBackendConnected) return;
+            
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/system/metrics`);
+                const data = await response.json();
+                
+                cpuUsage.textContent = data.cpu_percent.toFixed(1);
+                memoryUsage.textContent = data.memory_available_gb.toFixed(1);
+                uptime.textContent = new Date(data.timestamp).toLocaleTimeString();
+                
+                updateMetricsChart(data);
+            } catch (error) {
+                addLog(`Fehler beim Laden der System-Metriken: ${error.message}`, 'error');
+            }
+        }
+
+        async function loadHardwareInfo() {
+            if (!isBackendConnected) return;
+            
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/system/hardware`);
+                const data = await response.json();
+                
+                hardwareInfo.innerHTML = `
+                    <p><strong>CPU:</strong> ${data.cpu.cores} Kerne</p>
+                    <p><strong>RAM:</strong> ${data.memory.total_gb.toFixed(1)} GB</p>
+                    <p><strong>MLX:</strong> ${data.backends.mlx_available ? '✅' : '❌'}</p>
+                    <p><strong>PyTorch:</strong> ${data.backends.torch_available ? '✅' : '❌'}</p>
+                `;
+                
+                addLog(`Hardware: ${data.cpu.cores} CPU Kerne, ${data.memory.total_gb.toFixed(1)}GB RAM`, 'info');
+            } catch (error) {
+                addLog(`Fehler beim Laden der Hardware-Info: ${error.message}`, 'error');
+            }
+        }
+
+        // Benchmark Functions
+        async function runBenchmark(type, button, statusElement) {
+            if (!isBackendConnected) {
+                addLog('Backend nicht verbunden!', 'error');
+                return;
+            }
+
+            try {
+                button.disabled = true;
+                button.innerHTML = `<span class="loading"></span> ${type} Tests laufen...`;
+                updateStatus(statusElement, 'Running');
+                addLog(`${type}-Benchmarks gestartet...`, 'info');
+
+                const response = await fetch(`${BACKEND_URL}/api/benchmarks/${type.toLowerCase()}/start`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({})
+                });
+
+                const result = await response.json();
+                addLog(`${type}-Benchmarks gestartet (ID: ${result.test_id})`, 'success');
+                
+                // Poll for results
+                pollBenchmarkResults(result.test_id, statusElement);
+                
+            } catch (error) {
+                addLog(`Fehler bei ${type}-Benchmarks: ${error.message}`, 'error');
+                updateStatus(statusElement, 'Idle');
+            } finally {
+                button.disabled = false;
+                button.innerHTML = button.getAttribute('data-original-text');
+            }
+        }
+
+        async function runTrainingStep() {
+            if (!isBackendConnected) {
+                addLog('Backend nicht verbunden!', 'error');
+                return;
+            }
+
+            try {
+                trainingStepBtn.disabled = true;
+                trainingStepBtn.innerHTML = '<span class="loading"></span> Training läuft...';
+                updateStatus(trainingStatus, 'Running');
+                
+                addLog('Training-Step gestartet...', 'info');
+
+                const response = await fetch(`${BACKEND_URL}/api/training/step`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        epoch: 1,
+                        learning_rate: 0.001,
+                        batch_size: 32
+                    })
+                });
+
+                const result = await response.json();
+                
+                addLog(`Training-Step abgeschlossen: Loss ${result.loss.toFixed(4)}, Accuracy ${result.accuracy.toFixed(4)}`, 'success');
+                updateStatus(trainingStatus, 'Completed');
+                
+                updateTrainingChart(result);
+                
+            } catch (error) {
+                addLog(`Fehler beim Training: ${error.message}`, 'error');
+                updateStatus(trainingStatus, 'Idle');
+            } finally {
+                trainingStepBtn.disabled = false;
+                trainingStepBtn.textContent = '🧠 Training Step ausführen';
+            }
+        }
+
+        async function pollBenchmarkResults(testId, statusElement) {
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/benchmarks/results/${testId}`);
+                const result = await response.json();
+                
+                if (result.status === 'completed') {
+                    addLog(`Benchmark ${testId} abgeschlossen: ${result.results.length} Ergebnisse`, 'success');
+                    updateStatus(statusElement, 'Completed');
+                    updateBenchmarkChart(result.results);
+                } else if (result.status === 'running') {
+                    setTimeout(() => pollBenchmarkResults(testId, statusElement), 2000);
+                } else {
+                    addLog(`Benchmark ${testId} Status: ${result.status}`, 'warning');
+                    updateStatus(statusElement, 'Idle');
+                }
+            } catch (error) {
+                addLog(`Fehler beim Abrufen der Benchmark-Ergebnisse: ${error.message}`, 'error');
+                updateStatus(statusElement, 'Idle');
+            }
+        }
+
+        // Chart Functions
+        function initializeCharts() {
+            // Benchmark Chart
+            const benchmarkCtx = document.getElementById('benchmark-chart').getContext('2d');
+            charts.benchmark = new Chart(benchmarkCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Matrix', 'Quantum', 'System'],
+                    datasets: [{
+                        label: 'Performance Score',
+                        data: [0, 0, 0],
+                        backgroundColor: 'rgba(0, 255, 136, 0.6)',
+                        borderColor: '#00ff88',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
+
+            // Training Chart
+            const trainingCtx = document.getElementById('training-chart').getContext('2d');
+            charts.training = new Chart(trainingCtx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Loss',
+                        data: [],
+                        borderColor: '#ff4444',
+                        backgroundColor: 'rgba(255, 68, 68, 0.1)',
+                        tension: 0.4
+                    }, {
+                        label: 'Accuracy',
+                        data: [],
+                        borderColor: '#00ff88',
+                        backgroundColor: 'rgba(0, 255, 136, 0.1)',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
+
+            // Metrics Chart
+            const metricsCtx = document.getElementById('metrics-chart').getContext('2d');
+            charts.metrics = new Chart(metricsCtx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'CPU %',
+                        data: [],
+                        borderColor: '#4a90e2',
+                        backgroundColor: 'rgba(74, 144, 226, 0.1)',
+                        tension: 0.4
+                    }, {
+                        label: 'Memory GB',
+                        data: [],
+                        borderColor: '#ffaa00',
+                        backgroundColor: 'rgba(255, 170, 0, 0.1)',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
+        }
+
+        function updateBenchmarkChart(results) {
+            if (!charts.benchmark || !results.length) return;
+            
+            const labels = results.map(r => r.test_name);
+            const data = results.map(r => r.performance_score);
+            
+            charts.benchmark.data.labels = labels;
+            charts.benchmark.data.datasets[0].data = data;
+            charts.benchmark.update();
+        }
+
+        function updateTrainingChart(result) {
+            if (!charts.training) return;
+            
+            const now = new Date().toLocaleTimeString();
+            charts.training.data.labels.push(now);
+            charts.training.data.datasets[0].data.push(result.loss);
+            charts.training.data.datasets[1].data.push(result.accuracy);
+            
+            if (charts.training.data.labels.length > 20) {
+                charts.training.data.labels.shift();
+                charts.training.data.datasets[0].data.shift();
+                charts.training.data.datasets[1].data.shift();
+            }
+            
+            charts.training.update();
+        }
+
+        function updateMetricsChart(data) {
+            if (!charts.metrics) return;
+            
+            const now = new Date().toLocaleTimeString();
+            charts.metrics.data.labels.push(now);
+            charts.metrics.data.datasets[0].data.push(data.cpu_percent);
+            charts.metrics.data.datasets[1].data.push(data.memory_available_gb);
+            
+            if (charts.metrics.data.labels.length > 20) {
+                charts.metrics.data.labels.shift();
+                charts.metrics.data.datasets[0].data.shift();
+                charts.metrics.data.datasets[1].data.shift();
+            }
+            
+            charts.metrics.update();
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', async function() {
+            addLog('Dashboard initialisiert', 'success');
+            
+            // Store original button texts
+            runMatrixBtn.setAttribute('data-original-text', runMatrixBtn.textContent);
+            runQuantumBtn.setAttribute('data-original-text', runQuantumBtn.textContent);
+            runAllBtn.setAttribute('data-original-text', runAllBtn.textContent);
+            
+            // Initialize charts
+            initializeCharts();
+            
+            // Check backend connection
+            const connected = await checkBackendConnection();
+            
+            if (connected) {
+                await loadSystemMetrics();
+                await loadHardwareInfo();
+                
+                // Start periodic updates
+                setInterval(loadSystemMetrics, 5000);
+            }
+            
+            // Button event listeners
+            runMatrixBtn.addEventListener('click', () => runBenchmark('Matrix', runMatrixBtn, benchmarkStatus));
+            runQuantumBtn.addEventListener('click', () => runBenchmark('Quantum', runQuantumBtn, benchmarkStatus));
+            runAllBtn.addEventListener('click', () => runBenchmark('All', runAllBtn, benchmarkStatus));
+            trainingStepBtn.addEventListener('click', runTrainingStep);
+        });
+    </script>
+</body>
+</html>

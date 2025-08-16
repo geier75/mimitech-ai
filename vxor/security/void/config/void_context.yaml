@@ -1,0 +1,160 @@
+# VOID Protocol Configuration
+# Last Updated: 2025-05-28
+
+# Core Protocol Settings
+protocol:
+  version: "1.0.0"
+  environment: "production"
+  log_level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  
+# Cryptography Settings
+crypto:
+  # Symmetric Encryption
+  symmetric:
+    algorithm: "AES-256-GCM"
+    key_size: 32  # bytes
+    iv_size: 12   # bytes for GCM
+    auth_tag_size: 16  # bytes for GCM
+    
+  # Asymmetric Encryption
+  asymmetric:
+    algorithm: "RSA"
+    key_size: 4096
+    padding: "OAEP"
+    hash_algorithm: "SHA-512"
+    
+  # Hashing
+  hashing:
+    algorithm: "SHA3-512"
+    salt_size: 32  # bytes
+    iterations: 100000  # for key derivation
+    
+  # Key Management
+  key_management:
+    key_rotation_days: 30
+    max_key_age_days: 90
+    key_storage: "secure_vault"  # secure_vault, aws_kms, hashicorp_vault
+    
+# Verification Settings
+verification:
+  enforce_timestamps: true
+  max_clock_skew_seconds: 30
+  require_nonce: true
+  nonce_size: 16  # bytes
+  
+  # Signature Settings
+  signature:
+    algorithm: "ECDSA"
+    curve: "P-384"
+    hash_algorithm: "SHA3-384"
+    
+# Security Policies
+security_policies:
+  # Data Integrity
+  integrity:
+    enforce_checksums: true
+    checksum_algorithm: "BLAKE2b"
+    
+  # Confidentiality
+  confidentiality:
+    encrypt_pii: true
+    pii_fields:  # List of field names containing PII
+      - "email"
+      - "phone"
+      - "address"
+      - "ssn"
+      - "credit_card"
+    
+  # Availability
+  availability:
+    rate_limiting_enabled: true
+    max_requests_per_minute: 1000
+    
+# Audit Logging
+audit:
+  enabled: true
+  log_file: "logs/void_audit.log"
+  max_size_mb: 100
+  backup_count: 5
+  
+  # Logged Events
+  events:
+    - "AUTHENTICATION_ATTEMPT"
+    - "AUTHORIZATION_CHECK"
+    - "DATA_ACCESS"
+    - "CONFIGURATION_CHANGE"
+    - "SECURITY_EVENT"
+
+# Integration with ZTM
+ztm_integration:
+  enabled: true
+  config_path: "../ztm/config/ztm_config.yaml"
+  sync_interval_seconds: 300  # 5 minutes
+  
+# Performance Tuning
+performance:
+  thread_pool_size: 4
+  io_timeout_seconds: 30
+  cache_ttl_seconds: 300
+  
+# API Security
+api_security:
+  enabled: true
+  cors:
+    allowed_origins:
+      - "https://*.example.com"
+    allowed_methods: ["GET", "POST", "PUT", "DELETE"]
+    allowed_headers: ["Content-Type", "Authorization"]
+    
+  rate_limiting:
+    enabled: true
+    requests_per_minute: 1000
+    ip_whitelist: ["127.0.0.1", "::1"]
+    
+# Key Storage Configuration
+key_storage:
+  # Local File Storage (for development)
+  local:
+    enabled: true
+    private_key_path: "keys/private_key.pem"
+    public_key_path: "keys/public_key.pem"
+    
+  # AWS KMS Integration
+  aws_kms:
+    enabled: false
+    region: "us-west-2"
+    key_id: ""
+    
+  # HashiCorp Vault Integration
+  vault:
+    enabled: false
+    address: "https://vault.example.com:8200"
+    token: "${VAULT_TOKEN}"  # Use environment variable
+    
+# Compliance Settings
+compliance:
+  gdpr:
+    enabled: true
+    data_retention_days: 30
+    
+  hipaa:
+    enabled: false
+    
+  # Add other compliance frameworks as needed
+  
+# Custom Security Rules
+custom_rules:
+  - name: "high_risk_operation"
+    description: "Monitor high-risk operations"
+    condition: "operation_risk_level == 'HIGH'"
+    actions:
+      - "require_mfa()"
+      - "notify_security_team()"
+      - "log_event('HIGH_RISK_OPERATION')"
+    
+  - name: "unusual_location"
+    description: "Detect access from unusual locations"
+    condition: "is_unusual_location == true"
+    actions:
+      - "require_verification()"
+      - "log_event('UNUSUAL_LOCATION_DETECTED')"

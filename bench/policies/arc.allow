@@ -1,0 +1,7 @@
+# ARC-AGI Dataset Allowlist (SHA-256)
+# Ein Eintrag pro Zeile. Unterstützt Kommentare per '#'.
+# Verwenden Sie sha256_dir() auf dem Train- und Test-Verzeichnis und tragen Sie beide Hashes hier ein.
+# Beispiel:
+# 1234abcd... (Hash des ARC-Train-Verzeichnisses)
+# abcd1234... (Hash des ARC-Test-Verzeichnisses)
+error: path does not exist or is not a directory

@@ -1,0 +1,18 @@
+         1157 function calls in 0.032 seconds
+
+   Ordered by: cumulative time
+   List reduced from 55 to 10 due to restriction <10>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.001    0.001    0.032    0.032 /Volumes/My Book/MISO_Ultimate 15.32.28/vxor.ai/VX-MATRIX/tests/benchmark_matrix_ops.py:152(benchmark_matrix_inversion)
+       15    0.011    0.001    0.031    0.002 /Volumes/My Book/MISO_Ultimate 15.32.28/vxor.ai/VX-MATRIX/tests/benchmark_matrix_ops.py:65(generate_random_matrix)
+       15    0.018    0.001    0.019    0.001 /Volumes/My Book/MISO_Ultimate 15.32.28/vx_matrix_test_env/lib/python3.13/site-packages/numpy/linalg/_linalg.py:928(qr)
+       15    0.001    0.000    0.001    0.000 /Volumes/My Book/MISO_Ultimate 15.32.28/vx_matrix_test_env/lib/python3.13/site-packages/numpy/lib/_twodim_base_impl.py:497(triu)
+       75    0.000    0.000    0.000    0.000 {method 'astype' of 'numpy.ndarray' objects}
+       15    0.000    0.000    0.000    0.000 /Volumes/My Book/MISO_Ultimate 15.32.28/vx_matrix_test_env/lib/python3.13/site-packages/numpy/lib/_twodim_base_impl.py:245(diag)
+       30    0.000    0.000    0.000    0.000 {built-in method numpy.zeros}
+       15    0.000    0.000    0.000    0.000 /Volumes/My Book/MISO_Ultimate 15.32.28/vx_matrix_test_env/lib/python3.13/site-packages/numpy/lib/_twodim_base_impl.py:376(tri)
+       15    0.000    0.000    0.000    0.000 {method 'outer' of 'numpy.ufunc' objects}
+       15    0.000    0.000    0.000    0.000 /Volumes/My Book/MISO_Ultimate 15.32.28/vx_matrix_test_env/lib/python3.13/site-packages/numpy/_core/function_base.py:25(linspace)
+
+

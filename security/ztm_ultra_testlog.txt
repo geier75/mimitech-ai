@@ -1,0 +1,1057 @@
+2025-04-30 03:09:05,230 [INFO] ZTM-Tests: === SMOKE-TESTS STARTEN ===
+2025-04-30 03:09:05,230 [INFO] ZTM-Tests: Smoke-Test: Prüfung von ungültigen Dateien
+2025-04-30 03:09:05,230 [INFO] ZTM-Tests: Prüfe ungültige Datei: invalid_config.json
+2025-04-30 03:09:05,259 [INFO] ZTM-Tests: Ausgabe für invalid_config.json:
+
+2025-04-30 03:09:05,259 [WARNING] ZTM-Tests: Fehlerausgabe für invalid_config.json:
+Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,260 [INFO] ZTM-Tests: Smoke-Test: Prüfung von gültigen Dateien
+2025-04-30 03:09:05,260 [INFO] ZTM-Tests: Prüfe gültige Datei: valid_config.json
+2025-04-30 03:09:05,287 [INFO] ZTM-Tests: Ausgabe für valid_config.json:
+
+2025-04-30 03:09:05,287 [WARNING] ZTM-Tests: Fehlerausgabe für valid_config.json:
+Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,287 [INFO] ZTM-Tests: === STRESS-TESTS STARTEN ===
+2025-04-30 03:09:05,455 [INFO] ZTM-Tests: 50 randomisierte JSON-Dateien erstellt in /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated
+2025-04-30 03:09:05,455 [INFO] ZTM-Tests: Stresstest: Parallele Ausführung mit 8 Prozessen
+2025-04-30 03:09:05,506 [INFO] ZTM-Tests: Stresstest-Prozess 1 gestartet mit 13 Dateien
+2025-04-30 03:09:05,506 [INFO] ZTM-Tests: Stresstest-Prozess 0 gestartet mit 13 Dateien
+2025-04-30 03:09:05,507 [INFO] ZTM-Tests: Stresstest-Prozess 3 gestartet mit 13 Dateien
+2025-04-30 03:09:05,507 [INFO] ZTM-Tests: Stresstest-Prozess 2 gestartet mit 13 Dateien
+2025-04-30 03:09:05,508 [INFO] ZTM-Tests: Stresstest-Prozess 4 gestartet mit 12 Dateien
+2025-04-30 03:09:05,510 [INFO] ZTM-Tests: Stresstest-Prozess 5 gestartet mit 12 Dateien
+2025-04-30 03:09:05,510 [INFO] ZTM-Tests: Stresstest-Prozess 6 gestartet mit 12 Dateien
+2025-04-30 03:09:05,511 [INFO] ZTM-Tests: Stresstest-Prozess 7 gestartet mit 12 Dateien
+2025-04-30 03:09:05,541 [WARNING] ZTM-Tests: Prozess 3: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_001.json
+2025-04-30 03:09:05,541 [WARNING] ZTM-Tests: Prozess 1: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_000.json
+2025-04-30 03:09:05,541 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,541 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,541 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,541 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,541 [WARNING] ZTM-Tests: Prozess 2: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_001.json
+2025-04-30 03:09:05,541 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,541 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,541 [WARNING] ZTM-Tests: Prozess 0: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_000.json
+2025-04-30 03:09:05,541 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,541 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,542 [WARNING] ZTM-Tests: Prozess 4: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_002.json
+2025-04-30 03:09:05,542 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,542 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,543 [WARNING] ZTM-Tests: Prozess 5: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_002.json
+2025-04-30 03:09:05,543 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,543 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,543 [WARNING] ZTM-Tests: Prozess 6: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_003.json
+2025-04-30 03:09:05,543 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,543 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,544 [WARNING] ZTM-Tests: Prozess 7: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_003.json
+2025-04-30 03:09:05,544 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,544 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,574 [WARNING] ZTM-Tests: Prozess 2: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_005.json
+2025-04-30 03:09:05,574 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,574 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,574 [WARNING] ZTM-Tests: Prozess 3: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_005.json
+2025-04-30 03:09:05,574 [WARNING] ZTM-Tests: Prozess 6: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_007.json
+2025-04-30 03:09:05,574 [WARNING] ZTM-Tests: Prozess 5: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_006.json
+2025-04-30 03:09:05,574 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,574 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,574 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,574 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,574 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,574 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,575 [WARNING] ZTM-Tests: Prozess 4: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_006.json
+2025-04-30 03:09:05,575 [WARNING] ZTM-Tests: Prozess 1: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_004.json
+2025-04-30 03:09:05,575 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,575 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,575 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,575 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,575 [WARNING] ZTM-Tests: Prozess 0: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_004.json
+2025-04-30 03:09:05,575 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,575 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,576 [WARNING] ZTM-Tests: Prozess 7: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_007.json
+2025-04-30 03:09:05,576 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,577 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,607 [WARNING] ZTM-Tests: Prozess 7: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_011.json
+2025-04-30 03:09:05,607 [WARNING] ZTM-Tests: Prozess 2: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_009.json
+2025-04-30 03:09:05,607 [WARNING] ZTM-Tests: Prozess 3: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_009.json
+2025-04-30 03:09:05,607 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,607 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,607 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,607 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,607 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,607 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,607 [WARNING] ZTM-Tests: Prozess 4: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_010.json
+2025-04-30 03:09:05,608 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,608 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,608 [WARNING] ZTM-Tests: Prozess 0: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_008.json
+2025-04-30 03:09:05,608 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,608 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,608 [WARNING] ZTM-Tests: Prozess 6: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_011.json
+2025-04-30 03:09:05,608 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,608 [WARNING] ZTM-Tests: Prozess 5: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_010.json
+2025-04-30 03:09:05,608 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,608 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,608 [WARNING] ZTM-Tests: Prozess 1: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_008.json
+2025-04-30 03:09:05,608 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,608 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,608 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,639 [WARNING] ZTM-Tests: Prozess 3: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_013.json
+2025-04-30 03:09:05,639 [WARNING] ZTM-Tests: Prozess 2: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_013.json
+2025-04-30 03:09:05,639 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,639 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,639 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,639 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,640 [WARNING] ZTM-Tests: Prozess 7: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_015.json
+2025-04-30 03:09:05,641 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,641 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,641 [WARNING] ZTM-Tests: Prozess 4: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_014.json
+2025-04-30 03:09:05,641 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,641 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,641 [WARNING] ZTM-Tests: Prozess 0: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_012.json
+2025-04-30 03:09:05,641 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,641 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,641 [WARNING] ZTM-Tests: Prozess 6: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_015.json
+2025-04-30 03:09:05,641 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,641 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,641 [WARNING] ZTM-Tests: Prozess 1: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_012.json
+2025-04-30 03:09:05,641 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,641 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,641 [WARNING] ZTM-Tests: Prozess 5: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_014.json
+2025-04-30 03:09:05,641 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,641 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,672 [WARNING] ZTM-Tests: Prozess 6: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_019.json
+2025-04-30 03:09:05,672 [WARNING] ZTM-Tests: Prozess 2: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_017.json
+2025-04-30 03:09:05,673 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,673 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,673 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,673 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,673 [WARNING] ZTM-Tests: Prozess 3: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_017.json
+2025-04-30 03:09:05,673 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,673 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,673 [WARNING] ZTM-Tests: Prozess 4: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_018.json
+2025-04-30 03:09:05,673 [WARNING] ZTM-Tests: Prozess 7: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_019.json
+2025-04-30 03:09:05,673 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,673 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,673 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,673 [WARNING] ZTM-Tests: Prozess 5: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_018.json
+2025-04-30 03:09:05,673 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,673 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,673 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,673 [WARNING] ZTM-Tests: Prozess 0: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_016.json
+2025-04-30 03:09:05,673 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,673 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,673 [WARNING] ZTM-Tests: Prozess 1: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_016.json
+2025-04-30 03:09:05,673 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,673 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,705 [WARNING] ZTM-Tests: Prozess 2: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_021.json
+2025-04-30 03:09:05,705 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,705 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,706 [WARNING] ZTM-Tests: Prozess 3: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_021.json
+2025-04-30 03:09:05,706 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,706 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,706 [WARNING] ZTM-Tests: Prozess 1: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_020.json
+2025-04-30 03:09:05,706 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,706 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,706 [WARNING] ZTM-Tests: Prozess 4: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_022.json
+2025-04-30 03:09:05,707 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,707 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,707 [WARNING] ZTM-Tests: Prozess 0: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_020.json
+2025-04-30 03:09:05,707 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,707 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,707 [WARNING] ZTM-Tests: Prozess 5: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_022.json
+2025-04-30 03:09:05,707 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,707 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,707 [WARNING] ZTM-Tests: Prozess 7: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_023.json
+2025-04-30 03:09:05,707 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,707 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,708 [WARNING] ZTM-Tests: Prozess 6: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_023.json
+2025-04-30 03:09:05,708 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,708 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,738 [WARNING] ZTM-Tests: Prozess 4: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_026.json
+2025-04-30 03:09:05,738 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,738 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,739 [WARNING] ZTM-Tests: Prozess 1: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_024.json
+2025-04-30 03:09:05,739 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,739 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,739 [WARNING] ZTM-Tests: Prozess 6: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_027.json
+2025-04-30 03:09:05,739 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,739 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,739 [WARNING] ZTM-Tests: Prozess 3: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_025.json
+2025-04-30 03:09:05,739 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,739 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,739 [WARNING] ZTM-Tests: Prozess 2: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_025.json
+2025-04-30 03:09:05,739 [WARNING] ZTM-Tests: Prozess 0: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_024.json
+2025-04-30 03:09:05,740 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,740 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,740 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,740 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,740 [WARNING] ZTM-Tests: Prozess 5: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_026.json
+2025-04-30 03:09:05,740 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,740 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,740 [WARNING] ZTM-Tests: Prozess 7: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_027.json
+2025-04-30 03:09:05,740 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,740 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,771 [WARNING] ZTM-Tests: Prozess 0: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_028.json
+2025-04-30 03:09:05,771 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,771 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,771 [WARNING] ZTM-Tests: Prozess 3: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_029.json
+2025-04-30 03:09:05,771 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,771 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,771 [WARNING] ZTM-Tests: Prozess 2: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_029.json
+2025-04-30 03:09:05,772 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,772 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,772 [WARNING] ZTM-Tests: Prozess 6: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_031.json
+2025-04-30 03:09:05,772 [WARNING] ZTM-Tests: Prozess 5: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_030.json
+2025-04-30 03:09:05,772 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,772 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,772 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,772 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,772 [WARNING] ZTM-Tests: Prozess 7: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_031.json
+2025-04-30 03:09:05,772 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,772 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,772 [WARNING] ZTM-Tests: Prozess 1: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_028.json
+2025-04-30 03:09:05,772 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,772 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,772 [WARNING] ZTM-Tests: Prozess 4: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_030.json
+2025-04-30 03:09:05,773 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,773 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,803 [WARNING] ZTM-Tests: Prozess 7: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_035.json
+2025-04-30 03:09:05,803 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,803 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,803 [WARNING] ZTM-Tests: Prozess 3: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_033.json
+2025-04-30 03:09:05,803 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,803 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,804 [WARNING] ZTM-Tests: Prozess 0: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_032.json
+2025-04-30 03:09:05,805 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,805 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,805 [WARNING] ZTM-Tests: Prozess 1: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_032.json
+2025-04-30 03:09:05,805 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,805 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,805 [WARNING] ZTM-Tests: Prozess 4: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_034.json
+2025-04-30 03:09:05,805 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,805 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,805 [WARNING] ZTM-Tests: Prozess 2: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_033.json
+2025-04-30 03:09:05,805 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,805 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,806 [WARNING] ZTM-Tests: Prozess 5: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_034.json
+2025-04-30 03:09:05,806 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,806 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,806 [WARNING] ZTM-Tests: Prozess 6: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_035.json
+2025-04-30 03:09:05,806 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,806 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,837 [WARNING] ZTM-Tests: Prozess 5: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_038.json
+2025-04-30 03:09:05,837 [WARNING] ZTM-Tests: Prozess 3: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_037.json
+2025-04-30 03:09:05,837 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,837 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,837 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,837 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,837 [WARNING] ZTM-Tests: Prozess 0: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_036.json
+2025-04-30 03:09:05,837 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,838 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,838 [WARNING] ZTM-Tests: Prozess 4: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_038.json
+2025-04-30 03:09:05,838 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,838 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,838 [WARNING] ZTM-Tests: Prozess 2: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_037.json
+2025-04-30 03:09:05,839 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,839 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,839 [WARNING] ZTM-Tests: Prozess 7: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_039.json
+2025-04-30 03:09:05,839 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,839 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,839 [WARNING] ZTM-Tests: Prozess 6: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_039.json
+2025-04-30 03:09:05,839 [WARNING] ZTM-Tests: Prozess 1: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_036.json
+2025-04-30 03:09:05,840 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,840 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,840 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,840 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,871 [WARNING] ZTM-Tests: Prozess 4: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_042.json
+2025-04-30 03:09:05,871 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,871 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,871 [WARNING] ZTM-Tests: Prozess 1: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_040.json
+2025-04-30 03:09:05,872 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,872 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,872 [WARNING] ZTM-Tests: Prozess 0: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_040.json
+2025-04-30 03:09:05,872 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,872 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,872 [WARNING] ZTM-Tests: Prozess 2: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_041.json
+2025-04-30 03:09:05,872 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,872 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,872 [WARNING] ZTM-Tests: Prozess 3: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_041.json
+2025-04-30 03:09:05,873 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,873 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,873 [WARNING] ZTM-Tests: Prozess 5: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_042.json
+2025-04-30 03:09:05,873 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,873 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,873 [WARNING] ZTM-Tests: Prozess 7: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_043.json
+2025-04-30 03:09:05,873 [WARNING] ZTM-Tests: Prozess 6: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_043.json
+2025-04-30 03:09:05,873 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,873 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,873 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,873 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,904 [WARNING] ZTM-Tests: Prozess 5: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_046.json
+2025-04-30 03:09:05,904 [WARNING] ZTM-Tests: Prozess 4: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_046.json
+2025-04-30 03:09:05,904 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,904 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,904 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,904 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,905 [INFO] ZTM-Tests: Stresstest-Prozess 5 beendet. Dauer: 0.39s, Max Memory: 25744.00 MB
+2025-04-30 03:09:05,905 [INFO] ZTM-Tests: Stresstest-Prozess 4 beendet. Dauer: 0.40s, Max Memory: 25616.00 MB
+2025-04-30 03:09:05,906 [WARNING] ZTM-Tests: Prozess 2: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_045.json
+2025-04-30 03:09:05,906 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,906 [WARNING] ZTM-Tests: Prozess 3: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_045.json
+2025-04-30 03:09:05,906 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,906 [WARNING] ZTM-Tests: Prozess 1: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_044.json
+2025-04-30 03:09:05,906 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,906 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,906 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,906 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,906 [WARNING] ZTM-Tests: Prozess 0: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_044.json
+2025-04-30 03:09:05,906 [WARNING] ZTM-Tests: Prozess 6: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_047.json
+2025-04-30 03:09:05,906 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,906 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,906 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,906 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,906 [WARNING] ZTM-Tests: Prozess 7: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_047.json
+2025-04-30 03:09:05,906 [INFO] ZTM-Tests: Stresstest-Prozess 6 beendet. Dauer: 0.40s, Max Memory: 25488.00 MB
+2025-04-30 03:09:05,906 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,906 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,906 [INFO] ZTM-Tests: Stresstest-Prozess 7 beendet. Dauer: 0.39s, Max Memory: 26064.00 MB
+2025-04-30 03:09:05,939 [WARNING] ZTM-Tests: Prozess 2: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_049.json
+2025-04-30 03:09:05,939 [WARNING] ZTM-Tests: Prozess 1: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_048.json
+2025-04-30 03:09:05,939 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,939 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,939 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,939 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,939 [INFO] ZTM-Tests: Stresstest-Prozess 2 beendet. Dauer: 0.43s, Max Memory: 25248.00 MB
+2025-04-30 03:09:05,939 [INFO] ZTM-Tests: Stresstest-Prozess 1 beendet. Dauer: 0.43s, Max Memory: 25584.00 MB
+2025-04-30 03:09:05,939 [WARNING] ZTM-Tests: Prozess 0: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_048.json
+2025-04-30 03:09:05,939 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,940 [WARNING] ZTM-Tests: Prozess 3: Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_049.json
+2025-04-30 03:09:05,940 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,941 [WARNING] ZTM-Tests: Stdout: 
+2025-04-30 03:09:05,941 [WARNING] ZTM-Tests: Stderr: Traceback (most recent call last):
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_scan.py", line 19, in <module>
+    from ztm_validator import ZTMValidator, SecurityLevel, ValidationResult
+  File "/Volumes/My Book/MISO_Ultimate 15.32.28/security/ztm_validator.py", line 18, in <module>
+    import jsonschema
+ModuleNotFoundError: No module named 'jsonschema'
+
+2025-04-30 03:09:05,941 [INFO] ZTM-Tests: Stresstest-Prozess 0 beendet. Dauer: 0.43s, Max Memory: 25616.00 MB
+2025-04-30 03:09:05,941 [INFO] ZTM-Tests: Stresstest-Prozess 3 beendet. Dauer: 0.43s, Max Memory: 25248.00 MB
+2025-04-30 03:09:05,949 [INFO] ZTM-Tests: Stresstest abgeschlossen. Dauer: 0.49s
+2025-04-30 03:09:05,949 [INFO] ZTM-Tests: Dateien gesamt: 100, Gültig: 0, Ungültig: 0
+2025-04-30 03:09:05,949 [INFO] ZTM-Tests: Maximaler Speicherverbrauch: 26064.00 MB
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests: Fehler während des Stresstests: 100 Fehler
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_002.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_006.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_010.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_014.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_018.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_022.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_026.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_030.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_034.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_038.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_042.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_046.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_002.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_006.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_010.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_014.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_018.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_022.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_026.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_030.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_034.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_038.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_042.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_046.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_003.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_007.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_011.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_015.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_019.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_023.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_027.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_031.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_035.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_039.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_043.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_047.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_003.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_007.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_011.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_015.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_019.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_023.json
+2025-04-30 03:09:05,949 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_027.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_031.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_035.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_039.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_043.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_047.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_001.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_005.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_009.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_013.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_017.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_021.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_025.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_029.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_033.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_037.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_041.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_045.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_049.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_000.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_004.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_008.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_012.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_016.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_020.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_024.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_028.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_032.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_036.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_040.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_044.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_048.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_000.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_004.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_008.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_012.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_016.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_020.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_valid_024.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_028.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_032.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_036.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_040.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_044.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/gen_invalid_048.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_001.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_005.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_009.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_013.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_017.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_valid_021.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_025.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_029.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_033.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_037.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_041.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_045.json
+2025-04-30 03:09:05,950 [ERROR] ZTM-Tests:   - Unerwarteter Exitcode 1 für /Volumes/My Book/MISO_Ultimate 15.32.28/security/tests/samples/generated/._gen_invalid_049.json
+2025-04-30 03:09:05,951 [INFO] ZTM-Tests: Erstelle Auditbericht...
+2025-04-30 03:09:05,956 [INFO] ZTM-Tests: Auditbericht erstellt: /Volumes/My Book/MISO_Ultimate 15.32.28/security/audit_phase2b_report.md
+2025-04-30 03:13:51,857 [INFO] ZTM-Tests: JSON-Schema-Dateien können erfolgreich geladen werden
+2025-04-30 03:13:51,891 [INFO] ZTM-Tests: SimpleJsonValidator funktioniert korrekt
+2025-04-30 03:13:51,891 [INFO] ZTM-Tests: === SMOKE-TESTS STARTEN ===
+2025-04-30 03:13:51,891 [INFO] ZTM-Tests: ZTM-Validator und SimpleJsonValidator können erfolgreich importiert werden
+2025-04-30 03:13:51,934 [INFO] ZTM-Tests: ztm_scan.py kann erfolgreich ausgeführt werden
+2025-04-30 03:13:51,934 [INFO] ZTM-Tests: Erstelle Auditbericht...
+2025-04-30 03:13:51,937 [INFO] ZTM-Tests: Auditbericht erstellt: /Volumes/My Book/MISO_Ultimate 15.32.28/security/audit_phase2b_report.md

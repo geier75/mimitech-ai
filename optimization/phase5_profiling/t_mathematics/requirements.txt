@@ -1,0 +1,20 @@
+# T-Mathematics Engine Optimierung - Erforderliche Abhängigkeiten
+# Erstellt am 2025-05-03
+
+# Hauptabhängigkeiten
+numpy>=1.24.0  # Basis für numerische Berechnungen
+matplotlib>=3.7.0  # Für Visualisierungen und Benchmarks
+
+# MLX Framework
+mlx>=0.3.0  # Apple MLX Framework für Neural Network und Tensor-Operationen auf Apple Silicon
+
+# Alternative Backends
+# torch>=2.0.0  # PyTorch für GPU-beschleunigte Berechnungen auf anderen Plattformen
+
+# Profiling-Werkzeuge
+memory_profiler>=0.60.0  # Speicherprofilierung
+line_profiler>=4.0.0  # Zeilenweise Profilierung
+
+# Hilfsbibliotheken
+tqdm>=4.65.0  # Fortschrittsbalken
+pandas>=2.0.0  # Datenanalyse und -manipulation

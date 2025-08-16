@@ -1,0 +1,74 @@
+# VXOR_IST_STATE_REPORT
+# DATE: 2025-05-01T18:06:56+02:00
+# FORMAT: VLOG-1.0
+# ENCRYPTION: NONE
+# STATUS: COMPLETE
+
+[SYSTEM_STATS]
+total_files=67694
+total_directories=5633
+total_size_gb=72
+python_files=20859
+js_files=54
+html_files=16
+md_files=60
+json_files=117
+
+[MIGRATION_REFERENCES]
+miso=1363
+miso_ultimate=323
+miso_core=0
+vxor_occurrences=679
+
+[SECURITY_FINDINGS]
+window_exposure=87
+eval_occurrences=2532
+innerhtml_occurrences=47
+new_function=0
+potential_secrets=690
+
+[LEGACY_STATS]
+deprecated_paths=34
+last_modified_core=2025-04-27
+
+[CRITICAL_PATHS]
+core_path=/Volumes/My Book/MISO_Ultimate 15.32.28/core
+miso_path=/Volumes/My Book/MISO_Ultimate 15.32.28/miso
+vxor_module_path=/Volumes/My Book/MISO_Ultimate 15.32.28/miso/vxor
+security_path=/Volumes/My Book/MISO_Ultimate 15.32.28/miso/security/vxor_blackbox
+
+[LARGE_FILES]
+file_1=/Volumes/My Book/MISO_Ultimate 15.32.28/venv/lib/python3.13/site-packages/torch/lib/libtorch_cpu.dylib:178M
+file_2=/Volumes/My Book/MISO_Ultimate 15.32.28/venv_tests/lib/python3.13/site-packages/torch/lib/libtorch_cpu.dylib:178M
+file_3=/Volumes/My Book/MISO_Ultimate 15.32.28/verify/phase1/bandit.log:143M
+file_4=/Volumes/My Book/MISO_Ultimate 15.32.28/venv/lib/python3.13/site-packages/mlx/lib/mlx.metallib:80M
+file_5=/Volumes/My Book/MISO_Ultimate 15.32.28/venv_tests/lib/python3.13/site-packages/mlx/lib/mlx.metallib:80M
+file_6=/Volumes/My Book/MISO_Ultimate 15.32.28/verify/audit_venv/bin/ruff:26M
+file_7=/Volumes/My Book/MISO_Ultimate 15.32.28/verify/audit_venv/lib/python3.13/site-packages/3204bda914b7f2c6f497__mypyc.cpython-313-darwin.so:25M
+file_8=/Volumes/My Book/MISO_Ultimate 15.32.28/venv/lib/python3.13/site-packages/torch/lib/libtorch_python.dylib:25M
+file_9=/Volumes/My Book/MISO_Ultimate 15.32.28/venv_tests/lib/python3.13/site-packages/torch/lib/libtorch_python.dylib:25M
+file_10=/Volumes/My Book/MISO_Ultimate 15.32.28/venv_tests/lib/python3.13/site-packages/cryptography/hazmat/bindings/_rust.abi3.so:20M
+
+[RECENT_CHANGES]
+file_1=/Volumes/My Book/MISO_Ultimate 15.32.28/miso/math/t_mathematics/engine.py:2025-04-27 01:18:41
+file_2=/Volumes/My Book/MISO_Ultimate 15.32.28/miso/math/t_mathematics/tensor_wrappers.py:2025-04-27 01:18:03
+file_3=/Volumes/My Book/MISO_Ultimate 15.32.28/miso/vxor/vx_memex/__init__.py:2025-04-27 00:35:12
+file_4=/Volumes/My Book/MISO_Ultimate 15.32.28/miso/vxor/vx_intent/__init__.py:2025-04-27 00:35:12
+file_5=/Volumes/My Book/MISO_Ultimate 15.32.28/miso/vxor/__init__.py:2025-04-27 00:35:12
+file_6=/Volumes/My Book/MISO_Ultimate 15.32.28/miso/security/vxor_blackbox/crypto/tests/test_tensor_crypto.py:2025-04-26 23:54:15
+file_7=/Volumes/My Book/MISO_Ultimate 15.32.28/miso/security/vxor_blackbox/crypto/tensor_crypto.py:2025-04-26 23:53:35
+file_8=/Volumes/My Book/MISO_Ultimate 15.32.28/miso/security/vxor_blackbox/crypto/tests/test_aes_core.py:2025-04-26 23:42:42
+file_9=/Volumes/My Book/MISO_Ultimate 15.32.28/miso/security/vxor_blackbox/crypto/aes_core.py:2025-04-26 23:36:32
+file_10=/Volumes/My Book/MISO_Ultimate 15.32.28/miso/security/vxor_blackbox/crypto/tests/integration_test.py:2025-04-26 23:30:00
+
+[STRUCTURE_ANALYSIS]
+core_files=443
+miso_files=192
+parallels=["test,test-modules", "venv,venv_tests", "dashboard variations"]
+conflicts=["duplicate libraries", "multiple VXOR module versions"]
+
+[REPORT_SIGNATURE]
+analyzer=CASCADE_SCAN_AGENT
+timestamp=2025-05-01T18:06:56+02:00
+hash=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+valid=TRUE

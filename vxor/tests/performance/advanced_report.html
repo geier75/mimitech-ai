@@ -1,0 +1,614 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MISO Matrix-Benchmark Interaktive Ergebnisse</title>
+    
+    <!-- CSS für das Styling -->
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; line-height: 1.6; color: #333; padding: 20px; max-width: 1400px; margin: 0 auto; }
+        h1, h2, h3 { color: #2c3e50; }
+        table { border-collapse: collapse; width: 100%; margin-bottom: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        th, td { padding: 12px; text-align: left; border: 1px solid #ddd; }
+        th { background-color: #3498db; color: white; position: sticky; top: 0; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        tr:hover { background-color: #ddd; }
+        .summary { background-color: #f8f9fa; border: 1px solid #ddd; padding: 20px; margin: 20px 0; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .metrics-container { display: flex; flex-wrap: wrap; gap: 20px; margin: 20px 0; }
+        .metric { flex: 1; min-width: 200px; background-color: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.3s ease; }
+        .metric:hover { transform: translateY(-5px); }
+        .metric-title { font-weight: bold; color: #7f8c8d; margin-bottom: 10px; }
+        .metric-value { font-size: 28px; font-weight: bold; color: #2980b9; margin-bottom: 10px; }
+        .speedup { color: #27ae60; font-weight: bold; }
+        .chart-container { height: 400px; margin: 20px 0; background-color: white; padding: 15px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .tabs { overflow: hidden; border: 1px solid #ccc; background-color: #f1f1f1; }
+        .tab-button { background-color: inherit; float: left; border: none; outline: none; cursor: pointer; padding: 14px 16px; transition: 0.3s; }
+        .tab-button:hover { background-color: #ddd; }
+        .tab-button.active { background-color: #3498db; color: white; }
+        .tab-content { display: none; padding: 20px; border: 1px solid #ccc; border-top: none; }
+        .footer { text-align: center; margin-top: 40px; padding: 20px; color: #7f8c8d; border-top: 1px solid #eee; }
+        .badge { display: inline-block; padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; margin-right: 5px; }
+        .badge-mlx { background-color: #3498db; color: white; }
+        .badge-pytorch { background-color: #e67e22; color: white; }
+        .badge-numpy { background-color: #2ecc71; color: white; }
+        button { padding: 8px 16px; background-color: #3498db; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; margin-right: 10px; transition: background-color 0.3s; }
+        button:hover { background-color: #2980b9; }
+        #optimizationInfo { margin-top: 30px; padding: 15px; background-color: #e8f4fd; border-left: 5px solid #3498db; border-radius: 4px; }
+    </style>
+    
+    <!-- Plotly.js für interaktive Charts -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <h1>MISO Matrix-Benchmark Interaktive Ergebnisse</h1>
+    <p>Detaillierter Leistungsvergleich von Matrix-Operationen mit verschiedenen Backends und Optimierungen</p>
+    
+    <!-- Tabs für verschiedene Ansichten -->
+    <div class="tabs">
+        <button class="tab-button active" onclick="openTab(event, 'Overview')">Übersicht</button>
+        <button class="tab-button" onclick="openTab(event, 'DetailedResults')">Detaillierte Ergebnisse</button>
+        <button class="tab-button" onclick="openTab(event, 'BackendComparison')">Backend-Vergleich</button>
+        <button class="tab-button" onclick="openTab(event, 'OptimizationInsights')">Optimierungs-Erkenntnisse</button>
+    </div>
+    
+    <!-- Tab: Übersicht -->
+    <div id="Overview" class="tab-content" style="display: block;">
+        <div class="summary">
+            <h2>Benchmark-Zusammenfassung</h2>
+            <table style="width: 100%;">
+                <tr>
+                    <th style="width: 30%">Test-Zeitpunkt:</th>
+                    <td>2025-05-13 18:19:10</td>
+                </tr>
+                <tr>
+                    <th>Verwendete Backends:</th>
+                    <td>PYTORCH, MLX</td>
+                </tr>
+                <tr>
+                    <th>Matrix-Dimensionen:</th>
+                    <td>32x32</td>
+                </tr>
+                <tr>
+                    <th>Benchmark-Iterationen:</th>
+                    <td>10 (mit 3 Warmup-Iterationen)</td>
+                </tr>
+                <tr>
+                    <th>Anzahl der Ergebnisse:</th>
+                    <td>12</td>
+                </tr>
+            </table>
+            
+            <div class="metrics-container">
+                <div class="metric">
+                    <div class="metric-title">Schnellstes Backend</div>
+                    <div class="metric-value">MLX</div>
+                    <div><span class="speedup">3.33x</span> schneller als der Durchschnitt</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-title">Schnellste Operation</div>
+                    <div class="metric-value">EIGENVALUES</div>
+                    <div>Ausführungszeit: <span class="speedup">0.000209 s</span></div>
+                </div>
+                <div class="metric">
+                    <div class="metric-title">Optimale Präzision</div>
+                    <div class="metric-value">PrecisionType.FLOAT32</div>
+                    <div>Beste Kombination aus Geschwindigkeit und Genauigkeit</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-title">Getestete Matrixgrößen</div>
+                    <div class="metric-value">32x32</div>
+                    <div>Verschiedene Dimensionen für umfassende Analyse</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Performance-Übersicht nach Backend -->
+        <h3>Performance-Übersicht nach Backend</h3>
+        <div class="chart-container">
+            <div id="backendPerformanceChart"></div>
+        </div>
+        
+        <!-- Performance nach Matrix-Dimension -->
+        <h3>Performance nach Matrix-Dimension</h3>
+        <div class="chart-container">
+            <div id="dimensionPerformanceChart"></div>
+        </div>
+        
+        <div id="optimizationInfo">
+            <h3>Apple Silicon Optimierungen</h3>
+            <p>Die Matrix-Operationen wurden speziell für Apple Silicon mit MLX optimiert, was zu signifikanten Performance-Verbesserungen führt:</p>
+            <ul>
+                <li>JIT-Kompilierung für schnellere Berechnungen</li>
+                <li>Automatische Erkennung und Verwendung der Apple Neural Engine</li>
+                <li>Effiziente Speicherverwaltung für reduzierte Speichernutzung</li>
+                <li>Batch-Operationen für verbesserte Durchsatzleistung</li>
+                <li>Cache-optimierte Tiling-Strategien für große Matrizen</li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Tab: Detaillierte Ergebnisse -->
+    <div id="DetailedResults" class="tab-content">
+        <h2>Detaillierte Benchmark-Ergebnisse</h2>
+        <h3>Operation: MATMUL</h3>
+<table class='results-table'>
+<thead><tr><th>Backend</th><th>Dimension</th><th>Präzision</th><th>Zeit (s)</th><th>Speedup</th></tr></thead>
+<tbody>
+<tr class='mlx-row'>
+<td>MLX</td>
+<td>32x32</td>
+<td>FLOAT32</td>
+<td>0.000196</td>
+<td>4.96x</td>
+</tr>
+<tr class='pytorch-row'>
+<td>PYTORCH</td>
+<td>32x32</td>
+<td>FLOAT32</td>
+<td>0.000970</td>
+<td>1.00x</td>
+</tr>
+</tbody></table>
+<div class='chart-container operation-chart' id='chart-matmul'></div>
+<h3>Operation: INVERSE</h3>
+<table class='results-table'>
+<thead><tr><th>Backend</th><th>Dimension</th><th>Präzision</th><th>Zeit (s)</th><th>Speedup</th></tr></thead>
+<tbody>
+<tr class='mlx-row'>
+<td>MLX</td>
+<td>32x32</td>
+<td>FLOAT32</td>
+<td>0.000232</td>
+<td>12.17x</td>
+</tr>
+<tr class='pytorch-row'>
+<td>PYTORCH</td>
+<td>32x32</td>
+<td>FLOAT32</td>
+<td>0.002823</td>
+<td>1.00x</td>
+</tr>
+</tbody></table>
+<div class='chart-container operation-chart' id='chart-inverse'></div>
+<h3>Operation: SVD</h3>
+<table class='results-table'>
+<thead><tr><th>Backend</th><th>Dimension</th><th>Präzision</th><th>Zeit (s)</th><th>Speedup</th></tr></thead>
+<tbody>
+<tr class='mlx-row'>
+<td>MLX</td>
+<td>32x32</td>
+<td>FLOAT32</td>
+<td>0.000233</td>
+<td>8.18x</td>
+</tr>
+<tr class='pytorch-row'>
+<td>PYTORCH</td>
+<td>32x32</td>
+<td>FLOAT32</td>
+<td>0.001909</td>
+<td>1.00x</td>
+</tr>
+</tbody></table>
+<div class='chart-container operation-chart' id='chart-svd'></div>
+<h3>Operation: EIGENVALUES</h3>
+<table class='results-table'>
+<thead><tr><th>Backend</th><th>Dimension</th><th>Präzision</th><th>Zeit (s)</th><th>Speedup</th></tr></thead>
+<tbody>
+<tr class='mlx-row'>
+<td>MLX</td>
+<td>32x32</td>
+<td>FLOAT32</td>
+<td>0.000220</td>
+<td>1.00x</td>
+</tr>
+<tr class='pytorch-row'>
+<td>PYTORCH</td>
+<td>32x32</td>
+<td>FLOAT32</td>
+<td>0.000199</td>
+<td>1.11x</td>
+</tr>
+</tbody></table>
+<div class='chart-container operation-chart' id='chart-eigenvalues'></div>
+<h3>Operation: CHOLESKY</h3>
+<table class='results-table'>
+<thead><tr><th>Backend</th><th>Dimension</th><th>Präzision</th><th>Zeit (s)</th><th>Speedup</th></tr></thead>
+<tbody>
+<tr class='mlx-row'>
+<td>MLX</td>
+<td>32x32</td>
+<td>FLOAT32</td>
+<td>0.000195</td>
+<td>6.82x</td>
+</tr>
+<tr class='pytorch-row'>
+<td>PYTORCH</td>
+<td>32x32</td>
+<td>FLOAT32</td>
+<td>0.001333</td>
+<td>1.00x</td>
+</tr>
+</tbody></table>
+<div class='chart-container operation-chart' id='chart-cholesky'></div>
+<h3>Operation: QR</h3>
+<table class='results-table'>
+<thead><tr><th>Backend</th><th>Dimension</th><th>Präzision</th><th>Zeit (s)</th><th>Speedup</th></tr></thead>
+<tbody>
+<tr class='mlx-row'>
+<td>MLX</td>
+<td>32x32</td>
+<td>FLOAT32</td>
+<td>0.000240</td>
+<td>1.00x</td>
+</tr>
+<tr class='pytorch-row'>
+<td>PYTORCH</td>
+<td>32x32</td>
+<td>FLOAT32</td>
+<td>0.000212</td>
+<td>1.14x</td>
+</tr>
+</tbody></table>
+<div class='chart-container operation-chart' id='chart-qr'></div>
+
+        
+        <!-- Speicherverbrauch -->
+        <h3>Speicherverbrauch nach Operation und Backend</h3>
+        <div class="chart-container">
+            <div id="memoryUsageChart"></div>
+        </div>
+    </div>
+    
+    <!-- Tab: Backend-Vergleich -->
+    <div id="BackendComparison" class="tab-content">
+        <h2>Vergleich der verschiedenen Backends</h2>
+        <p>Die folgende Tabelle zeigt einen direkten Vergleich zwischen MLX, PyTorch und NumPy für alle getesteten Operationen und Dimensionen:</p>
+        
+        <table id="comparisonTable">
+            <thead>
+                <tr>
+                    <th>Operation</th>
+                    <th>Dimension</th>
+                    <th>MLX (s)</th>
+                    <th>PyTorch (s)</th>
+                    <th>NumPy (s)</th>
+                    <th>Beschleunigung</th>
+                    <th>Bester Backend</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+<td>CHOLESKY</td>
+<td>32x32</td>
+<td>0.000195</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>6.82x</td>
+<td>MLX</td>
+</tr>
+<tr>
+<td>EIGENVALUES</td>
+<td>32x32</td>
+<td>0.000220</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>1.11x</td>
+<td>PYTORCH</td>
+</tr>
+<tr>
+<td>INVERSE</td>
+<td>32x32</td>
+<td>0.000232</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>12.17x</td>
+<td>MLX</td>
+</tr>
+<tr>
+<td>MATMUL</td>
+<td>32x32</td>
+<td>0.000196</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>4.96x</td>
+<td>MLX</td>
+</tr>
+<tr>
+<td>QR</td>
+<td>32x32</td>
+<td>0.000240</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>1.14x</td>
+<td>PYTORCH</td>
+</tr>
+<tr>
+<td>SVD</td>
+<td>32x32</td>
+<td>0.000233</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>8.18x</td>
+<td>MLX</td>
+</tr>
+
+            </tbody>
+        </table>
+        
+        <div style="margin-top: 20px;">
+            <button id="exportCSV">Als CSV exportieren</button>
+            <button id="exportJSON">Als JSON exportieren</button>
+            <button id="printResults">Ergebnisse drucken</button>
+        </div>
+    </div>
+    
+    <!-- Tab: Optimierungs-Erkenntnisse -->
+    <div id="OptimizationInsights" class="tab-content">
+        <h2>Optimierungs-Erkenntnisse</h2>
+        
+        <h3>MLX-Optimierungen für Apple Silicon</h3>
+        <p>Die implementierten Optimierungen nutzen die spezifischen Eigenschaften von Apple Silicon zur Leistungssteigerung:</p>
+        
+        <div class="metrics-container">
+            <div class="metric">
+                <div class="metric-title">JIT-Kompilierung</div>
+                <div>Die Just-In-Time-Kompilierung erzeugt optimierten Code für die spezifische Hardware-Architektur.</div>
+            </div>
+            <div class="metric">
+                <div class="metric-title">Neural Engine</div>
+                <div>Nutzung der Apple Neural Engine (ANE) für beschleunigte Matrix-Operationen.</div>
+            </div>
+            <div class="metric">
+                <div class="metric-title">Speicher-Optimierung</div>
+                <div>Effiziente Speicherverwaltung durch intelligentes Memory-Pooling und -Wiederverwendung.</div>
+            </div>
+            <div class="metric">
+                <div class="metric-title">Tiling-Strategien</div>
+                <div>Aufteilung großer Matrizen in Cache-optimierte Teilmatrizen für verbesserte Lokalität.</div>
+            </div>
+        </div>
+        
+        <h3>Vergleich der Optimierungsstrategien</h3>
+        <div class="chart-container">
+            <div id="optimizationComparisonChart"></div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>MISO Matrix-Benchmark | Erstellt am 2025-05-13 18:19:10</p>
+        <p>Optimiert für Apple Silicon mit MLX und PyTorch</p>
+    </div>
+    
+    <!-- JavaScript für interaktive Funktionalität -->
+    <script>
+        // Daten aus dem Python-Backend laden
+        const chartData = {"operations": {"MATMUL": {"dimensions": [], "times": [], "backends": {"MLX": {"dimensions": [32], "times": [0.0001956389993817235]}, "PYTORCH": {"dimensions": [32], "times": [0.0009701943345135078]}}}, "INVERSE": {"dimensions": [], "times": [], "backends": {"MLX": {"dimensions": [32], "times": [0.00023200033198615225]}, "PYTORCH": {"dimensions": [32], "times": [0.002822861334910461]}}}, "SVD": {"dimensions": [], "times": [], "backends": {"MLX": {"dimensions": [32], "times": [0.00023336133259969452]}, "PYTORCH": {"dimensions": [32], "times": [0.0019092360004530444]}}}, "EIGENVALUES": {"dimensions": [], "times": [], "backends": {"MLX": {"dimensions": [32], "times": [0.0002201530005550012]}, "PYTORCH": {"dimensions": [32], "times": [0.00019879166696531078]}}}, "CHOLESKY": {"dimensions": [], "times": [], "backends": {"MLX": {"dimensions": [32], "times": [0.00019544466704246588]}, "PYTORCH": {"dimensions": [32], "times": [0.0013334030008991249]}}}, "QR": {"dimensions": [], "times": [], "backends": {"MLX": {"dimensions": [32], "times": [0.00024038900058561316]}, "PYTORCH": {"dimensions": [32], "times": [0.00021177799984191856]}}}}, "backends": {"32": {"MATMUL": {"MLX": 0.0001956389993817235, "PYTORCH": 0.0009701943345135078}, "INVERSE": {"MLX": 0.00023200033198615225, "PYTORCH": 0.002822861334910461}, "SVD": {"MLX": 0.00023336133259969452, "PYTORCH": 0.0019092360004530444}, "EIGENVALUES": {"MLX": 0.0002201530005550012, "PYTORCH": 0.00019879166696531078}, "CHOLESKY": {"MLX": 0.00019544466704246588, "PYTORCH": 0.0013334030008991249}, "QR": {"MLX": 0.00024038900058561316, "PYTORCH": 0.00021177799984191856}}}, "dimensions": {}, "memory": {"MATMUL": {"MLX": [], "PYTORCH": []}, "INVERSE": {"MLX": [], "PYTORCH": []}, "SVD": {"MLX": [], "PYTORCH": []}, "EIGENVALUES": {"MLX": [], "PYTORCH": []}, "CHOLESKY": {"MLX": [], "PYTORCH": []}, "QR": {"MLX": [], "PYTORCH": []}}, "precision_comparison": {"PrecisionType.FLOAT32": {"backends": {"MLX": [{"operation": "MATMUL", "dimension": 32, "time": 0.0001956389993817235}, {"operation": "INVERSE", "dimension": 32, "time": 0.00023200033198615225}, {"operation": "SVD", "dimension": 32, "time": 0.00023336133259969452}, {"operation": "EIGENVALUES", "dimension": 32, "time": 0.0002201530005550012}, {"operation": "CHOLESKY", "dimension": 32, "time": 0.00019544466704246588}, {"operation": "QR", "dimension": 32, "time": 0.00024038900058561316}], "PYTORCH": [{"operation": "MATMUL", "dimension": 32, "time": 0.0009701943345135078}, {"operation": "INVERSE", "dimension": 32, "time": 0.002822861334910461}, {"operation": "SVD", "dimension": 32, "time": 0.0019092360004530444}, {"operation": "EIGENVALUES", "dimension": 32, "time": 0.00019879166696531078}, {"operation": "CHOLESKY", "dimension": 32, "time": 0.0013334030008991249}, {"operation": "QR", "dimension": 32, "time": 0.00021177799984191856}]}}}};
+        
+        // Tab-Funktionalität
+        function openTab(evt, tabName) {
+            const tabContents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].style.display = "none";
+            }
+            
+            const tabButtons = document.getElementsByClassName("tab-button");
+            for (let i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].className = tabButtons[i].className.replace(" active", "");
+            }
+            
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+        
+        // Charts initialisieren wenn Seite geladen ist
+        document.addEventListener('DOMContentLoaded', function() {
+            // Backend Performance Chart
+            createBackendPerformanceChart();
+            
+            // Dimension Performance Chart
+            createDimensionPerformanceChart();
+            
+            // Memory Usage Chart
+            createMemoryUsageChart();
+            
+            // Optimization Comparison Chart
+            createOptimizationComparisonChart();
+            
+            // Export-Funktionalität
+            document.getElementById('exportCSV').addEventListener('click', exportToCSV);
+            document.getElementById('exportJSON').addEventListener('click', exportToJSON);
+            document.getElementById('printResults').addEventListener('click', printResults);
+        });
+        
+        // Chart-Erstellungsfunktionen
+        function createBackendPerformanceChart() {
+            const data = [];
+            const operations = Object.keys(chartData.operations);
+            
+            operations.forEach(operation => {
+                const backends = chartData.operations[operation].backends;
+                Object.keys(backends).forEach(backend => {
+                    const times = backends[backend].times;
+                    const avgTime = times.reduce((a, b) => a + b, 0) / times.length;
+                    
+                    data.push({
+                        x: [backend],
+                        y: [avgTime],
+                        type: 'bar',
+                        name: `${operation}`
+                    });
+                });
+            });
+            
+            const layout = {
+                title: 'Durchschnittliche Ausführungszeit nach Backend und Operation',
+                xaxis: { title: 'Backend' },
+                yaxis: { 
+                    title: 'Ausführungszeit (s)',
+                    type: 'log'
+                },
+                barmode: 'group',
+                legend: { orientation: 'h' }
+            };
+            
+            Plotly.newPlot('backendPerformanceChart', data, layout);
+        }
+        
+        function createDimensionPerformanceChart() {
+            const data = [];
+            const operations = Object.keys(chartData.operations);
+            
+            operations.forEach(operation => {
+                const backends = chartData.operations[operation].backends;
+                Object.keys(backends).forEach(backend => {
+                    data.push({
+                        x: backends[backend].dimensions,
+                        y: backends[backend].times,
+                        type: 'scatter',
+                        mode: 'lines+markers',
+                        name: `${operation} - ${backend}`
+                    });
+                });
+            });
+            
+            const layout = {
+                title: 'Performance nach Matrix-Dimension',
+                xaxis: { title: 'Matrix-Dimension' },
+                yaxis: { 
+                    title: 'Ausführungszeit (s)',
+                    type: 'log'
+                }
+            };
+            
+            Plotly.newPlot('dimensionPerformanceChart', data, layout);
+        }
+        
+        function createMemoryUsageChart() {
+            const data = [];
+            const operations = Object.keys(chartData.memory);
+            
+            operations.forEach(operation => {
+                const backends = Object.keys(chartData.memory[operation]);
+                backends.forEach(backend => {
+                    const memoryData = chartData.memory[operation][backend];
+                    const dimensions = memoryData.map(d => d.dimension);
+                    const memoryChanges = memoryData.map(d => d.memory_change);
+                    
+                    data.push({
+                        x: dimensions,
+                        y: memoryChanges,
+                        type: 'bar',
+                        name: `${operation} - ${backend}`
+                    });
+                });
+            });
+            
+            const layout = {
+                title: 'Speicherverbrauch nach Operation und Dimension',
+                xaxis: { title: 'Matrix-Dimension' },
+                yaxis: { title: 'Speicheränderung (MB)' },
+                barmode: 'group'
+            };
+            
+            Plotly.newPlot('memoryUsageChart', data, layout);
+        }
+        
+        function createOptimizationComparisonChart() {
+            // Hier könnten speziellere Optimierungsvergleiche dargestellt werden
+            // Vereinfachtes Beispiel mit vorhandenen Daten
+            const data = [];
+            const operations = Object.keys(chartData.operations);
+            
+            if (operations.length > 0) {
+                const operation = operations[0];
+                const backends = chartData.operations[operation].backends;
+                const backendNames = Object.keys(backends);
+                
+                backendNames.forEach(backend => {
+                    data.push({
+                        x: backends[backend].dimensions,
+                        y: backends[backend].times,
+                        type: 'scatter',
+                        mode: 'lines+markers',
+                        name: backend
+                    });
+                });
+                
+                const layout = {
+                    title: 'Optimierungsvergleich für ' + operation,
+                    xaxis: { title: 'Matrix-Dimension' },
+                    yaxis: { 
+                        title: 'Ausführungszeit (s)',
+                        type: 'log'
+                    }
+                };
+                
+                Plotly.newPlot('optimizationComparisonChart', data, layout);
+            }
+        }
+        
+        // Export-Funktionen
+        function exportToCSV() {
+            const rows = [
+                ["Operation", "Backend", "Dimension", "Zeit (s)", "Speicher (MB)"]
+            ];
+            
+            const operations = Object.keys(chartData.operations);
+            operations.forEach(operation => {
+                const backends = chartData.operations[operation].backends;
+                Object.keys(backends).forEach(backend => {
+                    const dimensions = backends[backend].dimensions;
+                    const times = backends[backend].times;
+                    
+                    dimensions.forEach((dim, idx) => {
+                        const time = times[idx];
+                        let memory = "N/A";
+                        
+                        if (chartData.memory[operation] && 
+                            chartData.memory[operation][backend]) {
+                            const memoryPoint = chartData.memory[operation][backend].find(m => m.dimension === dim);
+                            if (memoryPoint) {
+                                memory = memoryPoint.memory_change;
+                            }
+                        }
+                        
+                        rows.push([operation, backend, dim, time, memory]);
+                    });
+                });
+            });
+            
+            let csvContent = "data:text/csv;charset=utf-8,";
+            rows.forEach(row => {
+                const csvRow = row.join(',');
+                csvContent += csvRow + "
+";
+            });
+            
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "benchmark_results.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+        
+        function exportToJSON() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(chartData));
+            const downloadAnchorNode = document.createElement('a');
+            downloadAnchorNode.setAttribute("href", dataStr);
+            downloadAnchorNode.setAttribute("download", "benchmark_results.json");
+            document.body.appendChild(downloadAnchorNode);
+            downloadAnchorNode.click();
+            downloadAnchorNode.remove();
+        }
+        
+        function printResults() {
+            window.print();
+        }
+    </script>
+</body>
+</html>
+        

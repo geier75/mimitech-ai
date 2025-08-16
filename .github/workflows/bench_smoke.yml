@@ -1,0 +1,35 @@
+name: Bench Smoke
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install minimal deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install numpy scipy scikit-learn
+
+      - name: Verify ARC harness CLI
+        run: |
+          python -m bench.arc_eval --help
+
+      - name: Verify GLUE harness CLI
+        run: |
+          python -m bench.glue_eval --help
+
+      - name: Verify GLUE calibrator CLI
+        run: |
+          python bench/tools/glue_calibrate.py --help

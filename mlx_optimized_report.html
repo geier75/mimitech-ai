@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MISO Matrix-Benchmark Ergebnisse</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; padding: 20px; max-width: 1200px; margin: 0 auto; }
+        h1, h2, h3, h4 { color: #444; }
+        table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #f2f2f2; }
+        tr:hover { background-color: #f5f5f5; }
+        .summary { background-color: #f8f9fa; border: 1px solid #ddd; padding: 20px; margin: 20px 0; border-radius: 8px; }
+        .metric { background-color: #e9ecef; padding: 15px; margin-bottom: 10px; border-radius: 4px; }
+        .metric-title { font-weight: bold; margin-bottom: 5px; }
+        .metric-value { font-size: 24px; font-weight: bold; color: #007bff; }
+        .speedup { color: #28a745; font-weight: bold; }
+        .footer { text-align: center; margin-top: 40px; padding: 20px; color: #6c757d; border-top: 1px solid #eee; }
+        .metrics-container { display: flex; flex-wrap: wrap; gap: 20px; }
+        .metric-item { flex: 1; }
+    </style>
+</head>
+<body>
+    <h1>MISO Matrix-Benchmark Ergebnisse</h1>
+    <p>Leistungsvergleich von Matrix-Operationen mit verschiedenen Backends auf Apple Silicon</p>
+    
+    <div class="summary">
+        <h2>Zusammenfassung</h2>
+        <table>
+            <tr>
+                <th>Test-Zeitpunkt:</th>
+                <td>2025-05-13 16:47:05</td>
+            </tr>
+            <tr>
+                <th>Verwendete Backends:</th>
+                <td>MLX</td>
+            </tr>
+            <tr>
+                <th>Matrix-Dimensionen:</th>
+                <td>32x32, 64x64, 128x128, 256x256, 512x512, 1024x1024</td>
+            </tr>
+            <tr>
+                <th>Benchmark-Iterationen:</th>
+                <td>10 (mit 3 Warmup-Iterationen)</td>
+            </tr>
+            <tr>
+                <th>Anzahl der Ergebnisse:</th>
+                <td>1</td>
+            </tr>
+        </table>
+        
+        <div class="metrics-container">
+            <div class="metric metric-item">
+                <div class="metric-title">Schnellstes Backend</div>
+                <div class="metric-value">MLX</div>
+                <div>1.00x schneller als der Durchschnitt</div>
+            </div>
+            <div class="metric metric-item">
+                <div class="metric-title">Schnellste Operation</div>
+                <div class="metric-value">MATMUL</div>
+                <div>Ausführungszeit: 0.000222 s</div>
+            </div>
+            <div class="metric metric-item">
+                <div class="metric-title">Optimale Präzision</div>
+                <div class="metric-value">FLOAT32</div>
+            </div>
+            <div class="metric metric-item">
+                <div class="metric-title">Getestete Matrixgrößen</div>
+                <div class="metric-value">512x512 - 512x512</div>
+            </div>
+        </div>
+    </div>
+    
+    <h2>Detaillierte Ergebnisse</h2>
+    <h3>Operation: MATMUL</h3>
+<h4>Präzision: FLOAT32</h4>
+<table>
+<tr><th>Backend</th><th>Dimension</th><th>Mittlere Zeit (s)</th><th>Erfolgsrate</th><th>Std. Abw.</th><th>Min. Zeit (s)</th><th>Max. Zeit (s)</th></tr>
+<tr class='backend-mlx'><td>MLX</td><td>512x512</td><td>0.000222</td><td>0.50</td><td>0.000029</td><td>0.000200</td><td>0.000277</td></tr>
+</table>
+<h5>Performance-Vergleich nach Dimension</h5>
+<hr>
+
+    
+    <h2>Backend-Vergleich</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Operation</th>
+                <th>Dimension</th>
+                <th>MLX (s)</th>
+                <th>PyTorch (s)</th>
+                <th>NumPy (s)</th>
+                <th>Beschleunigung</th>
+                <th>Bester Backend</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>MATMUL</td><td>512x512</td><td class='highlight-row'>0.000222</td><td class=''>-</td><td class=''>-</td><td>1.00x</td><td>MLX</td></tr>
+
+        </tbody>
+    </table>
+    
+    <div class="footer">
+        <p>MISO Matrix-Benchmark | Erstellt am 2025-05-13 16:47:05</p>
+        <p>Optimiert für Apple Silicon mit MLX und PyTorch</p>
+    </div>
+</body>
+</html>
+        

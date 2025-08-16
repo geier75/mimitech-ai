@@ -1,0 +1,28 @@
+[Unit]
+Description=Zero-Trust Monitoring (ZTM) Service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/path/to/miso/security/ztm
+ExecStart=/path/to/miso/security/ztm/ztm_service.sh start
+ExecStop=/path/to/miso/security/ztm/ztm_service.sh stop
+ExecReload=/path/to/miso/security/ztm/ztm_service.sh reload
+Restart=on-failure
+RestartSec=5s
+
+# Security options
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+ReadWritePaths=/var/log/ztm
+
+# Resource limits
+LimitNOFILE=65535
+LimitNPROC=65535
+LimitCORE=infinity
+
+[Install]
+WantedBy=multi-user.target

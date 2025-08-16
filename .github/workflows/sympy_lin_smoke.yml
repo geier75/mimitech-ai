@@ -1,0 +1,32 @@
+name: SymPy Linear Solver Smoke
+
+on:
+  push:
+    paths:
+      - 'vxor/benchmarks/**'
+      - '.github/workflows/sympy_lin_smoke.yml'
+  pull_request:
+    paths:
+      - 'vxor/benchmarks/**'
+      - '.github/workflows/sympy_lin_smoke.yml'
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install sympy numpy
+
+      - name: Run self-check (no pytest required)
+        run: |
+          python vxor/benchmarks/tests/selfcheck_sympy_lin_sys.py

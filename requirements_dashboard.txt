@@ -1,0 +1,41 @@
+# MISO Ultimate AGI - Dashboard-Abhängigkeiten
+
+# Webframework
+flask==2.0.1
+flask-socketio==5.1.1
+fastapi==0.70.0
+uvicorn==0.15.0
+
+# Datenverarbeitung
+numpy==1.21.2
+pandas==1.3.3
+scipy==1.7.1
+
+# Visualisierung
+matplotlib==3.4.3
+plotly==5.3.1
+dash==2.0.0
+dash-bootstrap-components==1.0.0
+
+# ML-Frameworks
+torch==1.10.0
+mlx==1.0.0
+scikit-learn==1.0.1
+
+# Systemüberwachung
+psutil==5.8.0
+
+# Fortgeschrittene Visualisierung
+seaborn==0.11.2
+bokeh==2.4.0
+altair==4.1.0
+
+# Echtzeit-Kommunikation
+websockets==10.0
+
+# Datenspeicherung
+h5py==3.5.0
+
+# Fortgeschrittene KI-Metriken
+tensorboard==2.7.0
+wandb==0.12.7

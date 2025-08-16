@@ -1,0 +1,255 @@
+
+        <!DOCTYPE html>
+        <html lang="de">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>MPRIME Engine Performance-Bericht</title>
+            <style>
+                body { font-family: Arial, sans-serif; margin: 20px; }
+                h1, h2 { color: #333; }
+                table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+                th, td { padding: 8px; text-align: left; border-bottom: 1px solid #ddd; }
+                th { background-color: #f2f2f2; }
+                tr:hover { background-color: #f5f5f5; }
+                .chart-container { width: 100%; height: 400px; margin-bottom: 30px; }
+                .success-high { background-color: #dff0d8; }
+                .success-medium { background-color: #fcf8e3; }
+                .success-low { background-color: #f2dede; }
+                .summary { margin: 20px 0; padding: 15px; background-color: #f8f9fa; border-radius: 5px; }
+            </style>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        </head>
+        <body>
+            <h1>MPRIME Engine Performance-Bericht</h1>
+            <div class="summary">
+                <h2>Zusammenfassung</h2>
+                <p>Dieser Bericht zeigt die Performance-Vergleiche zwischen verschiedenen Backend-Engines (MLX, PyTorch) 
+                für die MPRIME Mathematik-Engine. Die Benchmarks wurden mit MLX Version 0.24.1 und PyTorch durchgeführt.</p>
+                <p>Systemumgebung: Apple Silicon, MISO Ultimate v1.4.2</p>
+                <p>Datum: 11.05.2025 00:45:33</p>
+            </div>
+            
+            <h2>Performance-Übersicht</h2>
+            <div class="chart-container">
+                <canvas id="overviewChart"></canvas>
+            </div>
+            
+            
+            <h2>SIMPLE Benchmark</h2>
+            <table>
+                <tr>
+                    <th>Backend</th>
+                    <th>Durchschnittliche Zeit (ms)</th>
+                    <th>Min. Zeit (ms)</th>
+                    <th>Max. Zeit (ms)</th>
+                    <th>Erfolgsrate</th>
+                    <th>Iterationen</th>
+                </tr>
+            
+                <tr class="success-high">
+                    <td>PYTORCH</td>
+                    <td>0.0116</td>
+                    <td>0.0098</td>
+                    <td>0.0150</td>
+                    <td>100.00%</td>
+                    <td>30</td>
+                </tr>
+                
+                <tr class="success-high">
+                    <td>MLX</td>
+                    <td>0.0129</td>
+                    <td>0.0112</td>
+                    <td>0.0153</td>
+                    <td>100.00%</td>
+                    <td>30</td>
+                </tr>
+                </table>
+            <h2>COMPLEX Benchmark</h2>
+            <table>
+                <tr>
+                    <th>Backend</th>
+                    <th>Durchschnittliche Zeit (ms)</th>
+                    <th>Min. Zeit (ms)</th>
+                    <th>Max. Zeit (ms)</th>
+                    <th>Erfolgsrate</th>
+                    <th>Iterationen</th>
+                </tr>
+            
+                <tr class="success-high">
+                    <td>PYTORCH</td>
+                    <td>0.0135</td>
+                    <td>0.0110</td>
+                    <td>0.0188</td>
+                    <td>100.00%</td>
+                    <td>30</td>
+                </tr>
+                
+                <tr class="success-high">
+                    <td>MLX</td>
+                    <td>0.0138</td>
+                    <td>0.0110</td>
+                    <td>0.0169</td>
+                    <td>100.00%</td>
+                    <td>30</td>
+                </tr>
+                </table>
+            <h2>MATRIX Benchmark</h2>
+            <table>
+                <tr>
+                    <th>Backend</th>
+                    <th>Durchschnittliche Zeit (ms)</th>
+                    <th>Min. Zeit (ms)</th>
+                    <th>Max. Zeit (ms)</th>
+                    <th>Erfolgsrate</th>
+                    <th>Iterationen</th>
+                </tr>
+            
+                <tr class="success-high">
+                    <td>PYTORCH</td>
+                    <td>0.0134</td>
+                    <td>0.0117</td>
+                    <td>0.0169</td>
+                    <td>100.00%</td>
+                    <td>30</td>
+                </tr>
+                
+                <tr class="success-high">
+                    <td>MLX</td>
+                    <td>0.0139</td>
+                    <td>0.0119</td>
+                    <td>0.0210</td>
+                    <td>100.00%</td>
+                    <td>30</td>
+                </tr>
+                </table>
+            <h2>DIFFERENTIAL Benchmark</h2>
+            <table>
+                <tr>
+                    <th>Backend</th>
+                    <th>Durchschnittliche Zeit (ms)</th>
+                    <th>Min. Zeit (ms)</th>
+                    <th>Max. Zeit (ms)</th>
+                    <th>Erfolgsrate</th>
+                    <th>Iterationen</th>
+                </tr>
+            
+                <tr class="success-high">
+                    <td>PYTORCH</td>
+                    <td>0.0128</td>
+                    <td>0.0110</td>
+                    <td>0.0153</td>
+                    <td>100.00%</td>
+                    <td>30</td>
+                </tr>
+                
+                <tr class="success-high">
+                    <td>MLX</td>
+                    <td>0.0123</td>
+                    <td>0.0098</td>
+                    <td>0.0150</td>
+                    <td>100.00%</td>
+                    <td>30</td>
+                </tr>
+                </table>
+            <h2>INTEGRAL Benchmark</h2>
+            <table>
+                <tr>
+                    <th>Backend</th>
+                    <th>Durchschnittliche Zeit (ms)</th>
+                    <th>Min. Zeit (ms)</th>
+                    <th>Max. Zeit (ms)</th>
+                    <th>Erfolgsrate</th>
+                    <th>Iterationen</th>
+                </tr>
+            
+                <tr class="success-high">
+                    <td>PYTORCH</td>
+                    <td>0.0134</td>
+                    <td>0.0110</td>
+                    <td>0.0172</td>
+                    <td>100.00%</td>
+                    <td>30</td>
+                </tr>
+                
+                <tr class="success-high">
+                    <td>MLX</td>
+                    <td>0.0129</td>
+                    <td>0.0110</td>
+                    <td>0.0162</td>
+                    <td>100.00%</td>
+                    <td>30</td>
+                </tr>
+                </table>
+            <h2>SYSTEM Benchmark</h2>
+            <table>
+                <tr>
+                    <th>Backend</th>
+                    <th>Durchschnittliche Zeit (ms)</th>
+                    <th>Min. Zeit (ms)</th>
+                    <th>Max. Zeit (ms)</th>
+                    <th>Erfolgsrate</th>
+                    <th>Iterationen</th>
+                </tr>
+            
+                <tr class="success-high">
+                    <td>PYTORCH</td>
+                    <td>0.0137</td>
+                    <td>0.0110</td>
+                    <td>0.0172</td>
+                    <td>100.00%</td>
+                    <td>30</td>
+                </tr>
+                
+                <tr class="success-high">
+                    <td>MLX</td>
+                    <td>0.0127</td>
+                    <td>0.0110</td>
+                    <td>0.0160</td>
+                    <td>100.00%</td>
+                    <td>30</td>
+                </tr>
+                </table>
+            
+            <script>
+                // Chart.js Konfiguration
+                const ctx = document.getElementById('overviewChart').getContext('2d');
+                
+                const chart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ["SIMPLE", "COMPLEX", "MATRIX", "DIFFERENTIAL", "INTEGRAL", "SYSTEM"],
+                        datasets: [{"label": "PYTORCH", "data": [0.011571248372395832, 0.013526280721028646, 0.013430913289388021, 0.012795130411783854, 0.013407071431477865, 0.013701121012369793], "backgroundColor": "#8e5ea2"}, {"label": "MLX", "data": [0.012866655985514324, 0.013764699300130209, 0.013868014017740885, 0.012294451395670574, 0.012898445129394531, 0.012723604838053385], "backgroundColor": "#3e95cd"}]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Durchschnittliche Zeit (ms)'
+                                }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Benchmark-Typ'
+                                }
+                            }
+                        },
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Durchschnittliche Ausführungszeit nach Backend und Benchmark-Typ'
+                            },
+                            legend: {
+                                position: 'top',
+                            }
+                        }
+                    }
+                });
+            </script>
+        </body>
+        </html>
+        
