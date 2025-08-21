@@ -60,7 +60,7 @@ class ModuleTester:
             interfaces = {
                 "miso.math.t_mathematics": ["TMathEngine", "MLXBackend", "get_t_math_integration_manager"],
                 "miso.simulation": ["PrismMatrix", "PrismEngine"],
-                "miso.vXor_Modules": ["get_hyperfilter_math_engine"],
+                "miso.vxor_modules": ["get_hyperfilter_math_engine"],
                 "miso.vxor": ["get_vxor_t_math_bridge", "VXORAdapter"],
                 "miso.lang": ["MCodeObject", "MCodeFunction"],
                 "miso.logic": ["QLOGIKIntegrationManager"],
@@ -118,7 +118,7 @@ class ModuleTester:
             benchmarks = {
                 "miso.math.t_mathematics": self._benchmark_t_mathematics,
                 "miso.simulation": self._benchmark_simulation,
-                "miso.vXor_Modules": self._benchmark_vxor_modules,
+                "miso.vxor_modules": self._benchmark_vxor_modules,
                 "miso.vxor": self._benchmark_vxor,
                 "miso.lang": self._benchmark_lang,
                 "miso.logic": self._benchmark_logic,
@@ -271,7 +271,7 @@ class ModuleTester:
         try:
             # Versuche, den HyperfilterMathEngine zu importieren
             try:
-                from miso.vXor_Modules.hyperfilter_t_mathematics import get_hyperfilter_math_engine
+                from miso.vxor_modules.hyperfilter_t_mathematics import get_hyperfilter_math_engine
                 hyperfilter_engine = get_hyperfilter_math_engine()
                 
                 # Benchmark: Text-Embedding-Analyse
