@@ -1,19 +1,66 @@
-# VX-MATRIX Performance Suite
+# MISO Ultimate - Meta-Intelligent Synthetic Operator
 
-Dieses Repository enthält das **MatrixCore**-Modul und das zugehörige Testskript zur umfassenden Performance- und Stabilitätsanalyse.
+Advanced AI system with comprehensive benchmark validation, schema enforcement, and quality gates.
 
-## Projektstruktur
+## 🚀 Quick Start
 
-```text
-VX-MATRIX/
-├── core/
-│   └── matrix_core.py            # Kernmodul mit MatrixCore-Klasse
-├── tests/
-│   └── vx_matrix_performance_test.py   # Standard-Testskript
-├── docs/
-│   └── robust_test_results.json  # Ergebnisse des robusten Stabilitätstests
-├── requirements.txt              # Abhängigkeiten
-└── README.md                     # Diese Anleitung
+### Prerequisites
+- Python 3.11+
+- Apple Silicon Mac (recommended) or x86_64 system
+- 8GB+ RAM for full benchmark suites
+
+### Installation
+
+1. **Clone and setup virtual environment:**
+```bash
+git clone <repository-url>
+cd MISO_Ultimate
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+2. **Install dependencies:**
+```bash
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+3. **Verify installation:**
+```bash
+python -c "from miso.validation.schema_validator import SchemaValidator; print('✅ MISO validation ready')"
+```
+
+## 🧪 Testing Commands
+
+### Quick Tests
+```bash
+# Schema validation test
+python -m pytest tests/test_schema_validation.py -v
+
+# Structured logging test  
+python -m pytest tests/test_structured_logging.py -v
+
+# Quick smoke test
+make test-short
+```
+
+### Full Test Suite
+```bash
+# Complete benchmark validation (all phases 1-10)
+make test-all
+
+# Individual phase testing
+python tests/test_phase_validation.py --phase=6
+python tests/test_phase_validation.py --phase=7,8
+```
+
+### CI/CD Validation
+```bash
+# Run smoke workflow validation
+python .github/workflows/bench_smoke.yml --validate
+
+# Generate summary report
+python scripts/generate_summary.py -i benchmark_report.json
 ```
 
 ## Abhängigkeiten

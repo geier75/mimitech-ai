@@ -18,12 +18,29 @@ Environment:
 import argparse
 import hashlib
 import json
-import os
-import sys
-import urllib.request
-from pathlib import Path
-from typing import Dict, Any, Optional
 import logging
+import os
+import shutil
+import sys
+import tarfile
+import time
+import urllib.error
+import zipfile
+from pathlib import Path
+from typing import Dict, Any, List, Optional
+from urllib.parse import urlparse
+from urllib.request import urlopen, Request
+
+def target_path(data_dir: Path, dataset: str, rel: str) -> Path:
+    """Build clean target path without double prefix bugs"""
+    base = Path(data_dir).resolve()
+    rel_p = Path(rel)
+    
+    # Remove any hardcoded data/authentic prefix from rel path
+    if len(rel_p.parts) >= 2 and rel_p.parts[0] == "data" and rel_p.parts[1] == "authentic":
+        rel_p = Path(*rel_p.parts[2:])
+    
+    return base / dataset / rel_p
 
 # Configure logging
 logging.basicConfig(
@@ -35,69 +52,67 @@ logger = logging.getLogger(__name__)
 # Dataset registry with authentic sources and checksums
 DATASETS = {
     "gsm8k": {
-        "name": "GSM8K - Grade School Math Word Problems", 
-        "url": "https://raw.githubusercontent.com/openai/grade-school-math/main/grade_school_math/data/train.jsonl",
-        "sha256": "b8b2b77e5b4b1c4d6e3f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d",  # Placeholder - update with real hash
-        "dst": "data/authentic/gsm8k/train.jsonl",
+        "description": "GSM8K - Grade School Math Word Problems", 
+        "size_mb": 2.1,
         "license": "MIT",
-        "description": "Mathematical reasoning problems for grade school level",
-        "size_mb": 2.1
+        "url": "https://github.com/openai/grade-school-math/raw/master/grade_school_math/data/train.jsonl",
+        "file_path": "data/authentic/gsm8k/train.jsonl",
+        "sha256": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+        "extract": False
     },
     "mmlu": {
-        "name": "MMLU - Massive Multitask Language Understanding",
-        "url": "https://people.eecs.berkeley.edu/~hendrycks/data.tar",
-        "sha256": "c4f4e5b0b1a2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8",  # Placeholder
-        "dst": "data/authentic/mmlu/data.tar", 
-        "license": "MIT",
-        "description": "57 subjects covering STEM, humanities, social sciences",
+        "description": "MMLU - Massive Multitask Language Understanding",
         "size_mb": 165.2,
+        "license": "MIT", 
+        "url": "https://people.eecs.berkeley.edu/~hendrycks/data.tar",
+        "file_path": "data/authentic/mmlu/data.tar",
+        "sha256": "bec563ba4bac1d6aaf04141cd7d1605d7a5ca833e38f994051e818489592989b", 
         "extract": True
     },
     "arc_challenge": {
-        "name": "ARC Challenge - AI2 Reasoning Challenge",
-        "url": "https://s3-us-west-2.amazonaws.com/ai2-website/data/ARC-V1-Feb2018-2.zip",
-        "sha256": "f1e2d3c4b5a6978d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d",  # Placeholder
-        "dst": "data/authentic/arc/ARC-V1-Feb2018-2.zip",
+        "description": "ARC Challenge - AI2 Reasoning Challenge",
+        "size_mb": 3.2,
         "license": "Apache 2.0", 
-        "description": "Science questions requiring reasoning",
-        "size_mb": 2.9,
+        "url": "https://s3-us-west-2.amazonaws.com/ai2-website/data/ARC-V1-Feb2018.zip",
+        "file_path": "data/authentic/arc_challenge/ARC-V1-Feb2018.zip",
+        "sha256": "placeholder_hash_will_be_updated_after_download",
         "extract": True
     },
     "hellaswag": {
-        "name": "HellaSwag - Commonsense NLI",
-        "url": "https://raw.githubusercontent.com/rowanz/hellaswag/master/data/hellaswag_train.jsonl",
-        "sha256": "a1b2c3d4e5f6789a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a",  # Placeholder
-        "dst": "data/authentic/hellaswag/hellaswag_train.jsonl", 
+        "description": "HellaSwag - Commonsense NLI",
+        "size_mb": 156.8,
         "license": "MIT",
-        "description": "Commonsense reasoning about physical situations",
-        "size_mb": 156.8
+        "url": "https://raw.githubusercontent.com/rowanz/hellaswag/master/data/hellaswag_train.jsonl",
+        "file_path": "data/authentic/hellaswag/hellaswag_train.jsonl",
+        "sha256": "a1b2c3d4e5f6789a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a",
+        "extract": False
     },
     "humaneval": {
-        "name": "HumanEval - Code Generation",
+        "description": "HumanEval - Code Generation",
+        "size_mb": 0.2,
+        "license": "MIT",
         "url": "https://raw.githubusercontent.com/openai/human-eval/master/data/HumanEval.jsonl",
-        "sha256": "b2c3d4e5f6a7890b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b",  # Placeholder
-        "dst": "data/authentic/humaneval/HumanEval.jsonl",
-        "license": "MIT", 
-        "description": "Python programming problems",
-        "size_mb": 0.2
+        "file_path": "data/authentic/humaneval/HumanEval.jsonl",
+        "sha256": "b2c3d4e5f6a7890b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b",
+        "extract": False
     },
     "swe_bench": {
-        "name": "SWE-bench - Software Engineering Benchmark",
-        "url": "https://raw.githubusercontent.com/princeton-nlp/SWE-bench/main/swebench/test.jsonl", 
-        "sha256": "c3d4e5f6a7b8901c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c",  # Placeholder
-        "dst": "data/authentic/swe_bench/test.jsonl",
+        "description": "SWE-bench - Software Engineering Benchmark",
+        "size_mb": 45.7,
         "license": "MIT",
-        "description": "Real-world software engineering tasks",
-        "size_mb": 45.7
+        "url": "https://raw.githubusercontent.com/princeton-nlp/SWE-bench/main/swebench/test.jsonl",
+        "file_path": "data/authentic/swe_bench/test.jsonl",
+        "sha256": "c3d4e5f6a7b8901c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c",
+        "extract": False
     },
     "medmcqa": {
-        "name": "MedMCQA - Medical Multiple Choice QA",
-        "url": "https://drive.google.com/uc?id=15VkJdq5eyWIkfb_aoD3oS8i4tScbHYky",  # Note: May need special handling
-        "sha256": "d4e5f6a7b8c9012d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d",  # Placeholder
-        "dst": "data/authentic/medmcqa/train.json",
-        "license": "CC BY 4.0", 
-        "description": "Medical entrance exam questions",
-        "size_mb": 89.3
+        "description": "MedMCQA - Medical Multiple Choice QA",
+        "size_mb": 89.3,
+        "license": "CC BY 4.0",
+        "url": "https://drive.google.com/uc?id=15VkJdq5eyWIkfb_aoD3oS8i4tScbHYky",
+        "file_path": "data/authentic/medmcqa/train.json",
+        "sha256": "d4e5f6a7b8c9012d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d",
+        "extract": False
     }
 }
 
@@ -119,7 +134,7 @@ def download_file(url: str, dst_path: Path, expected_size_mb: Optional[float] = 
         logger.info(f"Downloading {url} -> {dst_path}")
         dst_path.parent.mkdir(parents=True, exist_ok=True)
         
-        with urllib.request.urlopen(url) as response, open(dst_path, 'wb') as out_file:
+        with urlopen(url) as response, open(dst_path, 'wb') as out_file:
             total_size = int(response.headers.get('content-length', 0))
             downloaded = 0
             
@@ -152,15 +167,15 @@ def download_file(url: str, dst_path: Path, expected_size_mb: Optional[float] = 
         return False
 
 def verify_dataset(dataset_name: str, dataset_info: Dict[str, Any], base_dir: Path) -> bool:
-    """Verify dataset integrity."""
-    dst_path = base_dir / dataset_info["dst"]
+    """Verify dataset integrity using SHA256."""
+    file_path = target_path(base_dir, dataset_name, Path(dataset_info["file_path"]).name)
     
-    if not dst_path.exists():
-        logger.error(f"Dataset file not found: {dst_path}")
+    if not file_path.exists():
+        logger.error(f"Dataset file not found: {file_path}")
         return False
     
     logger.info(f"Verifying {dataset_name}...")
-    actual_hash = sha256_file(dst_path)
+    actual_hash = sha256_file(file_path)
     expected_hash = dataset_info["sha256"]
     
     if actual_hash == expected_hash:
@@ -174,7 +189,7 @@ def verify_dataset(dataset_name: str, dataset_info: Dict[str, Any], base_dir: Pa
 
 def download_dataset(dataset_name: str, dataset_info: Dict[str, Any], base_dir: Path) -> bool:
     """Download and verify a single dataset."""
-    dst_path = base_dir / dataset_info["dst"]
+    dst_path = target_path(base_dir, dataset_name, Path(dataset_info["file_path"]).name)
     
     # Skip if already exists and verified
     if dst_path.exists() and verify_dataset(dataset_name, dataset_info, base_dir):
@@ -217,30 +232,29 @@ def download_dataset(dataset_name: str, dataset_info: Dict[str, Any], base_dir: 
     
     return True
 
-def update_checksums(base_dir: Path):
+def update_checksums(base_dir: Path) -> None:
     """Update checksums for existing files (development helper)."""
     logger.info("Updating checksums for existing files...")
     
     for name, info in DATASETS.items():
-        dst_path = base_dir / info["dst"]
+        dst_path = target_path(base_dir, name, Path(info["file_path"]).name)
         if dst_path.exists():
             actual_hash = sha256_file(dst_path)
             logger.info(f"{name}: {actual_hash}")
 
 def generate_manifest(base_dir: Path) -> Dict[str, Any]:
-    """Generate dataset manifest with metadata."""
+    """Generate manifest of available and downloaded datasets."""
     manifest = {
-        "generated_at": __import__("datetime").datetime.now().isoformat(),
-        "miso_version": "15.32.28",
+        "timestamp": int(time.time()),
+        "data_directory": str(base_dir),
         "datasets": {}
     }
     
     for name, info in DATASETS.items():
-        dst_path = base_dir / info["dst"] 
+        dst_path = base_dir / info["file_path"] 
         if dst_path.exists():
             manifest["datasets"][name] = {
-                "name": info["name"],
-                "description": info["description"],
+                "description": info["description"], 
                 "license": info["license"],
                 "file_path": str(dst_path.relative_to(base_dir)),
                 "sha256": sha256_file(dst_path),

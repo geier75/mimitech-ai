@@ -1,0 +1,195 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://miso.ai/schemas/benchmark_report/v1.0.0",
+  "title": "MISO Benchmark Report Schema",
+  "description": "Schema for comprehensive benchmark test reports",
+  "type": "object",
+  "required": [
+    "report_id",
+    "timestamp",
+    "schema_version",
+    "summary",
+    "results",
+    "reproducibility"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "pattern": "^v\\d+\\.\\d+\\.\\d+$",
+      "description": "Schema version identifier"
+    },
+    "report_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Unique identifier for this report"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of report generation"
+    },
+    "summary": {
+      "type": "object",
+      "required": [
+        "total_tests",
+        "passed",
+        "failed", 
+        "skipped",
+        "errors",
+        "total_samples_processed"
+      ],
+      "properties": {
+        "total_tests": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total number of tests executed"
+        },
+        "passed": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of passed tests"
+        },
+        "failed": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of failed tests"
+        },
+        "skipped": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of skipped tests"
+        },
+        "errors": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of tests with errors"
+        },
+        "total_samples_processed": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total samples processed across all tests"
+        },
+        "average_accuracy": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Average accuracy across all tests (0-100)"
+        },
+        "total_execution_time_ms": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Total execution time in milliseconds"
+        }
+      },
+      "additionalProperties": false
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "$ref": "bench_result.schema.json"
+      },
+      "description": "Array of individual test results"
+    },
+    "system_info": {
+      "type": "object",
+      "properties": {
+        "platform": {
+          "type": "string",
+          "description": "System platform information"
+        },
+        "python_version": {
+          "type": "string",
+          "description": "Python version used"
+        },
+        "hardware": {
+          "type": "string",
+          "description": "Hardware specifications"
+        }
+      },
+      "additionalProperties": true
+    },
+    "reproducibility": {
+      "type": "object",
+      "required": [
+        "git_commit",
+        "python_version",
+        "platform",
+        "seed",
+        "compute_mode"
+      ],
+      "properties": {
+        "git_commit": {
+          "type": "string",
+          "minLength": 7,
+          "maxLength": 40,
+          "description": "Git commit hash (short or full)"
+        },
+        "git_tag": {
+          "type": "string",
+          "description": "Git tag if on a tagged commit"
+        },
+        "python_version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+",
+          "description": "Python version (e.g., 3.11.5)"
+        },
+        "platform": {
+          "type": "string",
+          "description": "Platform identifier (e.g., macOS-14.1-arm64)"
+        },
+        "env_flags": {
+          "type": "object",
+          "properties": {
+            "PYTHONHASHSEED": {
+              "type": "string",
+              "description": "Python hash seed for reproducibility"
+            },
+            "OMP_NUM_THREADS": {
+              "type": "string",
+              "description": "OpenMP thread count"
+            },
+            "MKL_NUM_THREADS": {
+              "type": "string",
+              "description": "Intel MKL thread count"
+            }
+          },
+          "additionalProperties": true,
+          "description": "Environment flags affecting reproducibility"
+        },
+        "seed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295,
+          "description": "Master seed for all random number generators"
+        },
+        "compute_mode": {
+          "type": "string",
+          "enum": ["full", "light", "stub"],
+          "description": "Computation mode: full=complete, light=reduced, stub=minimal"
+        }
+      },
+      "additionalProperties": false
+    },
+    "environment": {
+      "type": "object",
+      "description": "Test environment configuration"
+    }
+  },
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "description": "Consistency check: sum of status counts should equal total_tests",
+      "properties": {
+        "summary": {
+          "properties": {
+            "total_tests": true,
+            "passed": true,
+            "failed": true,
+            "skipped": true,
+            "errors": true
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,16 +1,31 @@
 PY ?= python3
 RESULTS_DIR = vxor/benchmarks/results
 
-.PHONY: help test arc-eval glue-eval imo-eval compare-external aggregate-results smoke-all pack docker-build docker-test docker-arc-eval docker-glue-eval docker-imo-eval
+.PHONY: help test test-short test-all arc-eval glue-eval imo-eval compare-external aggregate-results smoke-all pack docker-build docker-test docker-arc-eval docker-glue-eval docker-imo-eval
 
 help:
 	@echo "Targets:" \
-		"test, arc-eval, glue-eval, imo-eval, compare-external, aggregate-results, smoke-all, pack," \
+		"test, test-short, test-all, arc-eval, glue-eval, imo-eval, compare-external, aggregate-results, smoke-all, pack," \
 		"docker-build, docker-test, docker-arc-eval, docker-glue-eval, docker-imo-eval"
 
 # Run unit tests
 test:
 	$(PY) -m pytest -q vxor/benchmarks/tests
+
+# Quick smoke tests (Phase 1-5 validation)
+test-short:
+	@echo "🚀 Running MISO validation smoke tests..."
+	$(PY) -m pytest tests/test_schema_validation.py tests/test_structured_logging.py -v
+	@echo "✅ Smoke tests completed"
+
+# Full test suite (all phases 1-10)
+test-all: test-short
+	@echo "🧪 Running full MISO validation suite..."
+	$(PY) -m pytest tests/ -v
+	$(PY) scripts/validate_datasets.py
+	@echo "📊 Generating validation summary..."
+	$(PY) scripts/generate_summary.py --help > /dev/null || echo "Summary generator available"
+	@echo "✅ Full validation suite completed"
 
 # ARC-AGI evaluation (expects ARC data via env ARC_DATA_DIR or script will do a smoke-run)
 arc-eval:

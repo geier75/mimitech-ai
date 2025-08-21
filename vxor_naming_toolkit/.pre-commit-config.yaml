@@ -1,0 +1,222 @@
+# VXOR Case-Consistency Pre-Commit Hooks
+repos:
+  # VXOR Case-Consistency Gate (Critical - Must Pass)
+  - repo: local
+    hooks:
+      - id: vxor-naming-gate
+        name: "🚨 VXOR Naming Policy Gate"
+        entry: python vxor_naming_nano_cli.py gate --strict
+        language: system
+        always_run: true
+        pass_filenames: false
+        stages: [commit, push]
+        verbose: true
+        fail_fast: true
+
+      - id: vxor-case-consistency-scan
+        name: "🔍 VXOR Case-Consistency Scanner"
+        entry: python vxor_naming_nano_cli.py scan --category all --fail-on-violations
+        language: system
+        files: '\.(py|md|yml|yaml|json)$'
+        stages: [commit]
+        verbose: true
+
+      - id: vxor-import-stability-check
+        name: "📦 VXOR Import Stability Check"
+        entry: python -m pytest test_case_consistency.py::test_import_stability -v --tb=short
+        language: system
+        always_run: true
+        pass_filenames: false
+        stages: [commit]
+
+      - id: vxor-nano-step-validation
+        name: "🧪 VXOR Nano-Step Validation"
+        entry: python vxor_naming_nano_cli.py verify --quick
+        language: system
+        always_run: true
+        pass_filenames: false
+        stages: [commit]
+
+  # Advanced VXOR Hooks (Warning Level)
+  - repo: local
+    hooks:
+      - id: vxor-deprecated-patterns
+        name: "⚠️  VXOR Deprecated Patterns Check"
+        entry: python -c "
+import re, sys, os
+from pathlib import Path
+
+deprecated_patterns = [
+    (r'\bVXOR\b(?!_)', 'Use vxor or VXOR_ prefix for constants'),
+    (r'\bvX[oO]r\b', 'Use consistent vxor casing'),
+    (r'import\s+VXOR\b', 'Use lowercase module imports'),
+    (r'class\s+vxor', 'Use VxorClassName for classes'),
+]
+
+violations = []
+for file_path in sys.argv[1:]:
+    if file_path.endswith('.py'):
+        try:
+            with open(file_path, 'r') as f:
+                content = f.read()
+            for pattern, message in deprecated_patterns:
+                matches = re.finditer(pattern, content, re.MULTILINE)
+                for match in matches:
+                    line_num = content[:match.start()].count('\n') + 1
+                    violations.append(f'{file_path}:{line_num}: {message}')
+        except: pass
+
+if violations:
+    print('VXOR deprecated patterns found:')
+    for violation in violations:
+        print(f'  - {violation}')
+    print('\nRun: make fix-symbols to fix these issues')
+    sys.exit(1)
+"
+        language: system
+        files: '\.py$'
+        stages: [commit]
+
+      - id: vxor-case-collision-detector
+        name: "⚠️  VXOR Case-Collision Detector"
+        entry: python -c "
+import os, sys
+from collections import defaultdict
+from pathlib import Path
+
+def check_case_collisions(root_path):
+    collisions = defaultdict(list)
+    
+    # Check for case-insensitive filesystem collisions
+    for root, dirs, files in os.walk(root_path):
+        all_names = dirs + files
+        seen = {}
+        for name in all_names:
+            lower_name = name.lower()
+            if lower_name in seen:
+                collisions[lower_name].extend([
+                    os.path.join(root, seen[lower_name]),
+                    os.path.join(root, name)
+                ])
+            else:
+                seen[lower_name] = name
+    
+    return collisions
+
+# Check current directory
+collisions = check_case_collisions('.')
+
+if collisions:
+    print('Case collisions detected:')
+    for collision, paths in collisions.items():
+        print(f'  {collision}:')
+        for path in paths:
+            print(f'    - {path}')
+    print('\nThese may cause issues on case-insensitive filesystems!')
+    sys.exit(1)
+"
+        language: system
+        always_run: true
+        pass_filenames: false
+        stages: [push]
+
+  # Standard Code Quality (After VXOR checks pass)
+  - repo: https://github.com/psf/black
+    rev: 23.12.1
+    hooks:
+      - id: black
+        name: "🎨 Black Code Formatting"
+        language_version: python3
+        stages: [commit]
+
+  - repo: https://github.com/pycqa/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort
+        name: "📦 Import Sorting"
+        args: ["--profile", "black", "--check-only", "--diff"]
+        stages: [commit]
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.1.9
+    hooks:
+      - id: ruff
+        name: "🔍 Ruff Linting"
+        args: [--fix, --exit-non-zero-on-fix]
+        stages: [commit]
+
+      - id: ruff-format
+        name: "🎨 Ruff Formatting"
+        stages: [commit]
+
+  # Type Checking
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.8.0
+    hooks:
+      - id: mypy
+        name: "🔍 MyPy Type Checking"
+        additional_dependencies: [types-all]
+        args: [--ignore-missing-imports, --no-strict-optional]
+        stages: [push]
+
+  # Security and Best Practices
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.5
+    hooks:
+      - id: bandit
+        name: "🔒 Security Check (Bandit)"
+        args: ["-r", ".", "-f", "json"]
+        exclude: "tests/"
+
+  # Documentation and Markdown
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.38.0
+    hooks:
+      - id: markdownlint
+        name: "📝 Markdown Linting"
+        args: ["--config", ".markdownlint.yaml"]
+        files: '\.md$'
+
+  # YAML/JSON Validation
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: check-yaml
+        name: "✅ YAML Syntax Check"
+        exclude: "whisper.cpp/"
+      
+      - id: check-json
+        name: "✅ JSON Syntax Check"
+      
+      - id: check-toml
+        name: "✅ TOML Syntax Check"
+      
+      - id: trailing-whitespace
+        name: "✂️  Trailing Whitespace"
+        exclude: "whisper.cpp/"
+      
+      - id: end-of-file-fixer
+        name: "📄 End-of-File Fixer"
+        exclude: "whisper.cpp/"
+
+  # Advanced Git Hooks
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v3.13.0
+    hooks:
+      - id: commitizen
+        name: "📝 Conventional Commits"
+        stages: [commit-msg]
+
+# Configuration for specific hooks
+default_language_version:
+  python: python3.11
+
+default_stages: [commit]
+
+# Fail fast on critical violations
+fail_fast: true
+
+# CI configuration
+ci:
+  autofix_prs: true
+  autoupdate_schedule: weekly

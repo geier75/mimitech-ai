@@ -176,6 +176,7 @@ datasets/*/
 !**/manifest.json
 !**/datasets_manifest.json
 *.json
+!schemas/*.json
 *.jsonl
 *.csv
 *.parquet
@@ -217,12 +218,16 @@ Thumbs.db
 Dockerfile.dev
 
 # Security and secrets
+security/void/
+security/json_schemas/
+security/tests/
+security/m_code_security_sandbox/
+!security/QUARANTINE_ZONE/
 *.key
 *.pem
 *.crt
 *.p12
 .secrets/
-secrets/
 
 # Large binaries and archives
 *.tar.gz

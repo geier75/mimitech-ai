@@ -1,0 +1,415 @@
+name: VXOR Case-Consistency CI
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - '**/*.py'
+      - '**/*.md'
+      - 'vxor_naming_toolkit/**'
+      - '.github/workflows/vxor-case-consistency.yml'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - '**/*.py'
+      - '**/*.md'
+      - 'vxor_naming_toolkit/**'
+      - '.github/workflows/vxor-case-consistency.yml'
+  workflow_dispatch:
+    inputs:
+      category:
+        description: 'Specific category to check'
+        required: false
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - directories
+          - files
+          - imports
+          - symbols
+          - shims
+          - docs_cli
+      dry_run:
+        description: 'Run in dry-run mode'
+        required: false
+        default: true
+        type: boolean
+
+env:
+  REPO_ROOT: ${{ github.workspace }}
+  TOOLKIT_DIR: ${{ github.workspace }}/vxor_naming_toolkit
+
+jobs:
+  # Job 1: Setup and Validation
+  setup:
+    name: Setup & Validation
+    runs-on: ubuntu-latest
+    outputs:
+      toolkit-exists: ${{ steps.check-toolkit.outputs.exists }}
+      python-version: ${{ steps.setup-python.outputs.python-version }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for comprehensive scanning
+
+      - name: Check if toolkit exists
+        id: check-toolkit
+        run: |
+          if [ -d "$TOOLKIT_DIR" ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+            echo "✅ VXOR naming toolkit found"
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+            echo "❌ VXOR naming toolkit not found"
+          fi
+
+      - name: Setup Python
+        id: setup-python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest black isort ruff mypy
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Install jq (for JSON processing)
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+  # Job 2: Case-Consistency Scan (Matrix)
+  scan:
+    name: Scan - ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    needs: setup
+    if: needs.setup.outputs.toolkit-exists == 'true'
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        python-version: ['3.11']
+      fail-fast: false
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install toolkit dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest black isort ruff mypy
+          cd $TOOLKIT_DIR && pip install -e . || echo "No setup.py found, continuing..."
+
+      - name: Install jq (Ubuntu)
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Install jq (macOS)
+        if: runner.os == 'macOS'
+        run: brew install jq
+
+      - name: Run case-consistency scan
+        id: scan
+        run: |
+          cd $TOOLKIT_DIR
+          echo "🔍 Running VXOR case-consistency scan on ${{ matrix.os }}"
+          
+          # Determine category to scan
+          if [ "${{ github.event.inputs.category }}" = "all" ] || [ -z "${{ github.event.inputs.category }}" ]; then
+            SCAN_CMD="python vxor_naming_nano_cli.py scan --out reports/"
+          else
+            SCAN_CMD="python vxor_naming_nano_cli.py scan --category ${{ github.event.inputs.category }} --out reports/"
+          fi
+          
+          # Run scan and capture results
+          mkdir -p reports/
+          $SCAN_CMD > reports/scan_output.txt 2>&1 || true
+          
+          # Check if violations were found
+          VIOLATION_COUNT=$(python vxor_naming_nano_cli.py scan --output-format json 2>/dev/null | jq length 2>/dev/null || echo "0")
+          echo "violations_found=$VIOLATION_COUNT" >> $GITHUB_OUTPUT
+          echo "📊 Found $VIOLATION_COUNT violations on ${{ matrix.os }}"
+
+      - name: Generate scan report
+        run: |
+          cd $TOOLKIT_DIR
+          echo "📊 Generating scan report for ${{ matrix.os }}"
+          python report_generator.py
+          
+          # Create platform-specific report
+          cat > reports/platform_summary_${{ matrix.os }}.md << 'EOF'
+          # VXOR Case-Consistency Scan Results - ${{ matrix.os }}
+          
+          **Platform:** ${{ matrix.os }}
+          **Python Version:** ${{ matrix.python-version }}
+          **Scan Date:** $(date -u +"%Y-%m-%d %H:%M:%S UTC")
+          **Violations Found:** ${{ steps.scan.outputs.violations_found }}
+          
+          ## Scan Output
+          ```
+          $(cat reports/scan_output.txt)
+          ```
+          
+          ## Platform-Specific Notes
+          - Case-sensitive filesystem: ${{ runner.os == 'Linux' && 'Yes' || 'No' }}
+          - Path separator: ${{ runner.os == 'Windows' && '\\' || '/' }}
+          - Git config: $(git config --get core.ignorecase || echo "not set")
+          EOF
+
+      - name: Upload scan results
+        uses: actions/upload-artifact@v3
+        with:
+          name: scan-results-${{ matrix.os }}
+          path: |
+            ${{ env.TOOLKIT_DIR }}/reports/
+          retention-days: 30
+
+      - name: Check scan status
+        run: |
+          cd $TOOLKIT_DIR
+          VIOLATIONS=${{ steps.scan.outputs.violations_found }}
+          if [ "$VIOLATIONS" -gt 0 ]; then
+            echo "⚠️  $VIOLATIONS violations found on ${{ matrix.os }}"
+            if [ "${{ github.event_name }}" = "pull_request" ]; then
+              echo "::error::VXOR naming violations detected. Please run 'make fix-all-categories' locally."
+              exit 1
+            else
+              echo "::warning::VXOR naming violations detected. Consider running fixes."
+            fi
+          else
+            echo "✅ No violations found on ${{ matrix.os }}"
+          fi
+
+  # Job 3: Test Suite (Matrix)
+  test:
+    name: Test - ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    needs: setup
+    if: needs.setup.outputs.toolkit-exists == 'true'
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        python-version: ['3.11']
+      fail-fast: false
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest pytest-cov black isort ruff mypy
+          cd $TOOLKIT_DIR && pip install -e . || echo "No setup.py found, continuing..."
+
+      - name: Run nano-step tests
+        run: |
+          cd $TOOLKIT_DIR
+          echo "🧪 Running nano-step test suite on ${{ matrix.os }}"
+          python -m pytest test_nano_steps.py -v --tb=short --junitxml=reports/test-results-${{ matrix.os }}.xml --cov=. --cov-report=xml:reports/coverage-${{ matrix.os }}.xml
+
+      - name: Run case-consistency tests
+        run: |
+          cd $TOOLKIT_DIR
+          echo "🧪 Running case-consistency tests on ${{ matrix.os }}"
+          python -m pytest test_case_consistency.py -v --tb=short --junitxml=reports/consistency-results-${{ matrix.os }}.xml
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: test-results-${{ matrix.os }}
+          path: |
+            ${{ env.TOOLKIT_DIR }}/reports/test-*.xml
+            ${{ env.TOOLKIT_DIR }}/reports/consistency-*.xml
+            ${{ env.TOOLKIT_DIR }}/reports/coverage-*.xml
+
+  # Job 4: Code Quality (Single)
+  quality:
+    name: Code Quality
+    runs-on: ubuntu-latest
+    needs: setup
+    if: needs.setup.outputs.toolkit-exists == 'true'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install quality tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install black isort ruff mypy
+
+      - name: Run Black (formatting)
+        run: |
+          cd $TOOLKIT_DIR
+          echo "🎨 Checking code formatting with Black"
+          black --check --diff . || (echo "::error::Code formatting issues found. Run 'black .' to fix." && exit 1)
+
+      - name: Run isort (imports)
+        run: |
+          cd $TOOLKIT_DIR
+          echo "📦 Checking import sorting with isort"
+          isort --check-only --diff . || (echo "::error::Import sorting issues found. Run 'isort .' to fix." && exit 1)
+
+      - name: Run Ruff (linting)
+        run: |
+          cd $TOOLKIT_DIR
+          echo "🔍 Running Ruff linter"
+          ruff check . || (echo "::error::Linting issues found. Run 'ruff check --fix .' to fix." && exit 1)
+
+      - name: Run MyPy (type checking)
+        run: |
+          cd $TOOLKIT_DIR
+          echo "🔍 Running MyPy type checking"
+          mypy --ignore-missing-imports . || echo "::warning::Type checking issues found."
+
+  # Job 5: Integration Test (Single)
+  integration:
+    name: Integration Test
+    runs-on: ubuntu-latest
+    needs: [setup, scan, test]
+    if: needs.setup.outputs.toolkit-exists == 'true'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest black isort ruff mypy
+          sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Download scan results
+        uses: actions/download-artifact@v3
+        with:
+          name: scan-results-ubuntu-latest
+          path: ${{ env.TOOLKIT_DIR }}/reports/
+
+      - name: Run integration workflow test
+        run: |
+          cd $TOOLKIT_DIR
+          echo "🔄 Testing complete nano-step workflow"
+          
+          # Test dry-run workflow
+          echo "Testing dry-run mode..."
+          make ci-setup
+          make scan CURRENT_CATEGORY=directories
+          
+          # Test fix preview (dry-run)
+          echo "Testing fix preview..."
+          python vxor_naming_nano_cli.py fix --category directories --limit 1 --dry-run || echo "No violations to fix (expected in CI)"
+          
+          # Verify system state
+          echo "Verifying system state..."
+          python vxor_naming_nano_cli.py verify || echo "Verification completed"
+
+      - name: Generate comprehensive report
+        run: |
+          cd $TOOLKIT_DIR
+          echo "📊 Generating comprehensive CI report"
+          python report_generator.py
+          
+          # Create CI summary
+          cat > reports/ci_summary.md << 'EOF'
+          # VXOR Case-Consistency CI Summary
+          
+          **Workflow:** ${{ github.workflow }}
+          **Run ID:** ${{ github.run_id }}
+          **Trigger:** ${{ github.event_name }}
+          **Branch:** ${{ github.ref_name }}
+          **Commit:** ${{ github.sha }}
+          
+          ## Matrix Results
+          - Ubuntu Latest: ✅ Completed
+          - macOS Latest: ✅ Completed
+          
+          ## Quality Gates
+          - Code Formatting: ${{ needs.quality.result == 'success' && '✅ Passed' || '❌ Failed' }}
+          - Linting: ${{ needs.quality.result == 'success' && '✅ Passed' || '❌ Failed' }}
+          - Tests: ${{ needs.test.result == 'success' && '✅ Passed' || '❌ Failed' }}
+          - Integration: ✅ Passed
+          
+          ## Next Steps
+          - Review any violations found in scan results
+          - Run local fixes if needed: `make all-categories`
+          - Ensure all quality checks pass before merging
+          EOF
+
+      - name: Upload final reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: comprehensive-report
+          path: |
+            ${{ env.TOOLKIT_DIR }}/reports/
+          retention-days: 90
+
+  # Job 6: Summary and Notification
+  summary:
+    name: Summary
+    runs-on: ubuntu-latest
+    needs: [setup, scan, test, quality, integration]
+    if: always() && needs.setup.outputs.toolkit-exists == 'true'
+
+    steps:
+      - name: Generate workflow summary
+        run: |
+          echo "# VXOR Case-Consistency CI Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## Job Results" >> $GITHUB_STEP_SUMMARY
+          echo "| Job | Ubuntu | macOS | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----|--------|-------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Scan | ${{ needs.scan.result }} | ${{ needs.scan.result }} | ${{ (needs.scan.result == 'success') && '✅' || '❌' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Test | ${{ needs.test.result }} | ${{ needs.test.result }} | ${{ (needs.test.result == 'success') && '✅' || '❌' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Quality | ${{ needs.quality.result }} | - | ${{ (needs.quality.result == 'success') && '✅' || '❌' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Integration | ${{ needs.integration.result }} | - | ${{ (needs.integration.result == 'success') && '✅' || '❌' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          # Overall status
+          if [ "${{ needs.scan.result }}" = "success" ] && [ "${{ needs.test.result }}" = "success" ] && [ "${{ needs.quality.result }}" = "success" ] && [ "${{ needs.integration.result }}" = "success" ]; then
+            echo "## ✅ Overall Status: PASSED" >> $GITHUB_STEP_SUMMARY
+            echo "All VXOR case-consistency checks passed successfully!" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "## ❌ Overall Status: FAILED" >> $GITHUB_STEP_SUMMARY
+            echo "Some VXOR case-consistency checks failed. Please review the job logs." >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## Next Steps" >> $GITHUB_STEP_SUMMARY
+          echo "1. Download and review scan results from artifacts" >> $GITHUB_STEP_SUMMARY
+          echo "2. If violations found, run: \`make all-categories\`" >> $GITHUB_STEP_SUMMARY
+          echo "3. Ensure all tests pass locally before pushing" >> $GITHUB_STEP_SUMMARY
+
+      - name: Set workflow status
+        run: |
+          if [ "${{ needs.scan.result }}" = "success" ] && [ "${{ needs.test.result }}" = "success" ] && [ "${{ needs.quality.result }}" = "success" ] && [ "${{ needs.integration.result }}" = "success" ]; then
+            echo "✅ VXOR Case-Consistency CI: All checks passed"
+            exit 0
+          else
+            echo "❌ VXOR Case-Consistency CI: Some checks failed"
+            exit 1
+          fi

@@ -67,6 +67,9 @@ jobs:
           python run_smoke.py
         env:
           PYTHONPATH: ${{ github.workspace }}
+          PYTHONHASHSEED: 0
+          OMP_NUM_THREADS: 1
+          MKL_NUM_THREADS: 1
           
       - name: 🔧 Test CLI Wrapper
         run: |
@@ -94,6 +97,124 @@ jobs:
           echo "✅ Edge case tests passed"
         env:
           PYTHONPATH: ${{ github.workspace }}
+          
+      - name: 🔍 Validate Report Schemas
+        run: |
+          cd ${{ github.workspace }}
+          pip install jsonschema
+          python scripts/validate_reports.py
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+          PYTHONHASHSEED: 0
+          OMP_NUM_THREADS: 1
+          MKL_NUM_THREADS: 1
+          
+      - name: 🎲 Reproducibility Test (Double-Run)
+        run: |
+          cd ${{ github.workspace }}
+          echo "🎲 Running reproducibility double-test..."
+          
+          # Run 1
+          python -c "
+          import sys
+          sys.path.insert(0, '.')
+          from miso.reproducibility.repro_utils import seed_everything, ensure_deterministic_env
+          from miso.validation.schema_validator import SchemaValidator
+          import random, time
+          
+          # Setup deterministic environment
+          ensure_deterministic_env()
+          seed_everything(42)
+          
+          # Mock benchmark result for reproducibility test
+          class MockResult:
+              def __init__(self):
+                  self.name = 'repro_test'
+                  self.status = 'PASS'
+                  self.duration_s = 1.0
+                  self.started_at = time.time() - 1.0
+                  self.finished_at = time.time()
+                  self.accuracy = random.random()  # Should be deterministic with seed
+                  self.samples_processed = 100
+                  self.dataset_paths = ['/test/path']
+          
+          validator = SchemaValidator()
+          result = MockResult()
+          report1 = validator.create_validated_report([result], 'run1', 'stub', 42)
+          
+          with open('report1.json', 'w') as f:
+              import json
+              json.dump(report1, f, indent=2)
+          
+          print(f'Run 1: accuracy={result.accuracy:.6f}')
+          "
+          
+          # Run 2 (identical setup)
+          python -c "
+          import sys
+          sys.path.insert(0, '.')
+          from miso.reproducibility.repro_utils import seed_everything, ensure_deterministic_env
+          from miso.validation.schema_validator import SchemaValidator
+          import random, time
+          
+          # Setup deterministic environment (identical)
+          ensure_deterministic_env()
+          seed_everything(42)
+          
+          # Mock benchmark result for reproducibility test (identical)
+          class MockResult:
+              def __init__(self):
+                  self.name = 'repro_test'
+                  self.status = 'PASS'
+                  self.duration_s = 1.0
+                  self.started_at = time.time() - 1.0
+                  self.finished_at = time.time()
+                  self.accuracy = random.random()  # Should match Run 1
+                  self.samples_processed = 100
+                  self.dataset_paths = ['/test/path']
+          
+          validator = SchemaValidator()
+          result = MockResult()
+          report2 = validator.create_validated_report([result], 'run2', 'stub', 42)
+          
+          with open('report2.json', 'w') as f:
+              import json
+              json.dump(report2, f, indent=2)
+          
+          print(f'Run 2: accuracy={result.accuracy:.6f}')
+          "
+          
+          # Compare results
+          python -c "
+          import json
+          
+          with open('report1.json') as f1, open('report2.json') as f2:
+              r1, r2 = json.load(f1), json.load(f2)
+          
+          # Compare accuracy (should be identical)
+          acc1 = r1['results'][0]['accuracy']
+          acc2 = r2['results'][0]['accuracy']
+          
+          if acc1 != acc2:
+              print(f'❌ Reproducibility FAILED: {acc1} != {acc2}')
+              exit(1)
+          
+          # Compare reproducibility blocks (except timestamps)
+          repro1 = r1['reproducibility'].copy()
+          repro2 = r2['reproducibility'].copy()
+          
+          if repro1 != repro2:
+              print(f'❌ Reproducibility block differs: {repro1} vs {repro2}')
+              exit(1)
+              
+          print(f'✅ Reproducibility PASSED: identical accuracy={acc1}')
+          print(f'🎲 Seed: {repro1[\"seed\"]}, Mode: {repro1[\"compute_mode\"]}, Commit: {repro1[\"git_commit\"][:7]}')
+          "
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+          PYTHONHASHSEED: 0
+          OMP_NUM_THREADS: 1
+          MKL_NUM_THREADS: 1
           
       - name: 📊 Generate Test Report
         if: always()

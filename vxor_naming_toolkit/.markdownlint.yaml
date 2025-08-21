@@ -1,0 +1,38 @@
+# Markdownlint configuration for VXOR toolkit
+# ===========================================
+
+# Extend default configuration
+extends: default
+
+# Rule customizations
+rules:
+  # Line length - Allow longer lines for code blocks and URLs
+  MD013:
+    line_length: 120
+    code_blocks: false
+    tables: false
+    headings: false
+    
+  # Inline HTML - Allow for badges and formatting
+  MD033: false
+  
+  # Bare URLs - Allow bare URLs in documentation
+  MD034: false
+  
+  # First line heading - Allow documents without H1 at top
+  MD041: false
+  
+  # Emphasis style - Prefer ** for bold
+  MD049:
+    style: asterisk
+  
+  # Strong style - Prefer ** for bold  
+  MD050:
+    style: asterisk
+
+# Exclude patterns
+excludes:
+  - "whisper.cpp/**"
+  - "node_modules/**"
+  - ".github/**"
+  - "**/*.min.md"
