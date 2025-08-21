@@ -47,7 +47,7 @@ class StressTestRunner:
             stress_tests = {
                 "miso.math.t_mathematics": self._stress_test_t_mathematics,
                 "miso.simulation": self._stress_test_simulation,
-                "miso.vXor_Modules": self._stress_test_vxor_modules,
+                "miso.vxor_modules": self._stress_test_vxor_modules,
                 "miso.vxor": self._stress_test_vxor,
                 "miso.lang": self._stress_test_lang,
                 "miso.logic": self._stress_test_logic,
@@ -182,7 +182,7 @@ class StressTestRunner:
         try:
             # Versuche, den HyperfilterMathEngine zu importieren
             try:
-                from miso.vXor_Modules.hyperfilter_t_mathematics import get_hyperfilter_math_engine
+                from miso.vxor_modules.hyperfilter_t_mathematics import get_hyperfilter_math_engine
                 hyperfilter_engine = get_hyperfilter_math_engine()
                 
                 # Stresstest: Viele Text-Embedding-Analysen
@@ -293,7 +293,7 @@ class CompatibilityTestRunner:
                 compatibility_tests = {
                     "miso.math.t_mathematics": self._test_t_mathematics_compatibility,
                     "miso.simulation": self._test_simulation_compatibility,
-                    "miso.vXor_Modules": self._test_vxor_modules_compatibility,
+                    "miso.vxor_modules": self._test_vxor_modules_compatibility,
                     "miso.vxor": self._test_vxor_compatibility,
                     "miso.lang": self._test_lang_compatibility,
                     "miso.logic": self._test_logic_compatibility,
