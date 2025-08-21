@@ -32,7 +32,7 @@ def test_module_import():
         "miso.math.t_mathematics.mlx_support",
         "miso.simulation.prism_engine",
         "miso.simulation.prism_matrix",
-        "miso.vXor_Modules.hyperfilter_t_mathematics",
+        "miso.vxor_modules.hyperfilter_t_mathematics",
         "miso.vxor.t_mathematics_bridge"
     ]
     
@@ -111,7 +111,7 @@ def test_prism_engine():
 def test_hyperfilter_math_engine():
     """Testet die HyperfilterMathEngine-Klasse"""
     try:
-        from miso.vXor_Modules.hyperfilter_t_mathematics import get_hyperfilter_math_engine
+        from miso.vxor_modules.hyperfilter_t_mathematics import get_hyperfilter_math_engine
         
         # Hole Engine
         hyperfilter_engine = get_hyperfilter_math_engine()
