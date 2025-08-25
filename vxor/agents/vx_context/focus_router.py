@@ -23,7 +23,7 @@ import numpy as np
 import heapq
 
 # Logging-Konfiguration
-LOG_DIR = "/home/ubuntu/VXOR_Logs/CONTEXT/"
+LOG_DIR = os.path.join(os.path.dirname(__file__), "logs")
 os.makedirs(LOG_DIR, exist_ok=True)
 
 logging.basicConfig(

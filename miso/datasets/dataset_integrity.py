@@ -39,7 +39,7 @@ class DatasetStatus:
     status: str  # "PASS", "FAIL", "WARNING"
     error_message: str = ""
 
-class DatasetIntegrityChecker:
+class DatasetIntegrityValidator:
     """Validates dataset integrity and sample counts"""
     
     def __init__(self, datasets_root: Path = None):

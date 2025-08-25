@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json.schemastore.org/pyrightconfig.json",
+  "include": ["bench","vxor","tests","scripts","miso","agents","core","engines","lang"],
+  "exclude": [
+    ".git","**/__pycache__","**/.pytest_cache","**/.mypy_cache","**/.ruff_cache","**/.DS_Store",
+    "build","dist",".venv","venv","training_env","data","datasets","vxor-training-data",
+    "training/checkpoints","vxor/benchmarks/results","benchmarks/results","vxor_logs","whisper.cpp"
+  ],
+  "venvPath": ".",
+  "venv": ".venv",
+  "reportMissingImports": true,
+  "typeCheckingMode": "basic",
+  "pythonVersion": "3.13",
+  "pythonPlatform": "Darwin"
+}

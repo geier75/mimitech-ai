@@ -304,7 +304,7 @@ Alle Entwicklungsarbeiten werden auf der externen Festplatte "My Book" im Verzei
 │   ├── lang/                 # Sprachverarbeitung
 │   │   ├── mcode/            # M-CODE Runtime (4 Module)
 │   │   ├── mcode_*.py        # M-CODE Komponenten (8 Module)
-│   │   └── mlingua/          # M-LINGUA Interface (22 Module)
+│   │   └── /          # M-LINGUA Interface (22 Module)
 │   ├── logic/                # Logikkomponenten (30 Module)
 │   ├── math/                 # Mathematische Komponenten
 │   │   ├── mprime/           # M-PRIME Engine (7 Module)
@@ -349,7 +349,7 @@ Alle Entwicklungsarbeiten werden auf der externen Festplatte "My Book" im Verzei
 │   ├── VX-MEMEX/             # VX-MEMEX Referenzimplementierung
 │   ├── VX-NARRA/             # VX-NARRA Modul
 │   ├── VX-REFLEX/            # VX-REFLEX Referenzimplementierung
-│   ├── VX-SELFWRITER/        # VX-SELFWRITER Modul
+│   ├── -SELFWRITER/        # -SELFWRITER Modul
 │   ├── VX-SOMA/              # VX-SOMA Modul
 │   └── VX-VISION/            # VX-VISION Modul
 ├── tests/                    # Testverzeichnis (90+ Module)

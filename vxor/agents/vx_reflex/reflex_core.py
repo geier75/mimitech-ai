@@ -14,15 +14,20 @@ import time
 import json
 import logging
 import threading
+import os
 from enum import Enum
 from typing import Dict, List, Any, Callable, Optional, Tuple
 
-# Konfiguration des Logging
+# Konfiguration des Logging - Fixed path for current environment
+log_dir = os.path.join(os.path.dirname(__file__), "logs")
+os.makedirs(log_dir, exist_ok=True)
+log_file = os.path.join(log_dir, "reflex.log")
+
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler("/home/ubuntu/vXor_Modules/VX-REFLEX/logs/reflex.log"),
+        logging.FileHandler(log_file),
         logging.StreamHandler()
     ]
 )

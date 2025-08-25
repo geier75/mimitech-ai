@@ -1,0 +1,158 @@
+# VXOR Case-Consistency Pre-Commit Hooks
+# ======================================
+# 
+# These hooks enforce VXOR naming conventions and prevent regressions.
+# Install with: pre-commit install
+# Run manually: pre-commit run --all-files
+
+repos:
+  # VXOR Naming Policy Enforcement (Critical)
+  - repo: local
+    hooks:
+      - id: vxor-naming-policy-gate
+        name: VXOR Naming Policy Gate
+        entry: bash
+        language: system
+        files: '\.(py|md|js|json|yaml|yml)$'
+        args:
+          - -c
+          - |
+            set -e
+            echo "🔍 VXOR Naming Policy Gate: Scanning for violations..."
+            
+            # Critical patterns that must not be committed
+            VIOLATIONS=0
+            
+            # Check for legacy import patterns
+            if grep -r "miso\.vXor_Modules" --include="*.py" . 2>/dev/null | grep -v "\.venv\|venv\|__pycache__" | head -5; then
+              echo "❌ Found legacy import pattern: miso.vXor_Modules"
+              echo "   Please use: from miso import vxor_modules"
+              VIOLATIONS=$((VIOLATIONS + 1))
+            fi
+            
+            # Check for mixed-case VXOR violations
+            if grep -r "VXORAdapter\b" --include="*.py" . 2>/dev/null | grep -v "\.venv\|venv\|__pycache__\|vXor_Modules\.py" | head -3; then
+              echo "❌ Found legacy class name: VXORAdapter"
+              echo "   Please use: vxorAdapter"
+              VIOLATIONS=$((VIOLATIONS + 1))
+            fi
+            
+            # Check for Apple Double files
+            if find . -name "._*" -type f | head -3; then
+              echo "❌ Found Apple Double files (._*)"
+              echo "   Run: tools/final_sanity.sh to clean up"
+              VIOLATIONS=$((VIOLATIONS + 1))
+            fi
+            
+            # Check for duplicate timestamp directories
+            if find . -name "*23.33.*" -type d | head -3; then
+              echo "❌ Found duplicate timestamp directories"
+              echo "   Run: tools/final_sanity.sh to clean up"
+              VIOLATIONS=$((VIOLATIONS + 1))
+            fi
+            
+            if [ $VIOLATIONS -gt 0 ]; then
+              echo ""
+              echo "🚫 VXOR Naming Policy Gate: FAILED with $VIOLATIONS violations"
+              echo "   Run 'tools/final_sanity.sh' to fix issues automatically"
+              exit 1
+            else
+              echo "✅ VXOR Naming Policy Gate: PASSED"
+            fi
+        pass_filenames: false
+        always_run: true
+
+  - repo: local
+    hooks:
+      - id: case-collision-detector
+        name: Case Collision Detector
+        entry: bash
+        language: system
+        files: '\.(py|js|md)$'
+        args:
+          - -c
+          - |
+            set -e
+            echo "🔍 Checking for case collision risks..."
+            
+            # Find potential case collisions in source directories
+            for dir in miso vxor tools scripts; do
+              if [ -d "$dir" ]; then
+                COLLISIONS=$(find "$dir" -name "*.py" -exec basename {} \; | tr '[:upper:]' '[:lower:]' | sort | uniq -d)
+                if [ -n "$COLLISIONS" ]; then
+                  echo "❌ Case collision risk in $dir/:"
+                  echo "$COLLISIONS" | while read filename; do
+                    echo "   Multiple files with case variations of: $filename"
+                  done
+                  exit 1
+                fi
+              fi
+            done
+            
+            echo "✅ No case collision risks detected"
+        pass_filenames: false
+
+  # Standard Code Quality Hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: '\.md$'
+      - id: end-of-file-fixer
+        exclude: '\.md$'
+      - id: check-yaml
+        exclude: '^whisper\.cpp/|^external/'
+      - id: check-json
+        exclude: '^venv/|^\.venv/|_env/'
+      - id: check-added-large-files
+        args: ['--maxkb=1000']
+      - id: check-merge-conflict
+      - id: check-case-conflict
+      - id: mixed-line-ending
+
+  # Python-specific hooks
+  - repo: https://github.com/psf/black
+    rev: 24.8.0
+    hooks:
+      - id: black
+        language_version: python3
+        exclude: '^venv/|^\.venv/|_env/|^whisper\.cpp/|^external/'
+
+  - repo: https://github.com/pycqa/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort
+        args: ["--profile", "black"]
+        exclude: '^venv/|^\.venv/|_env/|^whisper\.cpp/|^external/'
+
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: v0.6.4
+    hooks:
+      - id: ruff
+        exclude: '^venv/|^\.venv/|_env/|^whisper\.cpp/|^external/'
+      - id: ruff-format
+        exclude: '^venv/|^\.venv/|_env/|^whisper\.cpp/|^external/'
+
+  # Security checks
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.9
+    hooks:
+      - id: bandit
+        args: ['-r', '-x', 'venv,tests']
+        exclude: '^venv/|^\.venv/|_env/|^tests/|^whisper\.cpp/|^external/'
+
+  # Final sanity check
+  - repo: local
+    hooks:
+      - id: final-sanity-check
+        name: Final Sanity Check
+        entry: tools/final_sanity.sh
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [commit, push]
+
+# Configuration
+default_stages: [commit]
+fail_fast: true
+minimum_pre_commit_version: "3.0.0"

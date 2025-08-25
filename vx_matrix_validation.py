@@ -25,9 +25,14 @@ from sklearn.datasets import make_spd_matrix
 import json
 
 # Pfad zum Matrix-Core hinzufügen
-matrix_core_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'vxor.ai/VX-MATRIX/core'))
+matrix_core_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'vxor/ai/vx_matrix/core'))
 sys.path.insert(0, matrix_core_path)
-from matrix_core import MatrixCore
+try:
+    from matrix_core import MatrixCore
+except ImportError:
+    # Fallback für alternative Pfade
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'vxor', 'ai', 'vx_matrix', 'core'))
+    from matrix_core import MatrixCore
 
 
 def create_original_core():
@@ -404,7 +409,7 @@ def run_validation_tests():
     print(f"   - Durchschnittlicher Speedup vs. NumPy: {avg_mm_speedup:.2f}x")
     
     # Ergebnisse als JSON speichern
-    output_dir = 'vxor.ai/docs/validation'
+    output_dir = os.path.join(os.path.dirname(__file__), 'validation_results')
     os.makedirs(output_dir, exist_ok=True)
     
     result_data = {

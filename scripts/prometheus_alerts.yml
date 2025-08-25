@@ -1,0 +1,49 @@
+# MISO Training Alerts Configuration
+groups:
+- name: miso_training_alerts
+  rules:
+  - alert: HighStepTime
+    expr: histogram_quantile(0.95, rate(mimikcompute_train_step_seconds_bucket[5m])) > 2 * histogram_quantile(0.50, rate(mimikcompute_train_step_seconds_bucket[1h]))
+    for: 2m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Training step time P95 exceeds 2x median"
+      description: "Step execution is significantly slower than normal"
+
+  - alert: LowThroughput
+    expr: mimikcompute_train_throughput_samples < 0.7 * quantile_over_time(0.5, mimikcompute_train_throughput_samples[1h])
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Training throughput below 70% of recent median"
+      description: "Training performance has degraded significantly"
+
+  - alert: AbnormalLoss
+    expr: increase(mimikcompute_nan_loss_total[5m]) > 0
+    for: 0s
+    labels:
+      severity: critical
+    annotations:
+      summary: "NaN or infinite loss detected"
+      description: "Training has encountered numerical instability"
+
+  - alert: HighGradientNorm
+    expr: mimikcompute_train_grad_norm > 10.0
+    for: 1m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Gradient norm is unusually high"
+      description: "May indicate training instability"
+
+  - alert: TrainingStalled
+    expr: increase(mimikcompute_train_step[10m]) == 0
+    for: 10m
+    labels:
+      severity: critical
+    annotations:
+      summary: "Training appears to have stalled"
+      description: "No progress detected in the last 10 minutes"
+

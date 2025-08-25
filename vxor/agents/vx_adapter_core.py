@@ -170,24 +170,60 @@ class VXORAdapter:
         
         # Wenn kein expliziter Pfad gefunden wurde, suche in allen Standardpfaden
         if not module_found:
-            for base_path in VXOR_MODULES_PATHS:
-                # Überprüfe verschiedene mögliche Pfadstrukturen
-                potential_paths = [
-                    base_path / module_name / "__init__.py",
-                    base_path / module_name / f"{module_name.lower()}.py",
-                    base_path / f"{module_name}.py",
-                    base_path / module_name.replace("-", "_").lower() / "__init__.py",
-                    base_path / f"{module_name.replace('-', '_').lower()}.py"
+            # Spezielle Pfad-Mappings für bekannte Module
+            special_mappings = {
+                "VX-SELFWRITER": [
+                    PROJECT_ROOT / "vx_selfwriter_autonomous.py",
+                    PROJECT_ROOT / "vxor" / "agents" / "vx_selfwriter.py",
+                    PROJECT_ROOT / "vxor" / "agents" / "vx_selfwriter" / "__init__.py"
+                ],
+                "VX-REFLEX": [
+                    PROJECT_ROOT / "vxor" / "agents" / "vx_reflex.py",
+                    PROJECT_ROOT / "vxor" / "agents" / "vx_reflex" / "__init__.py",
+                    PROJECT_ROOT / "vxor" / "agents" / "vx_reflex" / "reflex_core.py"
+                ],
+                "VX-MATRIX": [
+                    PROJECT_ROOT / "vxor" / "agents" / "vx_matrix.py",
+                    PROJECT_ROOT / "vxor" / "ai" / "vx_matrix" / "__init__.py",
+                    PROJECT_ROOT / "vxor" / "ai" / "vx_matrix" / "core" / "matrix_core.py"
+                ],
+                "VX-PSI": [
+                    PROJECT_ROOT / "vxor" / "agents" / "vx_psi_stub.py",
+                    PROJECT_ROOT / "vxor" / "agents" / "vx_psi.py"
                 ]
-                
-                for path in potential_paths:
+            }
+            
+            # Prüfe zuerst spezielle Mappings
+            if module_name in special_mappings:
+                for path in special_mappings[module_name]:
                     if path.exists():
-                        module_path = path.parent if path.name == "__init__.py" else path
+                        module_path = path
                         module_found = True
                         break
-                
-                if module_found:
-                    break
+            
+            # Wenn immer noch nicht gefunden, verwende Standard-Suche
+            if not module_found:
+                for base_path in VXOR_MODULES_PATHS:
+                    # Überprüfe verschiedene mögliche Pfadstrukturen
+                    potential_paths = [
+                        base_path / module_name / "__init__.py",
+                        base_path / module_name / f"{module_name.lower()}.py",
+                        base_path / f"{module_name}.py",
+                        base_path / module_name.replace("-", "_").lower() / "__init__.py",
+                        base_path / f"{module_name.replace('-', '_').lower()}.py",
+                        # Zusätzliche Patterns für agents-Verzeichnis
+                        base_path / "agents" / f"{module_name.replace('-', '_').lower()}.py",
+                        base_path / "agents" / module_name.replace("-", "_").lower() / "__init__.py"
+                    ]
+                    
+                    for path in potential_paths:
+                        if path.exists():
+                            module_path = path.parent if path.name == "__init__.py" else path
+                            module_found = True
+                            break
+                    
+                    if module_found:
+                        break
         
         if not module_found:
             self.module_status[module_name] = {

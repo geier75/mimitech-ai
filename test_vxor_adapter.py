@@ -6,10 +6,10 @@ Test-Skript für den VXOR-Adapter
 
 import sys
 import os
-from miso.vxor.vx_adapter_core import vxorAdapter
+from vxor.agents.vx_adapter_core import VXORAdapter
 
 # Initialisiere VXOR-Adapter
-adapter = vxorAdapter()
+adapter = VXORAdapter()
 
 # Gib Statusübersicht aus
 print("\nVXOR-Module Status:\n" + "-"*20)

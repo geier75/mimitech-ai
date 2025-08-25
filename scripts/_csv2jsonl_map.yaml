@@ -1,0 +1,4 @@
+# CSV→JSONL Feldabbildungen (falls nötig)
+text_fields: ["scenario_text", "expected_reasoning", "problem_statement", "creative_challenge"]
+label_fields: ["difficulty", "complexity_level"]
+meta_fields: ["domain", "causal_pattern", "communication_type", "creative_method"]

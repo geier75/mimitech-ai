@@ -11,7 +11,7 @@ from pathlib import Path
 # Add project root to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from miso.datasets.dataset_integrity import DatasetIntegrityChecker, MINIMUM_SAMPLE_COUNTS
+from miso.datasets.dataset_integrity import DatasetIntegrityValidator, MINIMUM_SAMPLE_COUNTS
 
 def setup_logging():
     """Setup logging for validation"""
@@ -28,7 +28,7 @@ def main():
     print("=" * 50)
     
     # Initialize checker
-    checker = DatasetIntegrityChecker()
+    checker = DatasetIntegrityValidator()
     
     # Check if datasets root exists
     if not checker.datasets_root.exists():

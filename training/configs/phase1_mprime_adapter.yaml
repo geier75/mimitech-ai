@@ -1,0 +1,18 @@
+target_model: "miso_mprime_adapter"
+adapter: "lora"
+lora_r: 16
+lora_alpha: 32
+lora_dropout: 0.05
+seed: 42
+train_steps: 3000
+eval_every: 300
+save_every: 300
+max_seq_len: 2048
+packing: true
+datasets:
+  - {name: type_02, path: data/type_training/phase1/processed/jsonl/train/AGI_Type_02_Mathematics_Logic_50K.jsonl, weight: 0.9}
+  - {name: type_10, path: data/type_training/phase1/processed/jsonl/train/AGI_Type_10_Probability_Statistics_50K.jsonl, weight: 0.9}
+  - {name: type_08, path: data/type_training/phase1/processed/jsonl/train/AGI_Type_08_Temporal_Sequential_Logic_50K.jsonl, weight: 0.2}
+val_sets:
+  - {name: type_02_val, path: data/type_training/phase1/processed/jsonl/val/AGI_Type_02_Mathematics_Logic_50K.jsonl}
+  - {name: type_10_val, path: data/type_training/phase1/processed/jsonl/val/AGI_Type_10_Probability_Statistics_50K.jsonl}

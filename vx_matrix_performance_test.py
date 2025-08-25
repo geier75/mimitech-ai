@@ -29,10 +29,15 @@ MISO_ROOT = '/Volumes/My Book/MISO_Ultimate 15.32.28'
 sys.path.insert(0, MISO_ROOT)
 
 # Direkter Import durch hinzufügen des core-Verzeichnisses zum Pfad
-sys.path.insert(0, MISO_ROOT + '/vxor.ai/VX-MATRIX/core')
+sys.path.insert(0, MISO_ROOT + '/vxor/ai/vx_matrix/core')
 
 # Jetzt können wir direkt importieren
-from matrix_core import MatrixCore, TensorType
+try:
+    from matrix_core import MatrixCore, TensorType
+except ImportError:
+    # Fallback für alternative Pfade
+    sys.path.insert(0, os.path.join(MISO_ROOT, 'vxor', 'ai', 'vx_matrix', 'core'))
+    from matrix_core import MatrixCore, TensorType
 
 def run_performance_test():
     # Initialisiere MatrixCore (zuerst mit MLX als bevorzugtes Backend)

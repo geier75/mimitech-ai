@@ -1,0 +1,22 @@
+target_model: "miso_mlingua_phase1"
+seed: 42
+train_steps: 6000
+eval_every: 300
+save_every: 300
+max_seq_len: 2048
+packing: true
+datasets:
+  - {name: type_04, path: data/type_training/phase1/processed/jsonl/train/AGI_Type_04_Language_Communication_50K.jsonl, weight: 1.0}
+  - {name: type_11, path: data/type_training/phase1/processed/jsonl/train/AGI_Type_11_Creative_Problem_Solving_40K.jsonl, weight: 0.9}
+  - {name: type_06, path: data/type_training/phase1/processed/jsonl/train/AGI_Type_06_Pattern_Recognition_Analysis_50K.jsonl, weight: 0.8}
+  - {name: type_07, path: data/type_training/phase1/processed/jsonl/train/AGI_Type_07_Abstract_Reasoning_50K.jsonl, weight: 0.8}
+  - {name: type_08, path: data/type_training/phase1/processed/jsonl/train/AGI_Type_08_Temporal_Sequential_Logic_50K.jsonl, weight: 0.8}
+  - {name: type_42, path: data/type_training/phase1/processed/jsonl/train/AGI_Type_42_Knowledge_Transfer_50K.jsonl, weight: 0.7}
+  - {name: type_10, path: data/type_training/phase1/processed/jsonl/train/AGI_Type_10_Probability_Statistics_50K.jsonl, weight: 0.6}
+  - {name: type_02, path: data/type_training/phase1/processed/jsonl/train/AGI_Type_02_Mathematics_Logic_50K.jsonl, weight: 0.6}
+critics:
+  - {name: critic_47, path: data/type_training/phase1/processed/jsonl/train/AGI_Type_47_Explainable_AI_50K.jsonl, mode: filter}
+  - {name: critic_48, path: data/type_training/phase1/processed/jsonl/train/AGI_Type_48_Bias_Detection_50K.jsonl, mode: filter}
+val_sets:
+  - {name: type_04_val, path: data/type_training/phase1/processed/jsonl/val/AGI_Type_04_Language_Communication_50K.jsonl}
+  - {name: type_11_val, path: data/type_training/phase1/processed/jsonl/val/AGI_Type_11_Creative_Problem_Solving_40K.jsonl}

@@ -1,0 +1,36 @@
+# Grafana Dashboard Configuration for MISO Training Monitoring
+
+## Panel 1: Training Loss
+Query: mimikcompute_train_loss
+Panel Type: Graph
+Title: Training Loss
+Y-Axis: Log scale recommended
+
+## Panel 2: Step Duration P95
+Query: histogram_quantile(0.95, sum(rate(mimikcompute_train_step_seconds_bucket[5m])) by (le))
+Panel Type: Graph  
+Title: Step Time P95 (seconds)
+Y-Axis: Linear scale
+
+## Panel 3: Throughput
+Query: mimikcompute_train_throughput_samples
+Panel Type: Graph
+Title: Training Throughput (samples/sec)
+Y-Axis: Linear scale
+
+## Panel 4: Learning Rate
+Query: mimikcompute_train_lr
+Panel Type: Graph
+Title: Learning Rate
+Y-Axis: Log scale recommended
+
+## Panel 5: Gradient Norm
+Query: mimikcompute_train_grad_norm
+Panel Type: Graph
+Title: Gradient Norm
+Y-Axis: Linear scale
+
+## Additional Useful Queries:
+- Loss change rate: rate(mimikcompute_train_loss[5m])
+- Training efficiency: mimikcompute_train_throughput_samples * on() group_left() mimikcompute_train_loss
+- Step time average: rate(mimikcompute_train_step_seconds_sum[5m]) / rate(mimikcompute_train_step_seconds_count[5m])
