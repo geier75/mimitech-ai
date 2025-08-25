@@ -177,6 +177,7 @@ datasets/*/
 !**/datasets_manifest.json
 *.json
 !schemas/*.json
+!bench/*.json
 *.jsonl
 *.csv
 *.parquet
@@ -208,10 +209,34 @@ secure_temp/
 .DS_Store
 .DS_Store?
 ._*
+.AppleDouble
+.LSOverride
 .Spotlight-V100
+.VolumeIcon.icns
 .Trashes
+.fseventsd
+.TemporaryItems
+.apdisk
 ehthumbs.db
 Thumbs.db
+
+# VXOR Case-Consistency Protection
+# ===============================
+# Prevent accidental commits of case-variants and duplicates
+**/benchmarks\ *
+**/*\ 23.33.*
+**/*\ 23.33.*\ 23.33.*
+**/*23.33.*/
+**/._benchmarks*
+**/._*23.33.*
+# Block legacy naming patterns that could cause case conflicts
+**/vXor_*
+**/VXor_*
+**/vXOR_*
+**/VXOR_*modules/
+# Exclude redundant Apple Double duplicates
+**/__*vxor_dashboard.py
+**/_*vxor_dashboard.py
 
 # Docker
 .dockerignore
@@ -274,3 +299,6 @@ dist/
 *.swp
 *.swo
 !miso/
+
+# allow pyright config
+!pyrightconfig.json

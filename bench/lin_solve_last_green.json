@@ -1,0 +1,10 @@
+{
+  "n": 165,
+  "method": "LUsolve",
+  "solve_sec": 45.0,
+  "source": "synthetic",
+  "residual_l2": 1e-15,
+  "solution_sha256": "baseline_sha256_placeholder",
+  "timestamp": "2025-08-25T15:57:00+00:00",
+  "notes": "Initial baseline for delta gate comparison - update after successful runs"
+}
