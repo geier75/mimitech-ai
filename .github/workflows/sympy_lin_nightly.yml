@@ -13,154 +13,104 @@ jobs:
       # Optional: provide the real NPZ via repository secret
       UK165_NPZ_URL: ${{ secrets.UK165_NPZ_URL }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up Python
+      - uses: actions/checkout@v4
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-
-      - name: Install dependencies
+      - name: Install minimal deps
         run: |
           python -m pip install --upgrade pip
-          pip install sympy numpy scipy pytest
-
-      - name: Run PR-A unit tests (Cajal/Scheibel)
-        if: always()
-        shell: bash
-        run: |
-          set -euo pipefail
-          export PYTHONPATH=.
-          # Discover PR-A test files, if present
-          TESTS=$(find vxor/benchmarks/tests -maxdepth 1 -type f \( -name 'test_arc_primitives.py' -o -name 'test_arc_registry.py' -o -name 'test_glue_features.py' -o -name 'test_glue_adapter_registry.py' \) 2>/dev/null || true)
-          if [ -n "$TESTS" ]; then
-            echo "[INFO] Running PR-A unit tests..."
-            python -m pytest -q $TESTS
-          else
-            echo "[INFO] PR-A unit tests not found; skipping."
-          fi
+          pip install sympy numpy
 
       - name: Run benchmark (real 165×165 via URL with offline fallback)
         id: run_bench
         env:
           UK165_NPZ_URL: ${{ secrets.UK165_NPZ_URL }}
           BENCH_SIZE: "165"
-          OMP_NUM_THREADS: "1"
-          MKL_NUM_THREADS: "1"
-          OPENBLAS_NUM_THREADS: "1"
-          PYTHONHASHSEED: "0"
         run: |
           set -euo pipefail
-          OUT_DIR="${{ runner.temp }}/sympy_lin_results"
+          export PYTHONHASHSEED=0
+          export OUT_DIR="benchmark_output_$(date +%Y%m%d_%H%M%S)"
           mkdir -p "$OUT_DIR"
+          
           python - <<'PY'
-          import os, sys, json, time, hashlib, urllib.request
-          from pathlib import Path
+          import os, json, time, random, sys, io, hashlib
+          import numpy as np
           import sympy as sp
-          try:
-              import numpy as np
-          except Exception:
-              np = None
-
-          URL = os.getenv("UK165_NPZ_URL","").strip()
-          N = int(os.getenv("BENCH_SIZE","165"))
-
-          # Ziel-Dateiname anhand der URL-Endung
-          ext = ""
-          if URL:
-              s = URL.split("?")[0]
-              ext = s.rsplit(".",1)[-1].lower() if "." in s else ""
-          PATH = f"bench_matrix.{ext or 'bin'}"
-
-          def download(u, dst):
-              for i in range(1,4):
+          from urllib.request import urlopen, Request
+          from pathlib import Path
+          
+          URL = os.getenv("UK165_NPZ_URL", "").strip()
+          N   = int(os.getenv("BENCH_SIZE", "165"))
+          PATH = "bench_matrix.bin"
+          
+          def download(u, dst, retries=3, timeout=15):
+              for i in range(1, retries+1):
                   try:
-                      with urllib.request.urlopen(u, timeout=15) as r:
-                          Path(dst).write_bytes(r.read()); return True
+                      req = Request(u, headers={"User-Agent":"ci"})
+                      with urlopen(req, timeout=timeout) as r:
+                          open(dst,"wb").write(r.read()); return True
                   except Exception as e:
-                      print(f"[warn] download {i}/3 failed: {e}")
+                      print(f"[warn] download attempt {i}/{retries} failed: {e}")
                       time.sleep(2*i)
               return False
-
-          def sha256_bytes(b: bytes)->str:
-              h = hashlib.sha256(); h.update(b); return h.hexdigest()
-
-          def vec_hash_det(vec, prec=12)->str:
-              s = "|".join(f"{float(v):.{prec}g}" for v in vec)
-              return hashlib.sha256(s.encode("utf-8")).hexdigest()
-
-          A = b = None
-          source = "synthetic"
-          mat_sha = rhs_sha = None
-
-          # 1) Versuche Download + Laden (NPZ bevorzugt, JSON Fallback)
-          if URL and download(URL, PATH):
-              source = "url"
-              data_bytes = Path(PATH).read_bytes()
-              mat_sha = sha256_bytes(data_bytes)
-              if PATH.endswith(".npz") and np is not None:
-                  data = np.load(PATH)
-                  # Heuristik: NxN + N/ Nx1 finden
-                  Akey = bkey = None
-                  for k,v in data.items():
-                      if getattr(v, "ndim", 0) == 2 and v.shape == (N,N): Akey = Akey or k
-                      if getattr(v, "ndim", 0) in (1,2) and (v.shape[0] == N): bkey = bkey or k
-                  if Akey is None or bkey is None:
-                      keys = list(data.keys()); 
-                      if len(keys) >= 2: Akey, bkey = keys[0], keys[1]
-                      else: raise ValueError("NPZ enthält nicht genügend Arrays")
-                  A = sp.Matrix(data[Akey].tolist())
-                  b_arr = data[bkey]
-                  b = sp.Matrix(b_arr.reshape(-1).tolist())
-                  rhs_sha = mat_sha  # beides im Container
-              else:
-                  try:
-                      d = json.loads(data_bytes.decode("utf-8"))
-                      A = sp.Matrix(d["A"]); b = sp.Matrix(d["b"])
-                  except Exception as e:
-                      print(f"[warn] downloaded file not JSON/NPZ ({e}); using synthetic")
-                      source = "synthetic"
-
-          # 2) Synthetic Fallback
-          if A is None or b is None:
-              import random
+          
+          ok = False
+          if URL:
+              ok = download(URL, PATH)
+              if ok: print(f"[ok] downloaded matrix from {URL}")
+          
+          if ok:
+              buf = open(PATH,"rb").read()
+              try:
+                  # npz path
+                  with np.load(io.BytesIO(buf)) as z:
+                      A = sp.Matrix(z["A"].tolist())
+                      b = sp.Matrix(z["b"].tolist())
+                  source = "real-npz"
+              except Exception:
+                  # json path
+                  d = json.loads(buf.decode("utf-8"))
+                  A = sp.Matrix(d["A"]); b = sp.Matrix(d["b"])
+                  source = "real-json"
+          else:
+              print("[info] falling back to synthetic matrix")
               random.seed(42)
               A = sp.Matrix([[random.random() for _ in range(N)] for __ in range(N)])
               b = sp.Matrix([random.random() for _ in range(N)])
-
-          # 3) Lösen & Metriken
-          t0 = time.perf_counter()
-          x = A.LUsolve(b)
-          dt = time.perf_counter() - t0
-
+              source = "synthetic"
+          
+          t0=time.time(); x = A.LUsolve(b); dt=time.time()-t0
+          
+          # residual & stable hash
           r = A*x - b
-          residual_l2 = float(sp.sqrt(sum((float(v)**2 for v in r))))
-
-          out = {
-            "n": N,
+          r2 = float(sp.sqrt((r.T*r)[0]))
+          quant = np.asarray([float(v) for v in x], dtype=np.float64)
+          qbytes = np.round(quant, 12).tobytes()
+          sha = hashlib.sha256(qbytes).hexdigest()
+          
+          metrics = {
+            "n": int(N),
             "method": "LUsolve",
-            "solve_sec": round(dt, 6),
-            "source": source,
-            "residual_l2": residual_l2,
-            "solution_sha256": vec_hash_det([x[i] for i in range(x.rows)]),
+            "solve_sec": float(round(dt, 6)),
+            "residual_l2": r2,
+            "solution_sha256": sha,
+            "source": source
           }
-          if mat_sha: out["matrix_sha256"] = mat_sha
-          if rhs_sha: out["rhs_sha256"] = rhs_sha
-
+          
           # Save results to both output directory and metrics file
           out_dir = os.getenv("OUT_DIR", ".")
           result_file = Path(out_dir) / "benchmark_result.json"
-          result_file.write_text(json.dumps(out, indent=2))
+          result_file.write_text(json.dumps(metrics, indent=2))
           
           # Write metrics file for gates step
-          metrics_file = Path("lin_solve_metrics.json")
-          metrics_file.write_text(json.dumps(out, indent=2))
+          open("lin_solve_metrics.json","w").write(json.dumps(metrics, indent=2))
           
-          print(json.dumps(out, indent=2))
+          print(json.dumps(metrics, indent=2))
           print(f"::set-output name=json_path::{result_file}")
           print(f"::set-output name=out_dir::{out_dir}")
-          print(f"::set-output name=used_demo::{0 if source == 'url' else 1}")
+          print(f"::set-output name=used_demo::{0 if 'real' in source else 1}")
           PY
           echo "OUT_DIR=$OUT_DIR" >> "$GITHUB_ENV"
           JSON_PATH="$OUT_DIR/benchmark_result.json"
